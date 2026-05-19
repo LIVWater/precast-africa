@@ -1787,6 +1787,7 @@ h1, h2, h3, h4, h5, h6 { text-align-last: auto; text-align: inherit; }
 @media (max-width: 1024px) {
   :root { --nav-h: 64px; }
   .nav__links { display: none; }
+  .nav__cta { display: none; }
   .nav__toggle { display: inline-flex; }
   .card-grid, .card-grid--4 { grid-template-columns: 1fr 1fr; }
   .value-props { grid-template-columns: 1fr 1fr; gap: 2rem; }

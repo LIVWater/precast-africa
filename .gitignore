@@ -16,6 +16,9 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# Local preview config
+.claude/
+
 # Build artifacts
 .compressed/
 *.backup.*
