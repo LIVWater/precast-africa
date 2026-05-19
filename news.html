@@ -1532,7 +1532,9 @@
   ────────────────────────────────────────────────────────────────── */
   (function(){
     const ANIM_DURATION = 90;   // seconds — must match the CSS keyframes
-    const DRAG_THRESHOLD = 5;   // pixels of movement before treating as drag
+    // Per-input thresholds: fingers drift more than mice during a tap.
+    const DRAG_THRESHOLD_MOUSE = 5;
+    const DRAG_THRESHOLD_TOUCH = 14;
 
     function getCurrentTranslateX(el){
       const t = getComputedStyle(el).transform;
@@ -1557,11 +1559,14 @@
 
       let isDown = false;
       let didMove = false;
+      let cancelled = false;
       let startX = 0;
+      let startY = 0;
       let startTranslate = 0;
       let currentTranslate = 0;
       let halfWidth = 0;
       let pointerId = null;
+      let pointerType = 'mouse';
       let suppressClickUntil = 0;
 
       function onDown(e){
@@ -1569,28 +1574,45 @@
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         isDown = true;
         didMove = false;
+        cancelled = false;
         startX = e.clientX;
+        startY = e.clientY;
+        pointerType = e.pointerType || 'mouse';
         halfWidth = track.scrollWidth / 2;
         startTranslate = getCurrentTranslateX(track);
         pointerId = e.pointerId;
-        try { marquee.setPointerCapture(e.pointerId); } catch(_){}
-        // Native HTML5 drag is prevented separately via the 'dragstart' listener
-        // and CSS user-drag:none. We do NOT preventDefault here, so plain clicks
-        // pass through to <a> links inside the carousel.
+        // Capture only for non-touch — for touch, capture interferes with native
+        // vertical page scroll, and we want plain taps to navigate normally.
+        if (pointerType !== 'touch') {
+          try { marquee.setPointerCapture(e.pointerId); } catch(_){}
+        }
+        // We do NOT preventDefault here, so plain clicks pass through to <a> links.
       }
 
       function onMove(e){
-        if (!isDown || e.pointerId !== pointerId) return;
-        const delta = e.clientX - startX;
-        if (!didMove && Math.abs(delta) >= DRAG_THRESHOLD){
+        if (!isDown || cancelled || e.pointerId !== pointerId) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        // If the user is clearly scrolling the page vertically, bail out — this
+        // is not a horizontal drag and we must not block the tap.
+        if (!didMove && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) {
+          cancelled = true;
+          return;
+        }
+        const threshold = pointerType === 'touch' ? DRAG_THRESHOLD_TOUCH : DRAG_THRESHOLD_MOUSE;
+        if (!didMove && Math.abs(dx) >= threshold){
           didMove = true;
           marquee.classList.add('is-dragging');
           track.classList.add('is-dragging');
           // Lock the track to the current animated position before applying drag
           track.style.transform = 'translate3d(' + startTranslate + 'px, 0, 0)';
+          // Now capture so subsequent moves stay with us even if pointer leaves
+          if (pointerType === 'touch') {
+            try { marquee.setPointerCapture(pointerId); } catch(_){}
+          }
         }
         if (didMove){
-          currentTranslate = startTranslate + delta;
+          currentTranslate = startTranslate + dx;
           track.style.transform = 'translate3d(' + currentTranslate + 'px, 0, 0)';
           e.preventDefault();
         }
@@ -1602,7 +1624,7 @@
         try { marquee.releasePointerCapture(pointerId); } catch(_){}
         pointerId = null;
 
-        if (!didMove) return; // treated as click — let normal navigation happen
+        if (!didMove || cancelled) return; // treated as click — let normal navigation happen
 
         // Block the next click event that the browser will synthesise from
         // this pointer sequence (otherwise the underlying <a> would fire).
