@@ -505,29 +505,14 @@
     .flip-col { opacity: 1; transform: none; }
   }
 
-  /* ─── Drag-to-scroll on carousels ─── */
-  .marquee {
-    cursor: grab;
-    touch-action: pan-y;                /* let users scroll the page vertically on touch */
-    user-select: none;                  /* no text selection during drag */
-    -webkit-user-select: none;
-  }
-  .marquee.is-dragging,
-  .marquee.is-dragging * { cursor: grabbing; }
-  /* Disable native HTML5 drag on links / images so pointer events keep flowing */
+  /* Disable native HTML5 image drag so taps on the auto-scrolling marquee
+     always navigate to the article instead of starting a drag. */
   .marquee a,
   .marquee img {
     -webkit-user-drag: none;
     user-drag: none;
     -webkit-touch-callout: none;
   }
-  .marquee__track.is-dragging {
-    animation: none !important;          /* pause auto-scroll during drag */
-    transition: none !important;
-  }
-  .marquee.is-dragging .carousel-card { pointer-events: none; }  /* suppress hover + link nav mid-drag */
-  .marquee.is-dragging .carousel-card:hover { transform: none; }
-  .marquee.is-dragging .carousel-card:hover .carousel-card__img { transform: none; }
 
   /* ─────────────────────────────────────────────
      NEWSLETTER — full-width strip, sharp corners
@@ -1523,155 +1508,6 @@
     });
   });
 
-  /* ──────────────────────────────────────────────────────────────────
-     Drag-to-scroll carousels
-     The CSS marquee animation keeps running on its own. When the user
-     presses and drags, the animation pauses and the track follows the
-     pointer. On release, an animation-delay is computed so the auto-
-     scroll resumes seamlessly from the new position.
-  ────────────────────────────────────────────────────────────────── */
-  (function(){
-    const ANIM_DURATION = 90;   // seconds — must match the CSS keyframes
-    // Per-input thresholds: fingers drift more than mice during a tap.
-    const DRAG_THRESHOLD_MOUSE = 5;
-    const DRAG_THRESHOLD_TOUCH = 14;
-
-    function getCurrentTranslateX(el){
-      const t = getComputedStyle(el).transform;
-      if (!t || t === 'none') return 0;
-      const m2 = t.match(/^matrix\(([^)]+)\)$/);
-      if (m2){
-        const p = m2[1].split(',').map(parseFloat);
-        return p[4] || 0;
-      }
-      const m3 = t.match(/^matrix3d\(([^)]+)\)$/);
-      if (m3){
-        const p = m3[1].split(',').map(parseFloat);
-        return p[12] || 0;
-      }
-      return 0;
-    }
-
-    document.querySelectorAll('.news-carousels .marquee').forEach(marquee => {
-      const track = marquee.querySelector('.marquee__track');
-      if (!track) return;
-      const isRTL = track.classList.contains('marquee__track--rtl');
-
-      let isDown = false;
-      let didMove = false;
-      let cancelled = false;
-      let startX = 0;
-      let startY = 0;
-      let startTranslate = 0;
-      let currentTranslate = 0;
-      let halfWidth = 0;
-      let pointerId = null;
-      let pointerType = 'mouse';
-      let suppressClickUntil = 0;
-
-      function onDown(e){
-        // Left mouse / touch / pen only
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        isDown = true;
-        didMove = false;
-        cancelled = false;
-        startX = e.clientX;
-        startY = e.clientY;
-        pointerType = e.pointerType || 'mouse';
-        halfWidth = track.scrollWidth / 2;
-        startTranslate = getCurrentTranslateX(track);
-        pointerId = e.pointerId;
-        // Capture only for non-touch — for touch, capture interferes with native
-        // vertical page scroll, and we want plain taps to navigate normally.
-        if (pointerType !== 'touch') {
-          try { marquee.setPointerCapture(e.pointerId); } catch(_){}
-        }
-        // We do NOT preventDefault here, so plain clicks pass through to <a> links.
-      }
-
-      function onMove(e){
-        if (!isDown || cancelled || e.pointerId !== pointerId) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        // If the user is clearly scrolling the page vertically, bail out — this
-        // is not a horizontal drag and we must not block the tap.
-        if (!didMove && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) {
-          cancelled = true;
-          return;
-        }
-        const threshold = pointerType === 'touch' ? DRAG_THRESHOLD_TOUCH : DRAG_THRESHOLD_MOUSE;
-        if (!didMove && Math.abs(dx) >= threshold){
-          didMove = true;
-          marquee.classList.add('is-dragging');
-          track.classList.add('is-dragging');
-          // Lock the track to the current animated position before applying drag
-          track.style.transform = 'translate3d(' + startTranslate + 'px, 0, 0)';
-          // Now capture so subsequent moves stay with us even if pointer leaves
-          if (pointerType === 'touch') {
-            try { marquee.setPointerCapture(pointerId); } catch(_){}
-          }
-        }
-        if (didMove){
-          currentTranslate = startTranslate + dx;
-          track.style.transform = 'translate3d(' + currentTranslate + 'px, 0, 0)';
-          e.preventDefault();
-        }
-      }
-
-      function onUp(e){
-        if (!isDown) return;
-        isDown = false;
-        try { marquee.releasePointerCapture(pointerId); } catch(_){}
-        pointerId = null;
-
-        if (!didMove || cancelled) return; // treated as click — let normal navigation happen
-
-        // Block the next click event that the browser will synthesise from
-        // this pointer sequence (otherwise the underlying <a> would fire).
-        suppressClickUntil = Date.now() + 350;
-
-        // Convert the released position into an animation-delay so the
-        // auto-scroll picks up exactly where the user let go.
-        if (halfWidth > 0){
-          let progress;
-          if (isRTL){
-            // RTL keyframes: translateX 0 → -halfWidth
-            const norm = ((-currentTranslate % halfWidth) + halfWidth) % halfWidth;
-            progress = norm / halfWidth;
-          } else {
-            // LTR keyframes: translateX -halfWidth → 0
-            const norm = ((currentTranslate % halfWidth) + halfWidth) % halfWidth;
-            progress = norm / halfWidth;
-          }
-          track.style.animationDelay = (-progress * ANIM_DURATION) + 's';
-        }
-
-        // Hand back to the CSS animation. Clearing the inline transform
-        // and removing the dragging class together restarts the keyframes
-        // with the new delay applied.
-        track.style.transform = '';
-        track.classList.remove('is-dragging');
-        marquee.classList.remove('is-dragging');
-      }
-
-      // Capture-phase click guard — wins over the link's default navigation
-      marquee.addEventListener('click', (e) => {
-        if (Date.now() < suppressClickUntil){
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      }, true);
-
-      // Prevent the browser's native drag-and-drop from hijacking the pointer
-      marquee.addEventListener('dragstart', e => e.preventDefault());
-
-      // Pointer listeners in capture phase, non-passive so preventDefault works
-      marquee.addEventListener('pointerdown',   onDown, { capture: true, passive: false });
-      marquee.addEventListener('pointermove',   onMove, { capture: true, passive: false });
-      marquee.addEventListener('pointerup',     onUp,   { capture: true });
-      marquee.addEventListener('pointercancel', onUp,   { capture: true });
-    });
-  })();
 </script>
 </body>
 </html>
