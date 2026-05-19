@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Precast Africa</title>
+<meta name="description" content="Talk to Precast Africa about your residential development pipeline, request a technical briefing, or enquire about investment and partnership opportunities." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/precast.css">
+<style>
+  /* Contact-specific */
+  .contact-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  @media (max-width: 1024px) { .contact-grid { grid-template-columns: 1fr; } }
+  .info-card {
+    background: var(--ink-1);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+  .info-card h3 {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent-2); font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .info-card p { color: var(--text-3); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.8rem; }
+  .info-card a { color: var(--text); transition: color var(--t); }
+  .info-card a:hover { color: var(--accent-2); }
+  .info-card__row {
+    display: flex; gap: 0.85rem; align-items: flex-start;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .info-card__row:last-child { border-bottom: none; }
+  .info-card__row svg { flex-shrink: 0; width: 18px; height: 18px; stroke: var(--accent-2); fill: none; stroke-width: 1.5; margin-top: 0.15rem; }
+  .info-card__row > div { font-size: 0.92rem; color: var(--text-3); }
+  .info-card__row strong { color: var(--text); font-weight: 500; }
+  .info-card--accent { background: linear-gradient(140deg, rgba(30,69,25,0.5), var(--ink-1)); }
+  /* Stick the right-hand info blocks to the top of the viewport; they release
+     naturally when the contact section's bottom edge passes through. */
+  .contact-grid > aside {
+    position: sticky;
+    top: calc(var(--nav-h, 64px) + 1.5rem);
+    align-self: start;
+  }
+  @media (max-width: 1024px) {
+    .contact-grid > aside { position: static; top: auto; }
+  }
+
+  /* ─────────────────────────────────────────────
+     CONTACT FORM — refined light card treatment.
+     Scoped to .form-card--refined so other forms
+     (builder, news) stay on the shared default.
+     ───────────────────────────────────────────── */
+  .form-card--refined {
+    background: linear-gradient(180deg, #ffffff 0%, var(--bg-soft, #f4f4f1) 100%);
+    border: 1px solid rgba(12, 13, 13, 0.06);
+    padding: clamp(2.25rem, 3.5vw, 3.25rem);
+    box-shadow:
+      0 28px 70px -36px rgba(12, 13, 13, 0.18),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+    color: var(--carbon-1);
+  }
+  .form-card--refined .form-card__head {
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid rgba(12, 13, 13, 0.08);
+    margin-bottom: 2.25rem;
+  }
+  .form-card--refined .form-card__head h2 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    letter-spacing: -0.022em;
+    color: var(--carbon-1);
+    margin: 0 0 0.55rem;
+  }
+  .form-card--refined .form-card__head h2 em {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .form-card--refined .form-card__head p {
+    color: var(--carbon-3);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Numbered sections */
+  .form-section {
+    border: 0; padding: 0;
+    margin: 0 0 2.25rem;
+    min-width: 0;
+  }
+  .form-section:last-of-type { margin-bottom: 1.5rem; }
+  .form-section__legend {
+    display: flex; align-items: center; gap: 0.85rem;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 1.25rem;
+  }
+  .form-section__num {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .form-section__title {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--carbon-2);
+    font-weight: 500;
+  }
+  .form-section__legend::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: rgba(12, 13, 13, 0.10);
+    margin-left: 0.25rem;
+  }
+
+  /* Refined input fields — light theme */
+  .form-card--refined .form-row { margin-bottom: 0.85rem; }
+  .form-card--refined .form-row:last-child { margin-bottom: 0; }
+  .form-card--refined .form-field input,
+  .form-card--refined .form-field textarea {
+    background: #ffffff;
+    border: 1px solid rgba(12, 13, 13, 0.12);
+    border-radius: 10px;
+    padding: 1.1rem 1.1rem;
+    font-size: 0.96rem;
+    color: var(--carbon-1);
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .form-card--refined .form-field input:hover,
+  .form-card--refined .form-field textarea:hover {
+    border-color: rgba(12, 13, 13, 0.22);
+  }
+  .form-card--refined .form-field input:focus,
+  .form-card--refined .form-field textarea:focus {
+    border-color: var(--accent);
+    background: #ffffff;
+    box-shadow:
+      0 0 0 4px rgba(74,158,63,0.14),
+      inset 0 0 0 1px rgba(74,158,63,0.2);
+  }
+  .form-card--refined .form-field label {
+    color: rgba(12, 13, 13, 0.5);
+  }
+  /* Floating label — match the form-card bg gradient (use white since field is on white top edge) */
+  .form-card--refined .form-field input:focus + label,
+  .form-card--refined .form-field input:not(:placeholder-shown) + label,
+  .form-card--refined .form-field textarea:focus + label,
+  .form-card--refined .form-field textarea:not(:placeholder-shown) + label {
+    background: #ffffff;
+    color: var(--accent-deep);
+    padding: 0 0.5rem;
+  }
+
+  /* Refined choice cards — light theme, stacked content (title above sub) */
+  .form-card--refined .choice-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0;
+  }
+  @media (max-width: 700px) {
+    .form-card--refined .choice-grid { grid-template-columns: 1fr; }
+  }
+  .form-card--refined .choice__box {
+    padding: 1.1rem 1.25rem;
+    background: #ffffff;
+    border: 1px solid rgba(12, 13, 13, 0.10);
+    border-radius: 10px;
+    transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .form-card--refined .choice__box:hover {
+    border-color: rgba(12, 13, 13, 0.22);
+    transform: translateY(-1px);
+  }
+  .form-card--refined .choice input:checked + .choice__box {
+    border-color: var(--accent);
+    background: rgba(74,158,63,0.06);
+    box-shadow:
+      0 0 0 1px var(--accent),
+      0 12px 30px -16px rgba(74,158,63,0.4);
+  }
+  /* Stack title above description, with proper spacing */
+  .form-card--refined .choice__box > span:last-child {
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .form-card--refined .choice__title {
+    display: block;
+    color: var(--carbon-1);
+    font-size: 0.96rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .form-card--refined .choice__sub {
+    display: block;
+    color: var(--carbon-3);
+    font-size: 0.83rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .form-card--refined .choice__radio {
+    border-color: rgba(12, 13, 13, 0.28);
+  }
+  .form-card--refined .choice input:checked + .choice__box .choice__radio { border-color: var(--accent); }
+
+  /* Submit area */
+  .form-card--refined .form-submit {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgba(12, 13, 13, 0.08);
+    display: flex; flex-direction: column;
+    gap: 1.1rem;
+  }
+  .form-privacy {
+    display: flex; align-items: center; gap: 0.55rem;
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--carbon-3);
+    line-height: 1.55;
+    letter-spacing: 0.005em;
+  }
+  .form-privacy svg {
+    width: 16px; height: 16px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .form-card--refined .form-submit .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1.2rem 1.6rem;
+  }
+
+  /* ─────────────────────────────────────────────
+     BROWSE / CTA CLOSING — mirrors the homepage's
+     section 6: black canvas + soft green radial glow.
+     ───────────────────────────────────────────── */
+  .browse-cta {
+    position: relative;
+    padding: clamp(6rem, 14vh, 12rem) 0 clamp(4rem, 7vh, 6rem);
+    background: #000;
+    overflow: hidden;
+  }
+  .browse-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(74,158,63,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 80%, rgba(30,69,25,0.12) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .browse-cta__inner {
+    position: relative;
+    width: var(--container);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .browse-cta__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+  }
+  .browse-cta__title {
+    font-family: var(--font-sans);
+    font-weight: 200;
+    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: #fff;
+    margin: 0 0 1.5rem;
+  }
+  .browse-cta__title em {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--accent-2);
+  }
+  .browse-cta__sub {
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+    color: var(--text-3);
+    line-height: 1.6;
+  }
+  .browse-cta__ctas {
+    display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<div class="topgrad" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="precast-africa-warwick-style.html" class="nav__brand">
+    <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt="" / decoding="async"><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt=""  loading="lazy" decoding="async"/></span>
+    <span>Precast Africa</span>
+  </a>
+  <div class="nav__links">
+    <a href="system.html" class="nav__link">System</a>
+    <a href="process.html" class="nav__link">Process</a>
+    <a href="developers.html" class="nav__link">Developers</a>
+    <a href="sustainability.html" class="nav__link">Sustainability</a>
+    <a href="news.html" class="nav__link">News</a>
+  </div>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+  </button>
+  <div class="nav__cta">
+    <a href="build-your-project.html" class="btn btn--accent"><span>Build Project</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="contact.html" class="btn btn--glass"><span>Get in touch</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</nav>
+<div class="nav__mobile" id="navMobile">
+  <a href="precast-africa-warwick-style.html">Home</a>
+  <a href="system.html">System</a>
+  <a href="process.html">Process</a>
+  <a href="developers.html">Developers</a>
+  <a href="build-your-project.html">Build Project</a>
+  <a href="sustainability.html">Sustainability</a>
+  <a href="news.html">News</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="page-hero" style="min-height:420px; height:55vh;">
+    <div class="page-hero__bg"><img src="Background Images/5.png" alt="" loading="eager"></div>
+    <div class="page-hero__inner">
+      <span class="page-hero__eyebrow">Get in Touch</span>
+      <h1 class="page-hero__title anim-letters">Let's <em>talk.</em></h1>
+      <p class="page-hero__lede">Whether you're a developer with a pipeline, an investor exploring partnership, or a partner curious about the system, we'd like to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section--lg">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- FORM -->
+        <form class="form-card form-card--refined demo-form reveal" id="contactForm">
+          <div class="form-card__head">
+            <h2>Send us a <em>message.</em></h2>
+            <p>Tell us a little about your project or enquiry. We aim to respond within two working days.</p>
+          </div>
+
+          <fieldset class="form-section">
+            <legend class="form-section__legend">
+              <span class="form-section__num">01</span>
+              <span class="form-section__title">What's this about?</span>
+            </legend>
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="enquiry" value="developer" checked />
+                <div class="choice__box">
+                  <span class="choice__radio"></span>
+                  <span><span class="choice__title">A development project</span><span class="choice__sub">A residential, mixed-use, or social housing pipeline.</span></span>
+                </div>
+              </label>
+              <label class="choice" id="investor">
+                <input type="radio" name="enquiry" value="investor" />
+                <div class="choice__box">
+                  <span class="choice__radio"></span>
+                  <span><span class="choice__title">Investment &amp; partnership</span><span class="choice__sub">Investor, funder, or strategic partner enquiry.</span></span>
+                </div>
+              </label>
+              <label class="choice">
+                <input type="radio" name="enquiry" value="briefing" />
+                <div class="choice__box">
+                  <span class="choice__radio"></span>
+                  <span><span class="choice__title">Technical briefing</span><span class="choice__sub">Engineering walkthrough of the PPVC system.</span></span>
+                </div>
+              </label>
+              <label class="choice">
+                <input type="radio" name="enquiry" value="other" />
+                <div class="choice__box">
+                  <span class="choice__radio"></span>
+                  <span><span class="choice__title">Something else</span><span class="choice__sub">Media, government, supplier, or general enquiry.</span></span>
+                </div>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend class="form-section__legend">
+              <span class="form-section__num">02</span>
+              <span class="form-section__title">A bit about you</span>
+            </legend>
+            <div class="form-row form-row--2">
+              <div class="form-field"><input id="cf-fn" type="text" name="firstname" placeholder=" " required><label for="cf-fn">First name</label></div>
+              <div class="form-field"><input id="cf-ln" type="text" name="lastname" placeholder=" " required><label for="cf-ln">Last name</label></div>
+            </div>
+            <div class="form-row form-row--2">
+              <div class="form-field"><input id="cf-em" type="email" name="email" placeholder=" " required><label for="cf-em">Email address</label></div>
+              <div class="form-field"><input id="cf-tel" type="tel" name="phone" placeholder=" "><label for="cf-tel">Phone</label></div>
+            </div>
+            <div class="form-row form-row--2">
+              <div class="form-field"><input id="cf-co" type="text" name="company" placeholder=" "><label for="cf-co">Company</label></div>
+              <div class="form-field"><input id="cf-role" type="text" name="role" placeholder=" "><label for="cf-role">Role</label></div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend class="form-section__legend">
+              <span class="form-section__num">03</span>
+              <span class="form-section__title">Your project</span>
+            </legend>
+            <div class="form-row">
+              <div class="form-field"><textarea id="cf-msg" name="message" placeholder=" "></textarea><label for="cf-msg">Tell us about your project or enquiry</label></div>
+            </div>
+          </fieldset>
+
+          <div class="form-submit">
+            <p class="form-privacy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+              We'll only use this to reply to your enquiry. No marketing lists.
+            </p>
+            <button class="btn btn--primary btn--lg" type="submit"><span>Send message</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </form>
+
+        <!-- SIDE -->
+        <aside class="reveal reveal-d1">
+          <div class="info-card">
+            <h3>Direct Contact</h3>
+            <div class="info-card__row">
+              <svg viewBox="0 0 24 24"><path d="M2 6.5A2.5 2.5 0 0 1 4.5 4h15A2.5 2.5 0 0 1 22 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 17.5v-11Z M2.5 7l9.5 7 9.5-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Email</strong><br><a href="mailto:info@precastafrica.com">info@precastafrica.com</a></div>
+            </div>
+            <div class="info-card__row">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><strong>Phone</strong><br><a href="tel:+27000000000">+27 (0) 00 000 0000</a></div>
+            </div>
+            <div class="info-card__row">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round"/></svg>
+              <div><strong>Head Office</strong><br>Cape Town · South Africa</div>
+            </div>
+            <div class="info-card__row">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M12 6v6l4 2" stroke-linecap="round"/></svg>
+              <div><strong>Office hours</strong><br>Mon–Fri · 08:00–17:00 SAST</div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>For Developers</h3>
+            <p>Bring your unit mix, site, and target programme. We'll come back with an indicative configuration and module count, plus a delivery schedule.</p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BROWSE — CTA / CLOSING -->
+  <section class="browse-cta">
+    <div class="browse-cta__inner">
+      <p class="browse-cta__eyebrow reveal">Or browse</p>
+      <h2 class="browse-cta__title anim-letters reveal reveal-d1">Find your <em>next step.</em></h2>
+      <p class="browse-cta__sub reveal reveal-d2">There's more to the system, the process, and the pipeline. Pick a path and keep exploring &mdash; we're not finished.</p>
+      <div class="browse-cta__ctas reveal reveal-d2">
+        <a href="system.html" class="btn btn--primary btn--lg">
+          <span>Explore the system</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="process.html" class="btn btn--glass btn--lg"><span>See the process</span></a>
+        <a href="developers.html" class="btn btn--glass btn--lg"><span>For developers</span></a>
+        <a href="sustainability.html" class="btn btn--glass btn--lg"><span>Sustainability</span></a>
+        <a href="news.html" class="btn btn--glass btn--lg"><span>News</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="precast-africa-warwick-style.html" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt=""  loading="lazy" decoding="async"/><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt=""  loading="lazy" decoding="async"/></span>
+        <span>Precast Africa</span>
+      </a>
+      <p class="footer__about">A sustainable PPVC precast construction-system company, designing, manufacturing, transporting, and installing durable volumetric modules for African developers.</p>
+    </div>
+    <div class="footer__col"><h4>System</h4><ul>
+      <li><a href="system.html">Overview</a></li>
+      <li><a href="system.html#modules">Modules</a></li>
+      <li><a href="system.html#specs">Specs</a></li>
+      <li><a href="process.html">Process</a></li>
+    </ul></div>
+    <div class="footer__col"><h4>Company</h4><ul>
+      <li><a href="developers.html">For Developers</a></li>
+      <li><a href="sustainability.html">Sustainability</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer__col"><h4>Reach Us</h4><ul>
+      <li><a href="mailto:info@precastafrica.com">info@precastafrica.com</a></li>
+      <li><a href="contact.html">Request a briefing</a></li>
+      <li><a href="contact.html#investor">Investor enquiries</a></li>
+    </ul></div>
+  </div>
+  <div class="footer__bottom">
+    <div>© 2026 Precast Africa. All rights reserved.</div>
+    <div>Sustainable PPVC Construction Systems · South Africa</div>
+  </div>
+</footer>
+
+<script src="assets/js/precast.js" defer></script>
+</body>
+</html>

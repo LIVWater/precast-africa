@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Precast Africa — The PPVC system shaping the future of African housing.</title>
+  <meta name="description" content="The precast construction system delivering homes across Africa. Factory-built. Crane-installed. Engineered for scale. Built faster. Built better. Built to last." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" defer></script>
+
+  <style>
+    /* ───────────────────────────────────────────────
+       PRECAST AFRICA — Redesigned (Sequel-style)
+    ─────────────────────────────────────────────── */
+    :root {
+      /* LIGHT theme defaults */
+      --bg:           #fafaf8;
+      --bg-soft:      #f0f0ed;
+
+      /* Dark surface tokens */
+      --ink-1:        #0c0d0d;
+      --ink-2:        #131515;
+      --ink-3:        #1a1c1c;
+
+      /* Lines */
+      --line:         rgba(0,0,0,0.08);
+      --line-2:       rgba(0,0,0,0.14);
+      --line-on-dark:   rgba(255,255,255,0.08);
+      --line-on-dark-2: rgba(255,255,255,0.14);
+
+      /* Text (light theme defaults — CARBON) */
+      --carbon-1:     #1a1a1a;
+      --carbon-2:     #3a3a3a;
+      --carbon-3:     #6a6a6a;
+      --carbon-4:     #9a9a9a;
+      --text:         var(--carbon-1);
+      --text-2:       var(--carbon-2);
+      --text-3:       var(--carbon-3);
+      --text-4:       var(--carbon-4);
+
+      /* On-dark variants */
+      --text-on-dark:   #f5f5f3;
+      --text-on-dark-2: #c9c9c4;
+      --text-on-dark-3: #8d8d87;
+      --text-on-dark-4: #5d5d57;
+
+      --accent:       #4a9e3f;
+      --accent-2:     #88d87e;
+      --accent-deep:  #1e4519;
+
+      --font-sans:    'Inter', system-ui, sans-serif;
+      --font-serif:   'Instrument Serif', 'Times New Roman', serif;
+      --font-display: 'Bebas Neue', sans-serif;
+
+      --ease:   cubic-bezier(0.22, 0.61, 0.36, 1);
+      --t:      0.4s var(--ease);
+      --t-long: 0.9s var(--ease);
+
+      --r:    14px;
+      --r-lg: 24px;
+      --r-xl: 32px;
+
+      --container: min(1480px, 92vw);
+      --gutter:    clamp(1.25rem, 3vw, 2.5rem);
+
+      --nav-h: 76px;
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.55;
+      letter-spacing: -0.005em;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, video { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul,ol { list-style: none; }
+    button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
+
+    /* DARK-SURFACE SCOPE — rebinds text & line variables on any dark element */
+    .on-dark,
+    .section1, .section3, .section6,
+    .card, .tile,
+    .footer {
+      --text:   var(--text-on-dark);
+      --text-2: var(--text-on-dark-2);
+      --text-3: var(--text-on-dark-3);
+      --text-4: var(--text-on-dark-4);
+      --line:   var(--line-on-dark);
+      --line-2: var(--line-on-dark-2);
+      color: var(--text-on-dark);
+    }
+
+    /* ─── Fixed top gradient ─── */
+    .topgrad {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 140px; z-index: 50;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      padding: 0 var(--gutter);
+      transition:
+        background var(--t-long),
+        backdrop-filter var(--t-long),
+        box-shadow var(--t-long),
+        border-color var(--t-long),
+        height var(--t-long);
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom-color: rgba(30,69,25,0.10);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.10);
+      height: 64px;
+    }
+    .nav__brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      color: #fff;
+      font-family: var(--font-display);
+      letter-spacing: 0.08em;
+      font-size: 1.2rem;
+      transition: color var(--t-long);
+    }
+    .nav.scrolled .nav__brand { color: var(--accent-deep); }
+    .nav__brand-mark {
+      position: relative;
+      width: 40px; height: 40px;
+      display: grid; place-items: center;
+      flex-shrink: 0;
+      transition: width var(--t-long), height var(--t-long);
+    }
+    /* On scroll, the mark fades out entirely — only the wordmark remains */
+    .nav.scrolled .nav__brand-mark {
+      width: 0; height: 0;
+      opacity: 0;
+      margin-left: -0.75rem; /* collapse the gap to brand text */
+      overflow: hidden;
+    }
+    .nav__brand-mark img,
+    .nav__brand-mark svg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      display: block; object-fit: contain;
+      transition: opacity var(--t-long);
+    }
+    .nav__brand-mark .logo-green { opacity: 0; }
+    .nav__links {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 2.4rem;
+    }
+    .nav__link {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.01em;
+      font-weight: 400;
+      transition: color var(--t-long), font-weight var(--t-long);
+    }
+    /* Global heading word-spacing — opens word gaps for easier reading across all headers */
+    h1, h2, h3, h4, h5, h6,
+    .section1__title, .section4__title { word-spacing: 0.18em; }
+
+    .nav.scrolled .nav__link { color: #2d6b27; }
+    .nav__link:hover { color: var(--accent-2); font-weight: 700; }
+    .nav.scrolled .nav__link:hover { color: var(--accent-deep); font-weight: 700; }
+    .nav__cta { margin-left: auto; display: flex; align-items: center; gap: 0.55rem; }
+    .nav__cta .btn--accent { background: var(--accent); color: #fff; }
+    .nav.scrolled .nav__cta .btn--accent { background: var(--accent); color: #fff; border-color: transparent; }
+    .nav.scrolled .nav__cta .btn--accent:hover { background: var(--accent-deep); color: #fff; }
+    /* "Get in touch" nav CTA — frosted glass with 1px green border, fills white on hover.
+       Identical in both scroll states so there is no visual transition. */
+    .nav__cta .btn--glass,
+    .nav.scrolled .nav__cta .btn--glass {
+      background: rgba(255,255,255,0.08);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      transition: color 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease);
+    }
+    .nav__cta .btn--glass::before,
+    .nav.scrolled .nav__cta .btn--glass::before { background: #fff; }
+    .nav__cta .btn--glass:hover,
+    .nav.scrolled .nav__cta .btn--glass:hover {
+      background: rgba(255,255,255,0.08);
+      color: var(--carbon-1);
+      border-color: var(--accent);
+    }
+    /* Hide the top gradient when nav is scrolled (white bg) */
+    body:has(.nav.scrolled) .topgrad { opacity: 0; }
+    .topgrad { transition: opacity var(--t-long); }
+
+    /* ─── Glass primitive ─── */
+    .glass {
+      backdrop-filter: blur(20px) saturate(170%);
+      -webkit-backdrop-filter: blur(20px) saturate(170%);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+    }
+
+    /* ─── Buttons ───
+       (the landing page is self-contained inline; precast.css is NOT loaded here) */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.65rem 1rem 0.65rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.005em;
+      white-space: nowrap;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 2s var(--ease), box-shadow 2s var(--ease), color 2s var(--ease), border-color 2s var(--ease);
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 2s var(--ease);
+      z-index: -1;
+      border-radius: inherit;
+    }
+    .btn:hover::before { transform: scaleX(1); }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 14px 34px -10px rgba(74,158,63,0.55),
+        0 4px 12px -4px rgba(74,158,63,0.35);
+    }
+    .btn svg { width: 14px; height: 14px; transition: transform 2s var(--ease); }
+    .btn:hover svg { transform: translateX(4px); }
+
+    .btn--primary { background: #fff; color: var(--carbon-1); }
+    .btn--primary::before { background: var(--accent-2); }
+    .btn--primary:hover { color: var(--carbon-1); }
+
+    .btn--glass {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      backdrop-filter: blur(20px) saturate(170%);
+      -webkit-backdrop-filter: blur(20px) saturate(170%);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .btn--glass::before { background: var(--accent); }
+    .btn--glass:hover { border-color: var(--accent); color: #fff; }
+
+    .btn--accent { background: var(--accent); color: #fff; }
+    .btn--accent::before { background: var(--accent-2); }
+    .btn--accent:hover { color: var(--bg); }
+
+    .btn--md { padding: 0.85rem 1.4rem 0.85rem 1.5rem; font-size: 0.88rem; }
+    .btn--lg { padding: 1.05rem 1.6rem 1.05rem 1.8rem; font-size: 0.95rem; }
+
+    /* ─── Badge ─── */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      color: #fff;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 1 — HERO VIDEO
+    ═══════════════════════════════════════════════ */
+    .section { position: relative; }
+    .section1 {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      height: 100vh;
+      height: 100svh;
+      min-height: 720px;
+      overflow: hidden;
+      background: #000;
+      display: flex; align-items: center;
+      isolation: isolate;
+    }
+    .section1__video {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100vw + 100px);
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 1.5s var(--ease) 0.3s;
+      pointer-events: none;
+    }
+    /* Poster matches the video footprint so there are no gaps before play starts */
+    .section1__poster {
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100vw + 100px);
+    }
+    .section1__video.loaded { opacity: 1; }
+    .section1__poster {
+      position: absolute; inset: 0;
+      background-image: url('Background Images/Precast Africa Hero Background 1.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.85) contrast(1.05);
+    }
+    /* Soft matte gradient — readable + cinematic */
+    .section1__vignette {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse 90% 70% at 35% 60%, transparent 0%, rgba(0,0,0,0.45) 80%),
+        linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 25%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.75) 85%, rgba(0,0,0,1) 100%);
+      pointer-events: none;
+    }
+    /* Bottom seamless transition into section 2 (also black) */
+    .section1__fade {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 28vh;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 45%, #000 100%);
+      pointer-events: none;
+    }
+    /* Hero content overlaid on video — middle-left aligned */
+    .section1__content {
+      position: relative; z-index: 3;
+      width: var(--container);
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0;
+      color: #fff;
+      text-align: left;
+    }
+    .section1__eyebrow {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: heroFadeUp 1s var(--ease) 0.4s forwards;
+    }
+    .section1__eyebrow::before {
+      content: '';
+      width: 26px; height: 1px;
+      background: var(--accent-2);
+    }
+    .section1__title {
+      font-family: var(--font-sans);
+      font-weight: 200;
+      font-size: clamp(3rem, 7.5vw, 7.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: #fff;
+      max-width: 26ch;
+      margin-bottom: 1.4rem;
+      opacity: 0;
+      animation: heroFadeUp 1.1s var(--ease) 0.55s forwards;
+    }
+    .section1__title em {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--accent-2);
+    }
+    .section1__lede {
+      max-width: clamp(26rem, 48vw, 46rem);
+      font-size: clamp(1rem, 1.2vw, 1.18rem);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      animation: heroFadeUp 1.1s var(--ease) 0.75s forwards;
+    }
+    .section1__ctas {
+      display: flex; gap: 0.7rem; flex-wrap: wrap;
+      opacity: 0;
+      animation: heroFadeUp 1.1s var(--ease) 0.95s forwards;
+    }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .section1__controls {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      padding: 0.45rem 0.55rem;
+      display: flex; align-items: center; gap: 0.35rem;
+    }
+    .ctrl-btn {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      transition: background var(--t);
+    }
+    .ctrl-btn:hover { background: rgba(255,255,255,0.12); }
+    .ctrl-btn svg { width: 16px; height: 16px; }
+    .ctrl-time {
+      font-family: var(--font-sans);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.78rem;
+      color: #fff;
+      padding: 0 0.5rem;
+      letter-spacing: 0.02em;
+    }
+    /* Lottie isometric cube — bottom-right corner */
+    .section1__lottie {
+      position: absolute;
+      bottom: clamp(1.5rem, 4vh, 3rem);
+      right: clamp(1.5rem, 3vw, 3rem);
+      z-index: 3;
+      width: clamp(60px, 6vw, 90px);
+      height: clamp(60px, 6vw, 90px);
+      pointer-events: none;
+      opacity: 0;
+      animation: lottieFadeIn 1.2s var(--ease) 0.8s forwards;
+    }
+    .section1__lottie dotlottie-player,
+    .section1__lottie .lottie-stage {
+      width: 100%; height: 100%; display: block;
+    }
+    @keyframes lottieFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 2 — TAGLINE + CARDS
+    ═══════════════════════════════════════════════ */
+    .section2 {
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: clamp(10rem, 20vh, 16rem) 0 clamp(10rem, 20vh, 16rem);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+    }
+    .section2__inner {
+      width: var(--container);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .section2__tagline {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: clamp(1.9rem, 4.4vw, 4.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      word-spacing: normal;
+      color: var(--text);
+      max-width: 22ch;
+      margin: 0 0 clamp(3rem, 5vh, 4.5rem);
+      text-align: left;
+    }
+    .section2__tagline .word { display: inline-block; margin-right: 0.18em; vertical-align: top; }
+    .section2__tagline .word:last-child { margin-right: 0; }
+    .section2__tagline .word.italic {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--accent);
+    }
+    .section2__tagline .letter {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(8px);
+      transition: opacity 0.9s var(--ease), filter 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .section2__tagline .letter.in { opacity: 1; filter: blur(0); transform: translateY(0); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 1.5vw, 1.5rem);
+      width: 100%;
+      max-width: var(--container);
+    }
+    .card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      perspective: 1400px;
+      cursor: pointer;
+      background: transparent;
+      border-radius: var(--r-xl);
+      transition: transform 2s var(--ease);
+    }
+    /* Border-glow halo — same expanding-circle reveal used on the four-stages cards.
+       Delayed by 1s (the flip duration) so it only starts after the back face is shown. */
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--r-xl);
+      pointer-events: none;
+      box-shadow:
+        inset 0 0 0 1.5px rgba(74,158,63,0.7),
+        0 0 4px rgba(74,158,63,0.55),
+        0 0 18px rgba(74,158,63,0.35);
+      opacity: 0;
+      clip-path: circle(0% at 50% 50%);
+      z-index: 3;
+      transition: clip-path 0.6s var(--ease), opacity 0.6s var(--ease);
+    }
+    .card:hover { transform: translateY(-8px); }
+    .card:hover::after {
+      opacity: 1;
+      clip-path: circle(150% at 50% 50%);
+      transition: clip-path 3s var(--ease) 1.6s, opacity 3s var(--ease) 1.6s;
+    }
+    .card__inner {
+      position: absolute; inset: 0;
+      transform-style: preserve-3d;
+      transition: transform 1.6s var(--ease);
+      border-radius: var(--r-xl);
+    }
+    .card:hover .card__inner { transform: rotateY(180deg); }
+    .card__face {
+      position: absolute; inset: 0;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      isolation: isolate;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .card__face--front { background: var(--ink-1); }
+    .card__face--back  {
+      transform: rotateY(180deg);
+      background: #fff;
+    }
+    /* Glass-morphism overlay — frosted white matte */
+    .card__face--back::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border-radius: inherit;
+      border: 1px solid rgba(255,255,255,0.5);
+      z-index: 0;
+    }
+    .card__img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.4s var(--ease);
+    }
+    .card:hover .card__img { transform: scale(1.04); }
+    .card__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0.85) 100%);
+      transition: background 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .card__content {
+      position: absolute;
+      inset: 1.6rem;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+    }
+    .card__title {
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .card__back-content {
+      position: absolute;
+      inset: 2rem;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      gap: 1.2rem;
+      color: var(--accent-deep);
+      z-index: 1;
+    }
+    .card__about {
+      color: var(--accent-deep);
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+      line-height: 1.55;
+      max-width: 32ch;
+      margin: 0;
+      font-weight: 400;
+    }
+    /* Light-bg badge variant for the frosted back faces */
+    .badge--on-light {
+      background: rgba(255,255,255,0.55);
+      border-color: rgba(30, 69, 25, 0.18);
+      color: var(--accent-deep);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    /* Back-face buttons: solid deep green for max readability across green→white spans */
+    .card__face--back .btn--accent { background: var(--accent-deep); color: #fff; }
+    .card__face--back .btn--accent::before { background: var(--accent); }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 3 — MANIFESTO (sticky video + 3D text)
+    ═══════════════════════════════════════════════ */
+    .section3 {
+      position: relative;
+      height: 320vh;
+      background: #000;
+    }
+    .section3__sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .section3__bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 0;
+      overflow: hidden;
+      background: var(--ink-1);
+    }
+    .section3__bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 35%, rgba(0,0,0,0.65) 100%),
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+    }
+    .section3__bg-img,
+    .section3__bg-video {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .section3__belief {
+      position: relative; z-index: 2;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .section3__inner {
+      position: relative; z-index: 2;
+      width: var(--container);
+      max-width: 1080px;
+      text-align: center;
+    }
+    .section3__items {
+      display: flex; flex-direction: column;
+      gap: clamp(1.2rem, 2.5vh, 2.2rem);
+      perspective: 1000px;
+    }
+    .section3__item {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3.8vw, 3.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: #fff;
+      transition: opacity 0.4s var(--ease), filter 0.4s var(--ease), transform 0.4s var(--ease);
+      will-change: transform, opacity, filter;
+    }
+    .section3__item em {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--accent-2);
+    }
+    .section3__cta {
+      position: relative; z-index: 2;
+      margin-top: 3rem;
+      display: flex; justify-content: center;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 4 — SHOWCASE GRID
+    ═══════════════════════════════════════════════ */
+    .section4 {
+      padding: clamp(5rem, 9vh, 8rem) 0;
+      background: var(--bg);
+    }
+    .section4__head {
+      width: var(--container);
+      margin: 0 auto clamp(3rem, 5vh, 4rem);
+    }
+    .section4__eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+    .section4__title {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: clamp(1.8rem, 3.6vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      word-spacing: -0.18em;
+      max-width: 32ch;
+    }
+    .section4__title em {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    /* Module family — 3-card grid (dark cards, full-bleed image, body text) */
+    .module-grid {
+      width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(0.75rem, 1.2vw, 1.5rem);
+    }
+    .module-card {
+      position: relative;
+      background: var(--ink-1);
+      border-radius: var(--r-xl);
+      border: 1px solid var(--line-on-dark);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  border-color 1.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  box-shadow 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      /* Rebind text vars so children inherit on-dark colors */
+      --text:   var(--text-on-dark);
+      --text-2: var(--text-on-dark-2);
+      --text-3: var(--text-on-dark-3);
+      --text-4: var(--text-on-dark-4);
+      color: var(--text-on-dark);
+    }
+    .module-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(74,158,63,0.45);
+      box-shadow: 0 24px 60px -28px rgba(0,0,0,0.4), 0 0 0 1px rgba(74,158,63,0.18);
+    }
+    .module-card__image-wrap {
+      position: relative;
+      background: #1a1c1c;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .module-card__image-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%);
+      transition: background 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .module-card:hover .module-card__image-wrap::after {
+      background: linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.85) 100%);
+    }
+    .module-card__image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .module-card:hover .module-card__image-wrap img { transform: scale(1.03); }
+    .module-card__body {
+      padding: 1.6rem 1.6rem 1.9rem;
+      display: flex; flex-direction: column;
+      gap: 0.55rem;
+      flex: 1;
+    }
+    .module-card__tag {
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 500;
+    }
+    .module-card__title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .module-card__text {
+      font-size: 0.86rem;
+      color: var(--text-on-dark-3);
+      line-height: 1.55;
+      margin-top: 0.35rem;
+    }
+    .module-card__cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: auto;
+      align-self: flex-start;
+      padding: 0.55rem 1rem 0.55rem 1.1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background var(--t), border-color var(--t), color var(--t);
+    }
+    .module-card__cta svg { width: 13px; height: 13px; transition: transform var(--t); }
+    .module-card__cta:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .module-card__cta:hover svg { transform: translateX(3px); }
+    @media (max-width: 1024px) {
+      .module-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    }
+    @media (max-width: 600px) {
+      .module-grid { grid-template-columns: 1fr; }
+    }
+    .showcase {
+      width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 1.5vw, 1.5rem);
+    }
+    .showcase__column {
+      display: flex; flex-direction: column;
+      gap: clamp(1rem, 1.5vw, 1.5rem);
+    }
+    .showcase__column--reverse {
+      padding-top: clamp(2rem, 5vh, 4rem);
+    }
+    .tile {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--ink-1);
+    }
+    .tile--video {
+      aspect-ratio: 4 / 5;
+    }
+    .tile__media {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 1.4s var(--ease);
+    }
+    .tile:hover .tile__media { transform: scale(1.03); }
+    .tile__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
+      pointer-events: none;
+    }
+    .tile__header {
+      position: absolute;
+      top: 1.25rem; left: 1.25rem; right: 1.25rem;
+      display: flex; justify-content: space-between;
+      z-index: 2;
+    }
+    .tile__footer {
+      position: absolute;
+      left: 1.5rem; right: 1.5rem; bottom: 1.4rem;
+      z-index: 2;
+      color: #fff;
+    }
+    .tile__title {
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+    }
+    .tile__sub {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.75);
+      margin-top: 0.2rem;
+    }
+    .tile--quote {
+      background: var(--ink-2);
+      padding: 2.2rem;
+      display: flex; flex-direction: column;
+      justify-content: space-between;
+      aspect-ratio: 4 / 5;
+      border: 1px solid var(--line);
+    }
+    .tile--quote .badge { align-self: flex-start; }
+    .tile__quote {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .tile__source {
+      font-size: 0.86rem;
+      color: var(--text-3);
+      margin-top: 1rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 5 — STATS + LOGOS
+    ═══════════════════════════════════════════════ */
+    .section5 {
+      padding: clamp(5rem, 10vh, 9rem) 0 clamp(6rem, 12vh, 10rem);
+      background: var(--bg);
+    }
+    .stats {
+      width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(1rem, 1.6vw, 1.6rem);
+      margin-bottom: clamp(5rem, 9vh, 7rem);
+    }
+    .stat {
+      position: relative;
+      border-radius: var(--r-xl);
+      padding: 2rem;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      min-height: 230px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      overflow: hidden;
+      transition: border-color 1.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  box-shadow 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .stat:hover {
+      border-color: rgba(74,158,63,0.30);
+      box-shadow: 0 18px 48px -28px rgba(30,69,25,0.25);
+    }
+    .stat::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 0% 0%, rgba(74,158,63,0.06), transparent 55%);
+      pointer-events: none;
+    }
+    /* Light-theme badge inside stat card */
+    .stat .badge {
+      background: rgba(74,158,63,0.10);
+      border-color: rgba(74,158,63,0.28);
+      color: var(--accent-deep);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .stat__badge { align-self: flex-start; }
+    .stat__title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.4vw, 5.4rem);
+      letter-spacing: 0.01em;
+      line-height: 1;
+      color: var(--accent);
+      margin-top: 0.8rem;
+    }
+    .stat__title em {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.55em;
+      color: var(--accent);
+      vertical-align: 0.15em;
+      letter-spacing: 0;
+    }
+    .stat__sub {
+      font-size: 0.92rem;
+      color: var(--carbon-2);
+      margin-top: 0.8rem;
+      max-width: 22ch;
+      line-height: 1.45;
+    }
+
+    .leagues {
+      width: 100%;
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    }
+    .leagues__track {
+      display: flex;
+      gap: clamp(2.5rem, 4vw, 4rem);
+      width: max-content;
+      animation: leagues 38s linear infinite;
+      padding: 1rem 0;
+    }
+    .leagues__track:hover { animation-play-state: paused; }
+    @keyframes leagues {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .league-item {
+      flex-shrink: 0;
+      width: clamp(120px, 11vw, 160px);
+      text-align: center;
+    }
+    .league-item__txt {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      line-height: 1;
+      transition: color var(--t);
+    }
+    .league-item:hover .league-item__txt { color: var(--accent-deep); }
+    .league-item__sub {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--carbon-3);
+      margin-top: 0.4rem;
+    }
+
+    /* ═══════════════════════════════════════════════
+       IMAGE MARQUEE — endless horizontal scroll of renders
+    ═══════════════════════════════════════════════ */
+    .image-marquee {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: clamp(3rem, 6vh, 5rem) 0 0;
+      background: var(--bg);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
+    }
+    .image-marquee.is-dragging { cursor: grabbing; }
+    .image-marquee::-webkit-scrollbar { display: none; }
+    .image-marquee__track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      will-change: transform;
+    }
+    .image-marquee__item {
+      flex-shrink: 0;
+      width: clamp(260px, 28vw, 420px);
+      aspect-ratio: 16 / 11;
+      perspective: 1200px;
+      overflow: visible;
+      background: transparent;
+    }
+    .flipbox {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 1.6s cubic-bezier(0.55, 0.05, 0.2, 1);
+    }
+    .image-marquee__item:hover .flipbox { transform: rotateY(180deg); }
+    .flipbox__face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+    .flipbox__front img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .flipbox__back {
+      transform: rotateY(180deg);
+      background: linear-gradient(140deg, #0c0d0d 0%, #1a1c1c 100%);
+      border: 1px solid rgba(74,158,63,0.18);
+      display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: space-between;
+      padding: clamp(1.25rem, 2vw, 1.75rem);
+      color: #fff;
+    }
+    .flipbox__back-tag {
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      font-weight: 500;
+    }
+    .flipbox__back-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2vw, 1.85rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+    }
+    .flipbox__back-cta {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.6rem 1.1rem 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: background var(--t), transform var(--t);
+    }
+    .flipbox__back-cta svg { width: 13px; height: 13px; transition: transform var(--t); }
+    .flipbox__back-cta:hover { background: var(--accent-2); color: var(--carbon-1); }
+    .flipbox__back-cta:hover svg { transform: translateX(2px); }
+    @media (max-width: 768px) {
+      .image-marquee__item { width: clamp(220px, 65vw, 320px); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION 6 — CTA / CLOSING
+    ═══════════════════════════════════════════════ */
+    .section6 {
+      position: relative;
+      padding: clamp(6rem, 14vh, 12rem) 0 clamp(4rem, 7vh, 6rem);
+      background: #000;
+      overflow: hidden;
+    }
+    .section6::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(74,158,63,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(30,69,25,0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .section6__inner {
+      position: relative;
+      width: var(--container);
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section6__eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 1.5rem;
+    }
+    .section6__title {
+      font-family: var(--font-sans);
+      font-weight: 200;
+      font-size: clamp(3rem, 8vw, 8rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: #fff;
+      margin-bottom: 1.5rem;
+    }
+    .section6__title em {
+      font-family: var(--font-sans);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--accent-2);
+    }
+    .section6__sub {
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    .section6__ctas {
+      display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    .footer {
+      background: #000;
+      border-top: 1px solid var(--line-on-dark);
+      padding: 4rem 0 2.5rem;
+    }
+    .footer__inner {
+      width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer__brand { max-width: 320px; }
+    .footer__about {
+      color: var(--text-3);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-top: 1.25rem;
+    }
+    .footer__col h4 {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-4);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .footer__col li { margin-bottom: 0.7rem; }
+    .footer__col a {
+      font-size: 0.92rem;
+      color: var(--text-2);
+      transition: color var(--t);
+    }
+    .footer__col a:hover { color: var(--accent-2); }
+    .footer__bottom {
+      width: var(--container);
+      margin: 4rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-4);
+    }
+
+    /* ─── In-view reveal helpers ─── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      :root { --nav-h: 64px; }
+      .nav__links { display: none; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .card { aspect-ratio: 4 / 5; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .footer__inner { grid-template-columns: 1fr 1fr; }
+      .section3 { height: 280vh; }
+      .showcase { grid-template-columns: 1fr; }
+      .showcase__column--reverse { padding-top: 0; }
+    }
+    @media (max-width: 700px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav__cta { display: none; }
+      .stats { grid-template-columns: 1fr; }
+      .footer__inner { grid-template-columns: 1fr; }
+      .section1__controls { bottom: 1rem; }
+      .section1__scroll { bottom: 5rem; }
+    }
+  
+    /* Letter-blur reveal (re-used by section4 & section6 headings) */
+    .anim-letters .word { display: inline-block; margin-right: 0.22em; vertical-align: top; white-space: nowrap; }
+    .anim-letters .letter {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(10px);
+      transition: opacity 0.9s var(--ease), filter 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+    .anim-letters .letter.in { opacity: 1; filter: blur(0); transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="topgrad" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════════════ NAV ════════════════════════════════════════════════ -->
+  <nav class="nav" id="nav" aria-label="Main">
+    <a href="precast-africa-warwick-style.html" class="nav__brand">
+      <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt="" / decoding="async"><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt=""  loading="lazy" decoding="async"/></span>
+      <span>Precast Africa</span>
+    </a>
+    <div class="nav__links">
+      <a href="system.html" class="nav__link">System</a>
+      <a href="process.html" class="nav__link">Process</a>
+      <a href="developers.html" class="nav__link">Developers</a>
+      <a href="sustainability.html" class="nav__link">Sustainability</a>
+      <a href="news.html" class="nav__link">News</a>
+    </div>
+    <div class="nav__cta">
+      <a href="build-your-project.html" class="btn btn--accent">
+        <span>Build Project</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="contact.html" class="btn btn--glass">
+        <span>Get in touch</span>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════ SECTION 1 ════════════════════════════════════════════════ -->
+  <section class="section section1" id="section1">
+    <div class="section1__poster" aria-hidden="true"></div>
+    <video class="section1__video" id="heroVideo"
+           poster="Background Images/hero-poster.jpg"
+           autoplay muted loop playsinline preload="metadata">
+      <source src="Background Images/Hero Background Video.mp4" type="video/mp4" />
+    </video>
+    <div class="section1__vignette" aria-hidden="true"></div>
+
+    <div class="section1__content">
+      <h1 class="section1__title">
+        Reshaping how<br>
+        Africa <em>builds.</em>
+      </h1>
+      <p class="section1__lede">Precast Africa is a sustainable PPVC construction-system company. We design, manufacture, transport, and install volumetric concrete modules — delivering complete residential buildings faster, at scale, and with cost certainty for African developers.</p>
+      <div class="section1__ctas">
+        <a href="developers.html" class="btn btn--primary btn--lg">
+          <span>For developers</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="system.html" class="btn btn--glass btn--lg">
+          <span>Explore the system</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section1__fade" aria-hidden="true"></div>
+
+  </section>
+
+  <!-- ════════════════════════════════════════════════ SECTION 2 ════════════════════════════════════════════════ -->
+  <section class="section section2" id="section2">
+    <div class="section2__inner">
+
+      <h1 class="section2__tagline" id="tagline" aria-label="The precast construction system shaping the future of African housing.">
+        <span class="word">The</span>
+        <span class="word">precast</span>
+        <span class="word">construction</span>
+        <span class="word">system</span>
+        <span class="word">shaping</span>
+        <span class="word">the</span>
+        <span class="word italic">future</span>
+        <span class="word">of</span>
+        <span class="word">African</span>
+        <span class="word">housing.</span>
+      </h1>
+
+      <div class="cards">
+        <a href="developers.html" class="card reveal">
+          <div class="card__inner">
+            <div class="card__face card__face--front">
+              <img class="card__img" src="Background Images/IMG_4583.JPG" alt="For developers" loading="lazy" />
+              <div class="card__overlay"></div>
+              <div class="card__content">
+                <span class="badge">Developers</span>
+                <div>
+                  <h2 class="card__title">Built faster. Built at scale.</h2>
+                  <span class="btn btn--primary">
+                    <span>For developers</span>
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="card__face card__face--back">
+              <div class="card__back-content">
+                <span class="badge badge--on-light">Developers</span>
+                <p class="card__about">Programme certainty, factory-controlled quality, and repeatable modules &mdash; engineered for the developers building Africa's residential pipeline.</p>
+                <span class="btn btn--accent">
+                  <span>For developers</span>
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="system.html" class="card reveal reveal-d1">
+          <div class="card__inner">
+            <div class="card__face card__face--front">
+              <video class="card__img" src="Background Images/card-technology.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Our technology"></video>
+              <div class="card__overlay"></div>
+              <div class="card__content">
+                <span class="badge">Technology</span>
+                <div>
+                  <h2 class="card__title">Engineered for repeatability.</h2>
+                  <span class="btn btn--primary">
+                    <span>Our technology</span>
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="card__face card__face--back">
+              <div class="card__back-content">
+                <span class="badge badge--on-light">Technology</span>
+                <p class="card__about">A PPVC volumetric system built on three core modules and a fourth enhanced variant &mdash; designed for crane installation, fixed-schedule delivery, and 50+ year service life.</p>
+                <span class="btn btn--accent">
+                  <span>Our technology</span>
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="sustainability.html" class="card reveal reveal-d2">
+          <div class="card__inner">
+            <div class="card__face card__face--front">
+              <img class="card__img" src="Background Images/IMG_4559.JPG" alt="For partners and investors" loading="lazy" />
+              <div class="card__overlay"></div>
+              <div class="card__content">
+                <span class="badge">Partners &amp; Investors</span>
+                <div>
+                  <h2 class="card__title">Built to last. Built with intent.</h2>
+                  <span class="btn btn--primary">
+                    <span>Our approach</span>
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="card__face card__face--back">
+              <div class="card__back-content">
+                <span class="badge badge--on-light">Partners &amp; Investors</span>
+                <p class="card__about">A sustainable construction system designed for long-life housing, lower-carbon concrete, and resilient supply chains across Africa.</p>
+                <span class="btn btn--accent">
+                  <span>Our approach</span>
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ SECTION 3 — MANIFESTO ════════════════════════════════════════════════ -->
+  <section class="section section3" id="section3">
+    <div class="section3__sticky">
+      <div class="section3__bg" aria-hidden="true">
+        <img class="section3__bg-img" src="Renders/precast-multistorey-house-modules.png" alt="" loading="lazy" />
+      </div>
+
+      <div class="section3__inner">
+        <p class="section3__belief">We believe in</p>
+
+        <div class="section3__items" id="manifestoItems">
+          <p class="section3__item">Building homes that <em>bend reality.</em></p>
+          <p class="section3__item">Treating <em>speed</em> as a duty, not a luxury.</p>
+          <p class="section3__item">Choosing <em>precision</em> over expedience.</p>
+          <p class="section3__item"><em>Refusing</em> to accept the housing crisis as inevitable.</p>
+          <p class="section3__item"><em>Sustainability</em> over headlines.</p>
+        </div>
+
+        <div class="section3__cta">
+          <a href="manifesto.html" class="btn btn--glass btn--md">
+            <span>Read our manifesto</span>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ SECTION 4 — SHOWCASE ════════════════════════════════════════════════ -->
+  <section class="section section4" id="section4">
+    <div class="section4__head reveal">
+      <p class="section4__eyebrow">The Module Family</p>
+      <h2 class="section4__title anim-letters">Three modules. <em>Any configuration.</em></h2>
+    </div>
+
+    <div class="module-grid">
+      <article class="module-card reveal">
+        <div class="module-card__image-wrap">
+          <img src="Precast Modules/Type A - Standard Module Render.png" alt="Main module render" loading="lazy" />
+        </div>
+        <div class="module-card__body">
+          <span class="module-card__tag">Module Type A</span>
+          <h3 class="module-card__title">Main Module</h3>
+          <p class="module-card__text">Primary habitable space. Configurable for studio, 1-bed, and 2-bed layouts. Flexible window arrangements, door positions, and internal partition options within structural limits.</p>
+          <a href="system.html#modules" class="module-card__cta">
+            <span>View module</span>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="module-card reveal reveal-d1">
+        <div class="module-card__image-wrap">
+          <img src="Precast Modules/Type B - Service Module Render.png" alt="Wet-core module render" loading="lazy" />
+        </div>
+        <div class="module-card__body">
+          <span class="module-card__tag">Module Type B</span>
+          <h3 class="module-card__title">Wet-Core Module</h3>
+          <p class="module-card__text">Centralises bathrooms, kitchens, plumbing, drainage, and electrical services. Factory-tested before dispatch. Eliminates the most common defect source in conventional residential builds.</p>
+          <a href="system.html#modules" class="module-card__cta">
+            <span>View module</span>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <article class="module-card reveal reveal-d2">
+        <div class="module-card__image-wrap">
+          <img src="Precast Modules/Type C - Entry Module Render.png" alt="Stair / Core module render" loading="lazy" />
+        </div>
+        <div class="module-card__body">
+          <span class="module-card__tag">Module Type C</span>
+          <h3 class="module-card__title">Stair / Core Module</h3>
+          <p class="module-card__text">Vertical circulation, stair access, structural core, and service shafts for multi-storey buildings. Provides lateral stability across the full stacked structure.</p>
+          <a href="system.html#modules" class="module-card__cta">
+            <span>View module</span>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ SECTION 5 — STATS + LOGOS ════════════════════════════════════════════════ -->
+  <section class="section section5" id="section5">
+    <div class="section4__head reveal">
+      <p class="section4__eyebrow">The Benefits</p>
+      <h2 class="section4__title anim-letters">Programme certainty. <em>Built in.</em></h2>
+    </div>
+    <div class="stats" id="stats">
+      <div class="stat reveal">
+        <span class="badge stat__badge">Programme</span>
+        <p class="stat__title"><span class="stat__val" data-target="40" data-suffix="%">0</span></p>
+        <p class="stat__sub">Faster delivery vs. comparable in-situ construction.</p>
+      </div>
+      <div class="stat reveal reveal-d1">
+        <span class="badge stat__badge">Off-site</span>
+        <p class="stat__title"><span class="stat__val" data-target="90" data-suffix="%">0</span></p>
+        <p class="stat__sub">Of construction completed in the factory.</p>
+      </div>
+      <div class="stat reveal reveal-d2">
+        <span class="badge stat__badge">Waste</span>
+        <p class="stat__title">Up to <span class="stat__val" data-target="90" data-suffix="%">0</span></p>
+        <p class="stat__sub">Less construction waste vs. traditional methods.</p>
+      </div>
+      <div class="stat reveal reveal-d2">
+        <span class="badge stat__badge">Durability</span>
+        <p class="stat__title"><span class="stat__val" data-target="50" data-suffix="+">0</span><em>&nbsp;yr</em></p>
+        <p class="stat__sub">Engineered design life. Low-maintenance concrete.</p>
+      </div>
+    </div>
+
+    <div class="leagues">
+      <div class="leagues__track">
+        <div class="league-item"><div class="league-item__txt">PPVC</div><div class="league-item__sub">System</div></div>
+        <div class="league-item"><div class="league-item__txt">40 MPa</div><div class="league-item__sub">Concrete</div></div>
+        <div class="league-item"><div class="league-item__txt">120 min</div><div class="league-item__sub">Fire rating</div></div>
+        <div class="league-item"><div class="league-item__txt">30T</div><div class="league-item__sub">Crane lift</div></div>
+        <div class="league-item"><div class="league-item__txt">SABS</div><div class="league-item__sub">Standards</div></div>
+        <div class="league-item"><div class="league-item__txt">ISO 9001</div><div class="league-item__sub">Quality</div></div>
+        <div class="league-item"><div class="league-item__txt">GBCSA</div><div class="league-item__sub">Green Building</div></div>
+        <div class="league-item"><div class="league-item__txt">Eurocode</div><div class="league-item__sub">Engineering</div></div>
+        <div class="league-item"><div class="league-item__txt">PPVC</div><div class="league-item__sub">System</div></div>
+        <div class="league-item"><div class="league-item__txt">40 MPa</div><div class="league-item__sub">Concrete</div></div>
+        <div class="league-item"><div class="league-item__txt">120 min</div><div class="league-item__sub">Fire rating</div></div>
+        <div class="league-item"><div class="league-item__txt">30T</div><div class="league-item__sub">Crane lift</div></div>
+        <div class="league-item"><div class="league-item__txt">SABS</div><div class="league-item__sub">Standards</div></div>
+        <div class="league-item"><div class="league-item__txt">ISO 9001</div><div class="league-item__sub">Quality</div></div>
+        <div class="league-item"><div class="league-item__txt">GBCSA</div><div class="league-item__sub">Green Building</div></div>
+        <div class="league-item"><div class="league-item__txt">Eurocode</div><div class="league-item__sub">Engineering</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ IMAGE MARQUEE (above CTA) ════════════════════════════════════════════════ -->
+  <section class="image-marquee" aria-label="Project renders" id="imageMarquee">
+    <div class="image-marquee__track">
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/Residential Exterior Day.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Residential</span>
+              <h3 class="flipbox__back-title">Exterior Day</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/3 storey walkup.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">3-Storey Walk-Up</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-apartment-block-evening.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Apartment Block</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-multistorey-house-modules.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Multi-Storey</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-mixed use development.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Mixed-Use Development</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-lowcost housing-commercial.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Affordable Housing</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-villa-png.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Villa</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-desert-retreat-sunset.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Desert Retreat</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-single-storey-home-dusk.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Single-Storey · Dusk</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-single-storey-home.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Single-Storey</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/single storey house_cladded.JPG" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Cladded Home</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-site-office.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Use Case</span>
+              <h3 class="flipbox__back-title">Site Office</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-guardhouse-estate.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Use Case</span>
+              <h3 class="flipbox__back-title">Estate Guardhouse</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/IMG_4632.JPG" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">On Site</span>
+              <h3 class="flipbox__back-title">In Production</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/81E47D2C-1AEC-4BCE-8DA0-18E3621087EF.JPG" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">On Site</span>
+              <h3 class="flipbox__back-title">On Location</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/Residential Exterior Day.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Residential</span>
+              <h3 class="flipbox__back-title">Exterior Day</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/3 storey walkup.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">3-Storey Walk-Up</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-apartment-block-evening.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Apartment Block</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-multistorey-house-modules.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Multi-Storey</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-mixed use development.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Mixed-Use Development</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-lowcost housing-commercial.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Configuration</span>
+              <h3 class="flipbox__back-title">Affordable Housing</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-villa-png.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Villa</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-desert-retreat-sunset.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Desert Retreat</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-single-storey-home-dusk.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Single-Storey · Dusk</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-single-storey-home.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Single-Storey</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/single storey house_cladded.JPG" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Typology</span>
+              <h3 class="flipbox__back-title">Cladded Home</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-site-office.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Use Case</span>
+              <h3 class="flipbox__back-title">Site Office</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/precast-guardhouse-estate.png" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">Use Case</span>
+              <h3 class="flipbox__back-title">Estate Guardhouse</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/IMG_4632.JPG" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">On Site</span>
+              <h3 class="flipbox__back-title">In Production</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="image-marquee__item">
+        <div class="flipbox">
+          <div class="flipbox__face flipbox__front"><img src="Renders/81E47D2C-1AEC-4BCE-8DA0-18E3621087EF.JPG" alt="" loading="lazy" draggable="false"></div>
+          <div class="flipbox__face flipbox__back">
+            <div>
+              <span class="flipbox__back-tag">On Site</span>
+              <h3 class="flipbox__back-title">On Location</h3>
+            </div>
+            <a class="flipbox__back-cta" href="system.html#configurations"><span>View configuration</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ SECTION 6 — CTA ════════════════════════════════════════════════ -->
+  <section class="section section6" id="section6">
+    <div class="section6__inner">
+      <p class="section6__eyebrow reveal">Build with us</p>
+      <h2 class="section6__title anim-letters reveal reveal-d1">Let's <em>build.</em></h2>
+      <p class="section6__sub reveal reveal-d2">Bring your unit mix, site, and target programme &mdash; we'll come back with an indicative configuration, module count, and delivery schedule.</p>
+      <div class="section6__ctas reveal reveal-d2">
+        <a href="build-your-project.html" class="btn btn--primary btn--lg">
+          <span>Builder</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="system.html" class="btn btn--glass btn--lg">
+          <span>Explore the system</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════ FOOTER ════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="precast-africa-warwick-style.html" class="nav__brand">
+          <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt=""  loading="lazy" decoding="async"/><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt=""  loading="lazy" decoding="async"/></span>
+          <span>Precast Africa</span>
+        </a>
+        <p class="footer__about">A sustainable PPVC precast construction-system company &mdash; designing, manufacturing, transporting, and installing durable volumetric modules for African developers.</p>
+      </div>
+      <div class="footer__col">
+        <h4>System</h4>
+        <ul>
+          <li><a href="system.html">Overview</a></li>
+          <li><a href="system.html#modules">Modules</a></li>
+          <li><a href="system.html#specs">Specs</a></li>
+          <li><a href="process.html">Process</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="developers.html">For Developers</a></li>
+          <li><a href="sustainability.html">Sustainability</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Reach Us</h4>
+        <ul>
+          <li><a href="mailto:info@precastafrica.com">info@precastafrica.com</a></li>
+          <li><a href="contact.html">Request a briefing</a></li>
+          <li><a href="contact.html#investor">Investor enquiries</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© 2026 Precast Africa. All rights reserved.</div>
+      <div>Sustainable PPVC Construction Systems &middot; South Africa</div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════════════ SCRIPTS ════════════════════════════════════════════════ -->
+  <script>
+    // ── Nav scroll state ───────────────────────────
+    (function () {
+      const nav = document.getElementById('nav');
+      if (!nav) return;
+      const setScrolled = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+      window.addEventListener('scroll', setScrolled, { passive: true });
+      setScrolled();
+    })();
+
+    // ── Hero video fade-in once buffered ───────────
+    (function () {
+      const v = document.getElementById('heroVideo');
+      if (!v) return;
+      v.addEventListener('loadeddata', () => v.classList.add('loaded'));
+      v.addEventListener('canplay', () => v.classList.add('loaded'));
+    })();
+
+    // ── Image marquee — auto-scroll + drag + wheel ─
+    (function () {
+      const marquee = document.getElementById('imageMarquee');
+      if (!marquee) return;
+
+      let speed = 0.28;            // px per frame — slower than before
+      let direction = -1;          // -1 = content drifts right; +1 = content drifts left
+      let paused = false;
+      let userIdleTimer = null;
+      const RESUME_DELAY = 2200;
+
+      function halfWidth() { return marquee.scrollWidth / 2; }
+
+      // Initialise scrollLeft into the middle of the first set so we have
+      // room to decrement (browser clamps scrollLeft to >= 0), THEN start ticking.
+      function start() {
+        const hw = halfWidth();
+        // If layout isn't ready yet, retry next frame
+        if (!hw) { requestAnimationFrame(start); return; }
+        marquee.scrollLeft = hw - 1;       // sit at end of first set so we can scroll left freely
+        requestAnimationFrame(tick);
+      }
+
+      function tick() {
+        if (!paused) {
+          const hw = halfWidth();
+          let next = marquee.scrollLeft + (speed * direction);
+          if (next >= hw) next -= hw;
+          else if (next < 0) next += hw;
+          marquee.scrollLeft = next;
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // Defer to next frame so images contribute to scrollWidth
+      requestAnimationFrame(start);
+
+      function userActive() {
+        paused = true;
+        clearTimeout(userIdleTimer);
+        userIdleTimer = setTimeout(() => { paused = false; userIdleTimer = null; }, RESUME_DELAY);
+      }
+
+      function wrapScroll() {
+        const hw = halfWidth();
+        if (marquee.scrollLeft >= hw) marquee.scrollLeft -= hw;
+        else if (marquee.scrollLeft < 0) marquee.scrollLeft += hw;
+      }
+      marquee.addEventListener('scroll', wrapScroll, { passive: true });
+
+      // Hover pause (so flip transitions are smooth)
+      marquee.addEventListener('mouseenter', () => { paused = true; });
+      marquee.addEventListener('mouseleave', () => {
+        if (!userIdleTimer) paused = false;
+      });
+
+      // Pointer drag-to-scroll
+      let dragging = false, startX = 0, startScroll = 0, pointerId = null;
+      marquee.addEventListener('pointerdown', (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        dragging = true;
+        startX = e.clientX;
+        startScroll = marquee.scrollLeft;
+        pointerId = e.pointerId;
+        try { marquee.setPointerCapture(e.pointerId); } catch (_) {}
+        marquee.classList.add('is-dragging');
+        userActive();
+      });
+      marquee.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        marquee.scrollLeft = startScroll - (e.clientX - startX);
+        userActive();
+      });
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        if (pointerId !== null) {
+          try { marquee.releasePointerCapture(pointerId); } catch (_) {}
+        }
+        marquee.classList.remove('is-dragging');
+      }
+      marquee.addEventListener('pointerup', endDrag);
+      marquee.addEventListener('pointercancel', endDrag);
+      marquee.addEventListener('pointerleave', endDrag);
+
+      // Wheel: vertical → horizontal; horizontal trackpad passes through
+      marquee.addEventListener('wheel', (e) => {
+        const absX = Math.abs(e.deltaX);
+        const absY = Math.abs(e.deltaY);
+        if (absY > absX) {
+          e.preventDefault();
+          marquee.scrollLeft += e.deltaY;
+        }
+        userActive();
+      }, { passive: false });
+
+      // Pause when tab is hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) paused = true;
+      });
+    })();
+
+    // ── Hero Lottie (isometric cube) ───────────────
+    (function () {
+      const stage = document.getElementById('heroLottie');
+      if (!stage) return;
+      function boot() {
+        if (typeof lottie === 'undefined') { setTimeout(boot, 80); return; }
+        const anim = lottie.loadAnimation({
+          container: stage,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: stage.dataset.lottie,
+          rendererSettings: { progressiveLoad: true, preserveAspectRatio: 'xMidYMid meet' }
+        });
+        anim.setSpeed(0.5); // half speed
+      }
+      boot();
+    })();
+
+    // ── Generic letter splitter (used by tagline + section4/6 titles) ───────
+    function splitLettersIn(root, baseDelay) {
+      if (root.dataset.split === '1') return;
+      root.dataset.split = '1';
+      let charCount = 0;
+      function walk(node) {
+        const frag = document.createDocumentFragment();
+        [...node.childNodes].forEach(child => {
+          if (child.nodeType === Node.TEXT_NODE) {
+            const txt = child.textContent;
+            const words = txt.split(/(\s+)/);
+            words.forEach(w => {
+              if (!w) return;
+              if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(' ')); return; }
+              const wEl = document.createElement('span');
+              wEl.className = 'word';
+              [...w].forEach(ch => {
+                const sp = document.createElement('span');
+                sp.className = 'letter';
+                sp.textContent = ch;
+                sp.style.transitionDelay = ((baseDelay || 0) + charCount * 22) + 'ms';
+                charCount++;
+                wEl.appendChild(sp);
+              });
+              frag.appendChild(wEl);
+            });
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            if (child.tagName === 'BR') { frag.appendChild(child.cloneNode()); }
+            else {
+              const wrap = child.cloneNode(false);
+              wrap.appendChild(walk(child));
+              frag.appendChild(wrap);
+            }
+          }
+        });
+        return frag;
+      }
+      const out = walk(root);
+      root.innerHTML = '';
+      root.appendChild(out);
+    }
+    // Tagline already has .word spans pre-split → keep its existing behaviour
+    (function() {
+      const t = document.getElementById('tagline');
+      if (!t) return;
+      const words = t.querySelectorAll('.word');
+      let total = 0;
+      words.forEach((w) => {
+        const txt = w.textContent.trim();
+        w.innerHTML = '';
+        [...txt].forEach((ch) => {
+          const span = document.createElement('span');
+          span.className = 'letter';
+          span.textContent = ch;
+          span.style.transitionDelay = (total * 28) + 'ms';
+          w.appendChild(span);
+          total++;
+        });
+      });
+    })();
+    // Split other .anim-letters (section 4, section 6, etc.)
+    document.querySelectorAll('.anim-letters').forEach(el => splitLettersIn(el, 0));
+    function revealLetters() {
+      document.querySelectorAll('#tagline .letter').forEach(l => l.classList.add('in'));
+    }
+
+    // ── In-view reveal (IntersectionObserver) ──────
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          if (e.target.id === 'tagline') revealLetters();
+          if (e.target.classList.contains('anim-letters')) {
+            e.target.querySelectorAll('.letter').forEach(l => l.classList.add('in'));
+          }
+          if (e.target.id === 'stats') runStats();
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal, #tagline, #stats, .anim-letters').forEach(el => io.observe(el));
+
+    // ── Stat counters ──────────────────────────────
+    function runStats() {
+      document.querySelectorAll('.stat__val').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const dur = 1600;
+        const start = performance.now();
+        function step(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    // ── Section 3 — 3D scroll-driven manifesto ─────
+    const s3 = document.getElementById('section3');
+    const items = document.querySelectorAll('#manifestoItems .section3__item');
+    function s3Tick() {
+      if (!s3 || !items.length) return;
+      const rect = s3.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = s3.offsetHeight - vh;
+      let p = -rect.top / total;
+      p = Math.max(0, Math.min(1, p));
+      const n = items.length;
+      // Slight inset so first/last items have time on screen
+      const eased = p * 1.0;
+      items.forEach((el, i) => {
+        const centre = i / (n - 1);
+        const d = (eased - centre) * (n - 1);
+        const abs = Math.min(Math.abs(d), 2);
+        const opacity = Math.max(0.08, 1 - abs * 0.55);
+        const scale = 1 - abs * 0.18;
+        const rotateX = d * 30;
+        const blur = Math.min(8, abs * 4);
+        const y = d * 14;
+        el.style.opacity = opacity.toFixed(3);
+        el.style.filter = 'blur(' + blur.toFixed(2) + 'px)';
+        el.style.transform = 'perspective(1000px) translateY(' + y.toFixed(1) + 'px) rotateX(' + rotateX.toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+      });
+    }
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => { s3Tick(); ticking = false; });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', s3Tick);
+    s3Tick();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>After the Building Site — A Field Note · Precast Africa</title>
+<meta name="description" content="A field note on Precast Africa — the sustainable PPVC construction system industrialising the African home. On the move from the building site to the factory, the architecture of a quiet shift, and what it means to assemble a home rather than pour one." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/precast.css">
+<style>
+  /* ─── Field Note — manifesto-aligned editorial treatment ─── */
+  .manifesto {
+    --measure: 36rem;
+    --gutter: clamp(1.25rem, 3vw, 3rem);
+  }
+
+  /* HERO ─── fixed cover, restrained title with em-italic accent */
+  .manifesto__hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    isolation: isolate;
+    background-image: url('Background Images/03DAB345-AC96-4091-A5F2-2CD8767F7AA3.JPG');
+    background-size: cover;
+    background-position: center 40%;
+    background-attachment: fixed;
+  }
+  .manifesto__hero-tint {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(12,13,13,0.10) 0%, rgba(12,13,13,0.05) 40%, rgba(12,13,13,0.65) 100%);
+    z-index: -1;
+  }
+  .manifesto__hero-inner {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vh, 7rem) 0;
+    color: #fff;
+    text-align: left;
+    will-change: opacity, transform;
+  }
+  @media (max-width: 820px) {
+    .manifesto__hero { background-attachment: scroll; }
+  }
+  .manifesto__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    font-weight: 500;
+    margin-bottom: 1.6rem;
+  }
+  .manifesto__hero-title {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(2.4rem, 5.6vw, 5.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    word-spacing: 0.18em;
+    color: #fff;
+    max-width: 22ch;
+    margin: 0;
+  }
+  .manifesto__hero-title em {
+    font-style: italic;
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-weight: 400;
+    color: #fff;
+  }
+  .manifesto__hero-meta {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+
+  /* SECTION BASE ─── magazine layout */
+  .manifesto__section {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: clamp(5rem, 10vh, 9rem) auto;
+  }
+  .manifesto__section--narrow {
+    width: min(100% - var(--gutter) * 2, 52rem);
+  }
+  .manifesto__intro {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    color: var(--text);
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+  .manifesto__intro em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-weight: 400;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* SPLIT ─── text + adjacent figure */
+  .manifesto__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+  .manifesto__split--reverse > :first-child { order: 2; }
+  .manifesto__split-copy { text-align: left; }
+  .manifesto__split-copy h2 {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    word-spacing: 0.18em;
+    margin: 0 0 1.4rem;
+    color: var(--text);
+    max-width: 100%;
+    text-align: left;
+  }
+  .manifesto__split-copy h2 em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__split-copy p {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 100%;
+    margin: 0 0 1.1rem;
+    text-align: left;
+  }
+  .manifesto__split-copy p:last-child { margin-bottom: 0; }
+  .manifesto__split-copy p em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    color: var(--text);
+  }
+  .manifesto__split-copy ul {
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1.2rem;
+  }
+  .manifesto__split-copy li {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-2);
+  }
+  .manifesto__split-copy li span {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* FIGURE ─── image frames */
+  .manifesto__figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4 / 5;
+    background: var(--bg-soft, #f0f0ed);
+  }
+  .manifesto__figure--wide   { aspect-ratio: 16 / 10; }
+  .manifesto__figure--cinema { aspect-ratio: 21 / 9; }
+  .manifesto__figure--paper  { background: #f7f6f3; }
+  .manifesto__figure img,
+  .manifesto__figure video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s var(--ease);
+  }
+  .manifesto__figure--contain img {
+    object-fit: contain;
+    padding: clamp(1rem, 2vw, 2rem);
+  }
+  .manifesto__figure:hover img { transform: scale(1.02); }
+  .manifesto__caption {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+    margin-top: 0.75rem;
+    max-width: 36ch;
+  }
+  .manifesto__caption-num {
+    font-family: var(--font-display, var(--font-sans));
+    margin-right: 0.5rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* MODULE FIGURE — render ↔ bare hover swap (restrained) */
+  .manifesto__figure--mod { aspect-ratio: 4 / 5; cursor: default; }
+  .manifesto__figure--mod img.mod-render,
+  .manifesto__figure--mod img.mod-bare {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: opacity 0.8s var(--ease), transform 1.8s var(--ease);
+  }
+  .manifesto__figure--mod img.mod-bare {
+    opacity: 0;
+    object-fit: contain;
+    padding: 1.25rem;
+    background: #f7f6f3;
+  }
+  .manifesto__figure--mod:hover img.mod-render { opacity: 0; }
+  .manifesto__figure--mod:hover img.mod-bare   { opacity: 1; }
+
+  /* PULL QUOTE */
+  .manifesto__pull {
+    margin: clamp(4rem, 8vh, 7rem) auto;
+    width: min(100% - var(--gutter) * 2, 60rem);
+    text-align: left;
+  }
+  .manifesto__pull blockquote {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    color: var(--text);
+    margin: 0;
+    border-left: 2px solid var(--accent);
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .manifesto__pull-attr {
+    margin-top: 1.6rem;
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  /* FULL-BLEED IMAGE / VIDEO */
+  .manifesto__bleed {
+    width: 100%;
+    margin: clamp(4rem, 9vh, 8rem) 0;
+  }
+  .manifesto__bleed-img,
+  .manifesto__bleed-video {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    display: block;
+  }
+  .manifesto__bleed-cap {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: 1rem auto 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .manifesto__bleed-cap span {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+    max-width: 40ch;
+  }
+
+  /* NUMBERED TENETS ─── 2-col editorial grid */
+  .manifesto__tenets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem) clamp(2rem, 5vw, 5rem);
+    margin-top: 2.5rem;
+  }
+  .manifesto__tenet {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .manifesto__tenet-num {
+    font-family: var(--font-display, var(--font-sans));
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+  }
+  .manifesto__tenet h3 {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    margin: 0 0 0.6rem;
+    color: var(--text);
+  }
+  .manifesto__tenet h3 em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__tenet p {
+    font-family: var(--font-sans);
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0;
+    max-width: 36ch;
+  }
+
+  /* MODULE TENETS — tenet pattern with figure on top */
+  .manifesto__module-tenet { border-top: 1px solid var(--line); padding-top: 1.5rem; }
+  .manifesto__module-tenet .manifesto__figure--mod {
+    margin-bottom: 1.2rem;
+    aspect-ratio: 4 / 5;
+  }
+  .manifesto__module-tenet .mod-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-display, var(--font-sans));
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    font-weight: 600;
+  }
+  .manifesto__module-tenet .mod-row span:first-child { color: var(--accent); }
+  .manifesto__module-tenet .mod-row span:last-child  { color: var(--text-3); }
+  .manifesto__module-tenet h3 {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    margin: 0 0 0.55rem;
+    color: var(--text);
+  }
+  .manifesto__module-tenet h3 em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__module-tenet p {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin: 0;
+    max-width: 32ch;
+  }
+  .manifesto__modules-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 1100px) {
+    .manifesto__modules-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .manifesto__modules-grid { grid-template-columns: 1fr; }
+  }
+
+  /* METRICS — as numerical tenet variant */
+  .manifesto__tenet--metric .metric-figure {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(2.6rem, 4.6vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin: 0 0 0.6rem;
+  }
+  .manifesto__tenet--metric .metric-figure em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+    font-size: 0.5em;
+    margin-left: 0.15em;
+    letter-spacing: 0;
+  }
+
+  /* CLOSING */
+  .manifesto__closing {
+    padding: clamp(5rem, 10vh, 9rem) 0;
+    background: var(--bg-soft, #f0f0ed);
+    border-top: 1px solid var(--line);
+    margin-top: clamp(4rem, 8vh, 7rem);
+  }
+  .manifesto__closing-inner {
+    width: min(100% - var(--gutter) * 2, 60rem);
+    margin: 0 auto;
+    text-align: left;
+  }
+  .manifesto__closing h2 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+    line-height: 1.12;
+    letter-spacing: -0.022em;
+    word-spacing: 0.18em;
+    color: var(--text);
+    margin: 0 0 1.6rem;
+    max-width: 100%;
+    text-align: left;
+  }
+  .manifesto__closing h2 em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__closing p {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 100%;
+    margin: 0 0 1.4rem;
+    text-align: left;
+  }
+  .manifesto__closing p:last-of-type { margin-bottom: 2.4rem; }
+
+  /* SECTION MARKER */
+  .manifesto__marker {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+  .manifesto__marker-line {
+    flex: 0 0 40px; height: 1px;
+    background: var(--accent);
+  }
+
+  /* READ NEXT — quiet card matched to manifesto restraint */
+  .manifesto__read-next {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: clamp(5rem, 9vh, 8rem) auto 0;
+    padding-top: clamp(3rem, 6vh, 5rem);
+    border-top: 1px solid var(--line);
+  }
+  .manifesto__read-next-card {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .manifesto__read-next-card .manifesto__figure { aspect-ratio: 4 / 5; }
+  .manifesto__read-next-meta {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .manifesto__read-next-title {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.022em;
+    word-spacing: 0.18em;
+    color: var(--text);
+    margin: 0 0 1.2rem;
+  }
+  .manifesto__read-next-title em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__read-next-dek {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 1.4rem;
+    max-width: 52ch;
+  }
+  .manifesto__read-next-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 0.3rem;
+    transition: gap 0.4s var(--ease);
+  }
+  .manifesto__read-next-card:hover .manifesto__read-next-cta { gap: 1rem; }
+  @media (max-width: 820px) {
+    .manifesto__read-next-card { grid-template-columns: 1fr; }
+  }
+
+  /* GUARD: left-aligned only */
+  .manifesto, .manifesto * { text-align: left; }
+
+  @media (max-width: 820px) {
+    .manifesto__split { grid-template-columns: 1fr; }
+    .manifesto__split--reverse > :first-child { order: 0; }
+    .manifesto__tenets { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="manifesto">
+
+<div class="topgrad" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="precast-africa-warwick-style.html" class="nav__brand">
+    <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt="" /><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt="" /></span>
+    <span>Precast Africa</span>
+  </a>
+  <div class="nav__links">
+    <a href="system.html" class="nav__link">System</a>
+    <a href="process.html" class="nav__link">Process</a>
+    <a href="developers.html" class="nav__link">Developers</a>
+    <a href="sustainability.html" class="nav__link">Sustainability</a>
+    <a href="news.html" class="nav__link is-active">News</a>
+  </div>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+  </button>
+  <div class="nav__cta">
+    <a href="build-your-project.html" class="btn btn--accent"><span>Build Project</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="contact.html" class="btn btn--glass"><span>Get in touch</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</nav>
+<div class="nav__mobile" id="navMobile">
+  <a href="precast-africa-warwick-style.html">Home</a>
+  <a href="system.html">System</a>
+  <a href="process.html">Process</a>
+  <a href="developers.html">Developers</a>
+  <a href="build-your-project.html">Build Project</a>
+  <a href="sustainability.html">Sustainability</a>
+  <a href="news.html">News</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+
+  <!-- ─────────────── HERO ─────────────── -->
+  <section class="manifesto__hero" id="manifestoHero">
+    <div class="manifesto__hero-tint" aria-hidden="true"></div>
+    <div class="manifesto__hero-inner" id="manifestoHeroInner">
+      <p class="manifesto__eyebrow">Field Note · № 01</p>
+      <h1 class="manifesto__hero-title">After the <em>building site.</em></h1>
+      <div class="manifesto__hero-meta">
+        <span>Vol. 01</span>
+        <span>On who we are &amp; the sustainable PPVC system</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── INTRO ─────────────── -->
+  <section class="manifesto__section manifesto__section--narrow">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>I.&nbsp;&nbsp;The position</span>
+    </div>
+    <p class="manifesto__intro">
+      A building, conventionally, is something that happens to a piece of land. Trucks arrive. Concrete is mixed. Walls go up by hand, in the open, in whatever weather the day delivers.<br><br>
+      We started Precast Africa with a different premise. A home, like any other manufactured object of quality, can be designed once and produced many times. It can be made under a roof, leave the plant complete, and be <em>set down on its site</em> by crane in a single afternoon.
+    </p>
+  </section>
+
+  <!-- ─────────────── II. THE SYSTEM ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split">
+      <div class="manifesto__figure manifesto__figure--wide manifesto__figure--paper manifesto__figure--contain">
+        <img src="Graphics/Module Assembly - Exploded Render.png" alt="Exploded axonometric of a Precast Africa three-module cluster" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>II.&nbsp;&nbsp;On the system</span>
+        </div>
+        <h2>Three modules, one variant, <em>and the architecture in between.</em></h2>
+        <p>
+          The Precast Africa system is deliberately small. Three core modules and one enhanced variant combine to produce any residential typology in our range — studio apartments through to multi-bedroom homes, single-storey terraces through to mid-rise walk-ups.
+        </p>
+        <p>
+          Repetition is the point. It is what makes the quality reproducible and the price hold. Up to <em>ninety per cent</em> of any building is complete before it ever sees its plot.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── PULL QUOTE ─────────────── -->
+  <aside class="manifesto__pull">
+    <blockquote>
+      The next generation of African housing is not going to be poured. It is going to be manufactured.
+    </blockquote>
+    <div class="manifesto__pull-attr">— Founding Position · 2026</div>
+  </aside>
+
+  <!-- ─────────────── III. THE MODULES ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>III.&nbsp;&nbsp;The module family</span>
+    </div>
+    <h2 style="font-family:var(--font-sans);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.14;letter-spacing:-0.018em;word-spacing:0.18em;margin:0 0 1.2rem;max-width:34ch;color:var(--text);">Four objects, <em style="font-family:var(--font-serif,'Instrument Serif',serif);font-style:italic;font-weight:400;color:var(--accent);">repeated with intent.</em></h2>
+    <p style="font-family:var(--font-sans);font-size:0.92rem;letter-spacing:0;color:var(--text-3);margin:0;max-width:42ch;">Hover any module to see the bare component beneath.</p>
+
+    <div class="manifesto__modules-grid">
+      <article class="manifesto__module-tenet">
+        <figure class="manifesto__figure manifesto__figure--mod">
+          <img class="mod-render" src="Precast Modules/Type A - Standard Module Render.png" alt="Module A — Standard Living" loading="lazy" />
+          <img class="mod-bare"   src="Precast Modules/Type A.png" alt="Module A — bare component" loading="lazy" />
+        </figure>
+        <div class="mod-row"><span>A · № 01</span><span>Living</span></div>
+        <h3>Standard <em>living.</em></h3>
+        <p>The structural workhorse of the system. Bedrooms, lounges, and habitable rooms — the module that repeats across every typology.</p>
+      </article>
+      <article class="manifesto__module-tenet">
+        <figure class="manifesto__figure manifesto__figure--mod">
+          <img class="mod-render" src="Precast Modules/Type B - Service Module Render.png" alt="Module B — Services and Risers" loading="lazy" />
+          <img class="mod-bare"   src="Precast Modules/Type B.png" alt="Module B — bare component" loading="lazy" />
+        </figure>
+        <div class="mod-row"><span>B · № 02</span><span>Wet Core</span></div>
+        <h3>Services &amp; <em>risers.</em></h3>
+        <p>Bathroom, kitchen, plumbing, drainage, electrical. The complicated half of any home, centralised and finished in a single component.</p>
+      </article>
+      <article class="manifesto__module-tenet">
+        <figure class="manifesto__figure manifesto__figure--mod">
+          <img class="mod-render" src="Precast Modules/Type D - Corner Module Render.png" alt="Module C — Stair and Structural Core" loading="lazy" />
+          <img class="mod-bare"   src="Precast Modules/Type D.png" alt="Module C — bare component" loading="lazy" />
+        </figure>
+        <div class="mod-row"><span>C · № 03</span><span>Core</span></div>
+        <h3>Stair &amp; <em>structure.</em></h3>
+        <p>Vertical circulation, stair access, and structural-core integration for multi-storey blocks. The spine of any walk-up.</p>
+      </article>
+      <article class="manifesto__module-tenet">
+        <figure class="manifesto__figure manifesto__figure--mod">
+          <img class="mod-render" src="Precast Modules/Engineerd Module.png" alt="Module + — Engineered variant" loading="lazy" />
+          <img class="mod-bare"   src="Precast Modules/Type C - Entry Module Render.png" alt="Engineered alternate view" loading="lazy" />
+        </figure>
+        <div class="mod-row"><span>+ · № 04</span><span>Enhanced</span></div>
+        <h3>The <em>engineered.</em></h3>
+        <p>A precision-built variant for higher-specification finishes, specialist façades, and bespoke configurations within the same modular grammar.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────────── IV. ON PRECISION (Technical drawing) ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split manifesto__split--reverse">
+      <div class="manifesto__figure manifesto__figure--wide manifesto__figure--paper manifesto__figure--contain">
+        <img src="Precast Modules/PCA-SUM-2400-001 Technical Drawing.png" alt="Module engineering data sheet — drawing PCA-SUM-2400-001" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>IV.&nbsp;&nbsp;On precision</span>
+        </div>
+        <h2>Every module is <em>a drawing</em> before it is a room.</h2>
+        <p>
+          Reinforced concrete cast at forty megapascals. Connection details tuned for crane lift. Stacking, dimensional, and material schedules signed off before the first pour. A building, in our hands, begins as an engineering document.
+        </p>
+        <p>
+          The factory is the only place in residential construction where every weight, tolerance, and connection can be measured before it leaves for site.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── FULL-BLEED PLATE 01 ─────────────── -->
+  <figure class="manifesto__bleed">
+    <img class="manifesto__bleed-img" src="Background Images/DE42D349-65BA-414A-AA4A-C41942D50485.JPG" alt="Sunlight passing through foliage onto a cast concrete wall" loading="lazy" />
+    <figcaption class="manifesto__bleed-cap">
+      <span><span class="manifesto__caption-num">Fig. 03</span>A cast concrete plane catching afternoon light. Permanence, in its quietest form.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ─────────────── V. ON ORIGIN ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split">
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>V.&nbsp;&nbsp;On origin</span>
+        </div>
+        <h2>A South African answer <em>to a continental problem.</em></h2>
+        <p>
+          The African housing shortfall is not a problem of demand, ambition, or even capital. It is a problem of delivery. Site-built construction is too slow, too imprecise, and too exposed to weather to ever close the gap.
+        </p>
+        <p>
+          We are headquartered in South Africa, with a manufacturing strategy that grows outward rather than upward — plant by plant, region by region. Each plant is a unit of capacity, engineered around the offtake of a partnership. The company is built the way the buildings are.
+        </p>
+      </div>
+      <div class="manifesto__figure manifesto__figure--wide">
+        <img src="Background Images/IMG_4631.JPG" alt="Architectural elevation studies of biophilic Precast Africa residences" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── VI. THE DELIVERY (tenets) ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>VI.&nbsp;&nbsp;On the delivery</span>
+    </div>
+    <h2 style="font-family:var(--font-sans);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.14;letter-spacing:-0.018em;word-spacing:0.18em;margin:0 0 1.2rem;max-width:34ch;color:var(--text);">From the brief to the handover — <em style="font-family:var(--font-serif,'Instrument Serif',serif);font-style:italic;font-weight:400;color:var(--accent);">one sequence, one owner.</em></h2>
+    <div class="manifesto__tenets">
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">01 · Design</p>
+        <h3>The drawing set is built around what the factory will <em>actually</em> make.</h3>
+        <p>Layouts are translated into the modular grammar — repeatable module types, structural arrangement, and service coordination.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">02 · Manufacture</p>
+        <h3>The plant produces the building before the site is ready for it.</h3>
+        <p>Modules are cast at 40&nbsp;MPa, internally finished, and quality-tagged at every station. Up to ninety per cent leaves the plant complete.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">03 · Transport</p>
+        <h3>The truck is <em>the warehouse.</em></h3>
+        <p>Finished modules move plant-to-site on planned abnormal-load runs — timed to the installation programme, never stockpiled at the gate.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">04 · Install</p>
+        <h3>A thirty-tonne crane, a published lift sequence.</h3>
+        <p>Modules are positioned against pre-poured foundations. Structural connections, weather sealing, and integration follow a known sequence.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">05 · Integrate</p>
+        <h3>Site finish happens to a <em>finished structure.</em></h3>
+        <p>Services tie-in, façade refinement, landscaping — the wet-trade exposure of a conventional site is largely removed.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">06 · Hand Over</p>
+        <h3>A structured digital handover, not a hand-typed snag list.</h3>
+        <p>Each unit is signed off against module-level quality data, embodied-carbon figures, energy performance, and warranty terms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── PULL QUOTE ─────────────── -->
+  <aside class="manifesto__pull">
+    <blockquote>
+      The building site stops being where buildings get built. It becomes where they get assembled.
+    </blockquote>
+    <div class="manifesto__pull-attr">— On Method · Precast Africa Studio</div>
+  </aside>
+
+  <!-- ─────────────── FULL-BLEED VIDEO ─────────────── -->
+  <figure class="manifesto__bleed">
+    <video class="manifesto__bleed-video" src="Graphics/System Hero Video.mp4" autoplay muted loop playsinline poster="Renders/precast-multistorey-house-modules.png"></video>
+    <figcaption class="manifesto__bleed-cap">
+      <span><span class="manifesto__caption-num">Fig. 04</span>The system in motion. A residential block, factory to fully-installed structure.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ─────────────── VII. ON THE CASE ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split manifesto__split--reverse">
+      <div class="manifesto__figure manifesto__figure--wide">
+        <img src="Renders/precast-villa-png.png" alt="A biophilic precast villa — system in use" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>VII.&nbsp;&nbsp;On the case</span>
+        </div>
+        <h2>A sustainability case <em>that runs on subtraction.</em></h2>
+        <p>
+          The strongest argument for industrialised construction is not what it adds, but what it removes. It removes weather. It removes over-pour. It removes cement consumed for confidence rather than for strength. It removes packaging, formwork, and mixed-concrete waste.
+        </p>
+        <p>
+          The numbers below compare a Precast Africa programme to a like-for-like in-situ programme of equivalent floor area. They are not aspirations. They are the operational consequence of <em>running the work indoors.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── VIII. IN NUMBERS ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>VIII.&nbsp;&nbsp;In numbers</span>
+    </div>
+    <h2 style="font-family:var(--font-sans);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.14;letter-spacing:-0.018em;word-spacing:0.18em;margin:0 0 1.2rem;max-width:32ch;color:var(--text);">The case, <em style="font-family:var(--font-serif,'Instrument Serif',serif);font-style:italic;font-weight:400;color:var(--accent);">like-for-like, against in-situ.</em></h2>
+    <div class="manifesto__tenets">
+      <div class="manifesto__tenet manifesto__tenet--metric">
+        <p class="manifesto__tenet-num">01 · Embodied Carbon</p>
+        <p class="metric-figure">−40<em>%</em></p>
+        <h3>Reduction per residential m².</h3>
+        <p>Precision batching eliminates over-pour; controlled curing reduces cement intensity for the same structural performance.</p>
+      </div>
+      <div class="manifesto__tenet manifesto__tenet--metric">
+        <p class="manifesto__tenet-num">02 · Site Waste</p>
+        <p class="metric-figure">−90<em>%</em></p>
+        <h3>Less material discarded on site.</h3>
+        <p>Factory production eliminates packaging, formwork offcuts, and mixed-concrete disposal. Waste is managed centrally at the plant.</p>
+      </div>
+      <div class="manifesto__tenet manifesto__tenet--metric">
+        <p class="manifesto__tenet-num">03 · Site Water</p>
+        <p class="metric-figure">−60<em>%</em></p>
+        <h3>Less water drawn at the build.</h3>
+        <p>Wet trades and site curing are removed. Factory curing runs on a closed-loop system — material in regions where water is scarcest.</p>
+      </div>
+      <div class="manifesto__tenet manifesto__tenet--metric">
+        <p class="manifesto__tenet-num">04 · Design Life</p>
+        <p class="metric-figure">50<em>+ yrs</em></p>
+        <h3>Reinforced concrete, <em>built to outlast.</em></h3>
+        <p>No termite vulnerability, no cladding-replacement cycle, no recurring structural-maintenance burden across the asset's life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── IX. WHERE WE GO ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split">
+      <div class="manifesto__figure manifesto__figure--wide">
+        <img src="Renders/precast-apartment-block-evening.png" alt="A Precast Africa apartment block illuminated at dusk" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>IX.&nbsp;&nbsp;Where we go</span>
+        </div>
+        <h2>Capacity follows demand — <em>plant by plant, partner by partner.</em></h2>
+        <p>
+          Each plant is a unit of capacity, engineered around the offtake of a developer partnership, not built speculatively against a forecast. As demand grows, capacity scales with it.
+        </p>
+        <ul>
+          <li><span>2024–25</span><span>System designed. Core module family engineered. Developer-partner model defined.</span></li>
+          <li><span>2026</span><span>First plant commissioned. Initial offtake secured. CETA learnership intake begins.</span></li>
+          <li><span>2027–28</span><span>Second and third plants deployed. 1,000 units per year throughput target.</span></li>
+          <li><span>2029+</span><span>Pan-African manufacturing footprint, adapted by climate zone and code.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── CLOSING ─────────────── -->
+  <section class="manifesto__closing">
+    <div class="manifesto__closing-inner">
+      <div class="manifesto__marker">
+        <span class="manifesto__marker-line" aria-hidden="true"></span>
+        <span>Colophon</span>
+      </div>
+      <h2>If the system is right, <em>the home does the rest.</em></h2>
+      <p>
+        Industrialised construction is sometimes presented as a technical achievement — better tolerances, faster programme, a cleaner site. All of that is true. None of it is the point.
+      </p>
+      <p>
+        The point is that a continent's housing can be delivered as a manufactured product, to a price, to a programme, and to a verifiable environmental and social standard. A fifty-year, low-carbon, dignified home in the hands of a family that previously could not access one is the largest social and economic intervention a building company can offer.
+      </p>
+      <p>
+        That is what we are building. Module by module. Plant by plant. Project by project.
+      </p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn--accent btn--md">
+          <span>Request a briefing</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="manifesto.html" class="btn btn--glass btn--md" style="background:transparent;color:var(--text);border:1px solid var(--line);">
+          <span>Read the manifesto</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── READ NEXT ─────────────── -->
+  <section class="manifesto__read-next">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>Read next · Field Note № 02</span>
+    </div>
+    <a href="sustainability-case.html" class="manifesto__read-next-card">
+      <div class="manifesto__figure">
+        <img src="Renders/precast-desert-retreat-sunset.png" alt="A Precast Africa residence at desert dusk" loading="lazy" />
+      </div>
+      <div>
+        <p class="manifesto__read-next-meta">Field Note № 02 · Sustainability</p>
+        <h3 class="manifesto__read-next-title">The sustainability <em>case.</em></h3>
+        <p class="manifesto__read-next-dek">The numbers behind industrialised construction — auditable, GRI-aligned, reported quarterly. A longer look at what the factory actually changes about the environmental ledger of a home.</p>
+        <span class="manifesto__read-next-cta">Continue reading <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+    </a>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="precast-africa-warwick-style.html" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt="" /><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt="" /></span>
+        <span>Precast Africa</span>
+      </a>
+      <p class="footer__about">A sustainable PPVC precast construction-system company, designing, manufacturing, transporting, and installing durable volumetric modules for African developers.</p>
+    </div>
+    <div class="footer__col"><h4>System</h4><ul>
+      <li><a href="system.html">Overview</a></li>
+      <li><a href="system.html#modules">Modules</a></li>
+      <li><a href="system.html#specs">Specs</a></li>
+      <li><a href="process.html">Process</a></li>
+    </ul></div>
+    <div class="footer__col"><h4>Company</h4><ul>
+      <li><a href="developers.html">For Developers</a></li>
+      <li><a href="sustainability.html">Sustainability</a></li>
+      <li><a href="manifesto.html">Manifesto</a></li>
+      <li><a href="news.html" class="is-active">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer__col"><h4>Reach Us</h4><ul>
+      <li><a href="mailto:info@precastafrica.com">info@precastafrica.com</a></li>
+      <li><a href="contact.html">Request a briefing</a></li>
+      <li><a href="contact.html#investor">Investor enquiries</a></li>
+    </ul></div>
+  </div>
+  <div class="footer__bottom">
+    <div>© 2026 Precast Africa. All rights reserved.</div>
+    <div>Sustainable PPVC Construction Systems · South Africa</div>
+  </div>
+</footer>
+
+<script src="assets/js/precast.js" defer></script>
+<script>
+  // Hero scroll fade — fades and lifts the inner content as the user scrolls past the hero
+  (function() {
+    const hero = document.getElementById('manifestoHero');
+    const inner = document.getElementById('manifestoHeroInner');
+    if (!hero || !inner) return;
+    let ticking = false;
+    function update() {
+      const rect = hero.getBoundingClientRect();
+      const total = hero.offsetHeight || 1;
+      const progress = Math.max(0, Math.min(1, -rect.top / total));
+      const opacity = Math.max(0, 1 - progress / 0.6);
+      const translate = progress * -40;
+      inner.style.opacity = opacity.toFixed(3);
+      inner.style.transform = 'translateY(' + translate.toFixed(1) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  })();
+</script>
+</body>
+</html>

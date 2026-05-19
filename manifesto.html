@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manifesto — Precast Africa</title>
+<meta name="description" content="On the homes we owe each other — a quiet meditation on time, quality, dignity, and legacy from Precast Africa." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/precast.css">
+<style>
+  /* ─── Manifesto: architectural-magazine treatment ─── */
+  .manifesto {
+    --measure: 36rem;       /* comfortable reading column */
+    --gutter: clamp(1.25rem, 3vw, 3rem);
+  }
+  .manifesto__hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    isolation: isolate;
+    background-image: url('Background Images/BF25578B-62EF-44DC-A5E1-A32D8A681A9A.JPG');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .manifesto__hero-tint {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(12,13,13,0.10) 0%, rgba(12,13,13,0.05) 40%, rgba(12,13,13,0.65) 100%);
+    z-index: -1;
+  }
+  .manifesto__hero-inner {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vh, 7rem) 0;
+    color: #fff;
+    text-align: left;
+    will-change: opacity, transform;
+  }
+  /* Mobile / iOS: background-attachment: fixed is unreliable on touch — fall back */
+  @media (max-width: 820px) {
+    .manifesto__hero { background-attachment: scroll; }
+  }
+  .manifesto__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    font-weight: 500;
+    margin-bottom: 1.6rem;
+  }
+  .manifesto__hero-title {
+    font-family: var(--font-display, var(--font-sans));
+    font-weight: 300;
+    font-size: clamp(2.4rem, 5.6vw, 5.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    word-spacing: 0.18em;
+    color: #fff;
+    max-width: 18ch;
+    margin: 0;
+  }
+  .manifesto__hero-title em {
+    font-style: italic;
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-weight: 400;
+    color: #fff;
+  }
+  .manifesto__hero-meta {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.4rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgba(255,255,255,0.18);
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+  }
+
+  /* Section base — magazine layout */
+  .manifesto__section {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: clamp(5rem, 10vh, 9rem) auto;
+  }
+  .manifesto__section--narrow {
+    width: min(100% - var(--gutter) * 2, 52rem);
+  }
+  .manifesto__intro {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    color: var(--text);
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+  .manifesto__intro em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-weight: 400;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Split layout — text + adjacent image */
+  .manifesto__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+  .manifesto__split--reverse > :first-child { order: 2; }
+  .manifesto__split-copy { text-align: left; }
+  .manifesto__split-copy h2 {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    word-spacing: 0.18em;
+    margin: 0 0 1.4rem;
+    color: var(--text);
+    max-width: 100%;
+    text-align: left;
+  }
+  .manifesto__split-copy h2 em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__split-copy p {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 100%;
+    margin: 0 0 1.1rem;
+    text-align: left;
+  }
+  .manifesto__split-copy p:last-child { margin-bottom: 0; }
+  .manifesto__figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4 / 5;
+  }
+  .manifesto__figure--wide { aspect-ratio: 16 / 10; }
+  .manifesto__figure--cinema { aspect-ratio: 21 / 9; }
+  .manifesto__figure img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s var(--ease);
+  }
+  .manifesto__figure:hover img { transform: scale(1.02); }
+  .manifesto__caption {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+    margin-top: 0.75rem;
+    max-width: 36ch;
+  }
+  .manifesto__caption-num {
+    font-family: var(--font-display, var(--font-sans));
+    margin-right: 0.5rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Pull quote */
+  .manifesto__pull {
+    margin: clamp(4rem, 8vh, 7rem) auto;
+    width: min(100% - var(--gutter) * 2, 60rem);
+    text-align: left;
+  }
+  .manifesto__pull blockquote {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    color: var(--text);
+    margin: 0;
+    border-left: 2px solid var(--accent);
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .manifesto__pull-attr {
+    margin-top: 1.6rem;
+    padding-left: clamp(1.5rem, 3vw, 2.5rem);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  /* Full-bleed image with caption sitting against side */
+  .manifesto__bleed {
+    width: 100%;
+    margin: clamp(4rem, 9vh, 8rem) 0;
+  }
+  .manifesto__bleed-img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    display: block;
+  }
+  .manifesto__bleed-cap {
+    width: min(100% - var(--gutter) * 2, 88rem);
+    margin: 1rem auto 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .manifesto__bleed-cap span {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+    max-width: 36ch;
+  }
+
+  /* Numbered tenets list — restrained, editorial */
+  .manifesto__tenets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem) clamp(2rem, 5vw, 5rem);
+    margin-top: 2.5rem;
+  }
+  .manifesto__tenet {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .manifesto__tenet-num {
+    font-family: var(--font-display, var(--font-sans));
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+  }
+  .manifesto__tenet h3 {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    margin: 0 0 0.6rem;
+    color: var(--text);
+  }
+  .manifesto__tenet p {
+    font-family: var(--font-sans);
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0;
+    max-width: 36ch;
+  }
+
+  /* Closing */
+  .manifesto__closing {
+    padding: clamp(5rem, 10vh, 9rem) 0;
+    background: var(--bg-soft, #f0f0ed);
+    border-top: 1px solid var(--line);
+    margin-top: clamp(4rem, 8vh, 7rem);
+  }
+  .manifesto__closing-inner {
+    width: min(100% - var(--gutter) * 2, 60rem);
+    margin: 0 auto;
+    text-align: left;
+  }
+  .manifesto__closing h2 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+    line-height: 1.12;
+    letter-spacing: -0.022em;
+    word-spacing: 0.18em;
+    color: var(--text);
+    margin: 0 0 1.6rem;
+    max-width: 100%;
+    text-align: left;
+  }
+  .manifesto__closing h2 em {
+    font-family: var(--font-serif, 'Instrument Serif', serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .manifesto__closing p {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(0.98rem, 1.1vw, 1.1rem);
+    line-height: 1.65;
+    color: var(--text-2);
+    max-width: 100%;
+    margin: 0 0 2.4rem;
+    text-align: left;
+  }
+
+  /* Section number — running editorial marker */
+  .manifesto__marker {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+  .manifesto__marker-line {
+    flex: 0 0 40px; height: 1px;
+    background: var(--accent);
+  }
+
+  /* Guard: never use justified alignment on this page */
+  .manifesto, .manifesto * { text-align: left; }
+  .manifesto .footer__bottom { /* keep footer bottom row default flex */ }
+
+  @media (max-width: 820px) {
+    .manifesto__split { grid-template-columns: 1fr; }
+    .manifesto__split--reverse > :first-child { order: 0; }
+    .manifesto__tenets { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="manifesto">
+
+<div class="topgrad" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="precast-africa-warwick-style.html" class="nav__brand">
+    <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt="" / decoding="async"><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt=""  loading="lazy" decoding="async"/></span>
+    <span>Precast Africa</span>
+  </a>
+  <div class="nav__links">
+    <a href="system.html" class="nav__link">System</a>
+    <a href="process.html" class="nav__link">Process</a>
+    <a href="developers.html" class="nav__link">Developers</a>
+    <a href="sustainability.html" class="nav__link">Sustainability</a>
+    <a href="news.html" class="nav__link">News</a>
+  </div>
+  <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+  </button>
+  <div class="nav__cta">
+    <a href="build-your-project.html" class="btn btn--accent"><span>Build Project</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="contact.html" class="btn btn--glass"><span>Get in touch</span><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</nav>
+<div class="nav__mobile" id="navMobile">
+  <a href="precast-africa-warwick-style.html">Home</a>
+  <a href="system.html">System</a>
+  <a href="process.html">Process</a>
+  <a href="developers.html">Developers</a>
+  <a href="build-your-project.html">Build Project</a>
+  <a href="sustainability.html">Sustainability</a>
+  <a href="news.html">News</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<main>
+
+  <!-- ─────────────── HERO ─────────────── -->
+  <section class="manifesto__hero" id="manifestoHero">
+    <div class="manifesto__hero-tint" aria-hidden="true"></div>
+    <div class="manifesto__hero-inner" id="manifestoHeroInner">
+      <p class="manifesto__eyebrow">Manifesto</p>
+      <h1 class="manifesto__hero-title">On the homes <em>we owe</em> each other.</h1>
+      <div class="manifesto__hero-meta">
+        <span>Vol. 01</span>
+        <span>A letter to those building Africa's pipeline</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── INTRO ─────────────── -->
+  <section class="manifesto__section manifesto__section--narrow">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>I.&nbsp;&nbsp;The position</span>
+    </div>
+    <p class="manifesto__intro">
+      A house can be measured. A home cannot.<br><br>
+      We design and manufacture buildings — but the work, when we are honest about it, is something else. It is about the people who will turn a key, place a kettle, hang a photograph. It is about families who have been waiting longer than they should have. It is about <em>time given back</em> to the people who live with the consequence of how slowly we build.
+    </p>
+  </section>
+
+  <!-- ─────────────── 1. TIME ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split">
+      <div class="manifesto__figure manifesto__figure--wide">
+        <img src="Renders/precast-single-storey-home-dusk.png" alt="A single-storey home at dusk" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>II.&nbsp;&nbsp;On time</span>
+        </div>
+        <h2>Time is the one resource <em>we cannot return.</em></h2>
+        <p>
+          A construction programme that runs three months over budget is a line item. To the family waiting, it is a third winter in a place they had planned to leave.
+        </p>
+        <p>
+          We treat speed not as marketing, but as a moral position. The faster a building can be honestly delivered, the more life it gives back to the people who need it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── PULL QUOTE ─────────────── -->
+  <aside class="manifesto__pull">
+    <blockquote>
+      The walls we build today will outlive the people who designed them, the people who poured them, and the policies that approved them. That is the weight of the work.
+    </blockquote>
+    <div class="manifesto__pull-attr">— Precast Africa</div>
+  </aside>
+
+  <!-- ─────────────── 2. QUALITY ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split manifesto__split--reverse">
+      <div class="manifesto__figure">
+        <img src="Background Images/IMG_4557.JPG" alt="Interior of a finished module" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>III.&nbsp;&nbsp;On quality</span>
+        </div>
+        <h2>Quality is dignity, <em>rendered in concrete.</em></h2>
+        <p>
+          A cracked ceiling is not a defect. It is a daily reminder, for the person who lives beneath it, that they were not worth the second visit.
+        </p>
+        <p>
+          We build in a controlled environment because variability — the small inconsistencies of weather, fatigue, and goodwill — has a human cost we are not willing to externalise. The discipline of the factory is, finally, an act of care.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── FULL-BLEED IMAGE ─────────────── -->
+  <figure class="manifesto__bleed">
+    <img class="manifesto__bleed-img" src="Background Images/IMG_4553.JPG" alt="A module ready for transport" loading="lazy" />
+    <figcaption class="manifesto__bleed-cap">
+      <span><span class="manifesto__caption-num">Fig. 03</span>A finished module, before dispatch. The interior of someone's first morning.</span>
+    </figcaption>
+  </figure>
+
+  <!-- ─────────────── 3. DIGNITY ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split">
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>IV.&nbsp;&nbsp;On dignity</span>
+        </div>
+        <h2>Scale, done with care, <em>is not anonymity.</em></h2>
+        <p>
+          The argument against mass housing has always been that scale erodes character — that what is delivered in volume is delivered carelessly. We disagree, and we are building the proof.
+        </p>
+        <p>
+          Every module is somebody's first home, last home, daughter's room. The repeatability of our system is what allows us to attend to that fact in detail, every time.
+        </p>
+      </div>
+      <div class="manifesto__figure manifesto__figure--wide">
+        <img src="Renders/precast-single-storey-home.png" alt="A single-storey home, daylight" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── 4. TENETS ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__marker">
+      <span class="manifesto__marker-line" aria-hidden="true"></span>
+      <span>V.&nbsp;&nbsp;What we hold to</span>
+    </div>
+    <h2 style="font-family:var(--font-sans);font-weight:400;font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.14;letter-spacing:-0.018em;word-spacing:0.18em;margin:0 0 1.2rem;max-width:30ch;color:var(--text);">Five quiet commitments. <em style="font-family:var(--font-serif,'Instrument Serif',serif);font-style:italic;font-weight:400;color:var(--accent);">Held without fanfare.</em></h2>
+    <div class="manifesto__tenets">
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">01</p>
+        <h3>We will not confuse motion with progress.</h3>
+        <p>Programme certainty is honesty with people who are planning their lives against our dates.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">02</p>
+        <h3>We will not externalise the cost of variability.</h3>
+        <p>If the weather is poor on site, that is our problem to solve, not theirs to live with.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">03</p>
+        <h3>We will design for the life inside.</h3>
+        <p>The dimensions, light, and finishes serve the day that begins inside the room — not the rendering that sold it.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">04</p>
+        <h3>We will say what we will not do.</h3>
+        <p>There are projects we are right for, and projects we are not. Being clear about the difference is part of the discipline.</p>
+      </div>
+      <div class="manifesto__tenet">
+        <p class="manifesto__tenet-num">05</p>
+        <h3>We will outlast the trend cycle.</h3>
+        <p>A building that lasts fifty years is a quiet vote of confidence in the people who will inherit it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── 5. LEGACY ─────────────── -->
+  <section class="manifesto__section">
+    <div class="manifesto__split manifesto__split--reverse">
+      <div class="manifesto__figure manifesto__figure--wide">
+        <img src="Background Images/IMG_4580.JPG" alt="A finished home, considered" loading="lazy" />
+      </div>
+      <div class="manifesto__split-copy">
+        <div class="manifesto__marker">
+          <span class="manifesto__marker-line" aria-hidden="true"></span>
+          <span>VI.&nbsp;&nbsp;On legacy</span>
+        </div>
+        <h2>What we leave behind <em>will speak for us.</em></h2>
+        <p>
+          Buildings outlast political cycles, design trends, and the people who commissioned them. They are the most patient, most unforgiving record of what we believed about each other.
+        </p>
+        <p>
+          We are building for a continent whose housing pipeline cannot be finished in our lifetime — and whose first homes, when they are finally delivered, will need to stand long enough to be inherited.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────── CLOSING ─────────────── -->
+  <section class="manifesto__closing">
+    <div class="manifesto__closing-inner">
+      <div class="manifesto__marker">
+        <span class="manifesto__marker-line" aria-hidden="true"></span>
+        <span>Colophon</span>
+      </div>
+      <h2>The work, as we understand it.</h2>
+      <p>
+        We are not the only people building homes. We are not the fastest, nor the cheapest, nor — in many cases — the loudest. We are, we hope, the most careful: about the lives that will be lived inside the rooms we cast, and about the conditions under which they will be delivered.
+      </p>
+      <p>
+        If that matches the way you think about your projects, we would like to hear from you.
+      </p>
+      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn--accent btn--md">
+          <span>Start a conversation</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="developers.html" class="btn btn--glass btn--md" style="background:transparent;color:var(--text);border:1px solid var(--line);">
+          <span>For developers</span>
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <a href="precast-africa-warwick-style.html" class="nav__brand">
+        <span class="nav__brand-mark" aria-hidden="true"><img class="logo-white" src="assets/logos/precast-mark-white.svg" alt=""  loading="lazy" decoding="async"/><img class="logo-green" src="assets/logos/precast-mark-green.svg" alt=""  loading="lazy" decoding="async"/></span>
+        <span>Precast Africa</span>
+      </a>
+      <p class="footer__about">A sustainable PPVC precast construction-system company, designing, manufacturing, transporting, and installing durable volumetric modules for African developers.</p>
+    </div>
+    <div class="footer__col"><h4>System</h4><ul>
+      <li><a href="system.html">Overview</a></li>
+      <li><a href="system.html#modules">Modules</a></li>
+      <li><a href="system.html#specs">Specs</a></li>
+      <li><a href="process.html">Process</a></li>
+    </ul></div>
+    <div class="footer__col"><h4>Company</h4><ul>
+      <li><a href="developers.html">For Developers</a></li>
+      <li><a href="sustainability.html">Sustainability</a></li>
+      <li><a href="manifesto.html" class="is-active">Manifesto</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer__col"><h4>Reach Us</h4><ul>
+      <li><a href="mailto:info@precastafrica.com">info@precastafrica.com</a></li>
+      <li><a href="contact.html">Request a briefing</a></li>
+      <li><a href="contact.html#investor">Investor enquiries</a></li>
+    </ul></div>
+  </div>
+  <div class="footer__bottom">
+    <div>© 2026 Precast Africa. All rights reserved.</div>
+    <div>Sustainable PPVC Construction Systems · South Africa</div>
+  </div>
+</footer>
+
+<script src="assets/js/precast.js" defer></script>
+<script>
+  // Manifesto hero — fade & gently lift the inner content as the user scrolls past the hero
+  (function() {
+    const hero = document.getElementById('manifestoHero');
+    const inner = document.getElementById('manifestoHeroInner');
+    if (!hero || !inner) return;
+    let ticking = false;
+    function update() {
+      const rect = hero.getBoundingClientRect();
+      const total = hero.offsetHeight || 1;
+      // 0 at top of hero in view, 1 when scrolled by full hero height
+      const progress = Math.max(0, Math.min(1, -rect.top / total));
+      // Fade entirely by 60% scroll; subtle 40px upward drift
+      const opacity = Math.max(0, 1 - progress / 0.6);
+      const translate = progress * -40;
+      inner.style.opacity = opacity.toFixed(3);
+      inner.style.transform = 'translateY(' + translate.toFixed(1) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  })();
+</script>
+</body>
+</html>
