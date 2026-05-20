@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Precast Africa — How Africa Builds Its Housing Future</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --ink: #0a0b0b;
+  --ink-2: #131414;
+  --ink-3: #1c1e1d;
+  --paper: #f4f2ed;
+  --paper-2: #e8e4dc;
+  --accent: #4a9e3f;
+  --accent-2: #88d87e;
+  --accent-deep: #1e4519;
+  --red: #c8312b;
+  --text-1: #0f1110;
+  --text-2: #4a4c4a;
+  --text-3: #8a8a86;
+  --line: rgba(0,0,0,0.1);
+  --line-dark: rgba(255,255,255,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+html{scroll-behavior:auto}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--text-1);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.h0{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);line-height:0.9;letter-spacing:-0.01em;text-transform:uppercase}
+.h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);line-height:0.95;letter-spacing:-0.005em;text-transform:uppercase}
+.h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5.5vw,5rem);line-height:1;letter-spacing:0;text-transform:uppercase}
+.h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.6vw,2.6rem);line-height:1.05;letter-spacing:0.01em;text-transform:uppercase}
+.h4{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,1.6vw,1.6rem);line-height:1.15;letter-spacing:0.02em;text-transform:uppercase}
+.eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent)}
+.eyebrow.light{color:var(--accent-2)}
+.serif{font-family:'Instrument Serif',serif;font-style:italic}
+.green{color:var(--accent)}
+.green-2{color:var(--accent-2)}
+.red{color:var(--red)}
+.muted{color:var(--text-3)}
+
+/* ─── BRAND BAR ─── */
+.brandbar{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 40px;
+  color:#fff;mix-blend-mode:difference;
+  pointer-events:none;
+}
+.brandbar .logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.18em;
+}
+.brandbar .meta{
+  font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;
+}
+
+/* ─── SCROLL CIRCLE ─── */
+.scroll-circle{
+  display:inline-flex;align-items:center;gap:14px;
+  color:#fff;font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  background:none;border:none;cursor:default;
+}
+.scroll-circle svg{width:34px;height:34px}
+.scroll-circle svg circle{stroke-dasharray:100;stroke-dashoffset:0}
+.scroll-circle svg path{stroke:#fff}
+
+/* ─── INTRO BANNER ─── */
+.intro-banner{
+  position:relative;height:100vh;width:100%;
+  background:var(--ink);overflow:hidden;
+}
+.intro-visual{
+  position:absolute;inset:0;
+}
+.intro-visual img{
+  width:100%;height:100%;object-fit:cover;opacity:0.55;
+  filter:grayscale(20%) contrast(1.05);
+}
+.intro-visual::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,11,11,0.55) 0%,rgba(10,11,11,0.2) 40%,rgba(10,11,11,0.85) 100%);
+}
+.intro-content{
+  position:relative;z-index:2;height:100%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:40px 48px 60px;
+  color:#fff;
+}
+.intro-eyebrow{
+  display:flex;align-items:center;gap:14px;margin-bottom:20px;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);
+}
+.intro-eyebrow::before{content:"";display:inline-block;width:48px;height:1px;background:var(--accent-2)}
+.intro-title{color:#fff;max-width:14ch}
+.intro-title .red-word{color:var(--accent-2);font-style:normal}
+.intro-footer{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-top:48px;flex-wrap:wrap;gap:24px;
+}
+.intro-deal-strip{
+  display:flex;gap:28px;flex-wrap:wrap;
+}
+.intro-deal-strip .cell{padding-left:14px;border-left:1px solid rgba(255,255,255,0.18);}
+.intro-deal-strip .cell:first-child{border-left:none;padding-left:0}
+.intro-deal-strip .k{font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:4px}
+.intro-deal-strip .v{font-size:0.85rem;font-weight:600;color:#fff}
+
+/* ─── TEXT INTRO ─── */
+.text-intro{
+  background:var(--paper);padding:140px 60px;
+}
+.text-intro-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;
+}
+.text-intro h2{color:var(--text-1)}
+.text-intro p{font-size:1.05rem;color:var(--text-2);line-height:1.7;max-width:60ch}
+.text-intro p + p{margin-top:16px}
+
+/* ─── CHAPTER PREVIEWS ─── */
+.chapter-previews{
+  background:var(--paper-2);
+  position:relative;
+}
+.chapter-previews .scroller{
+  display:flex;align-items:center;height:100vh;
+  padding:0 60px;gap:32px;
+  width:max-content;
+}
+.cp-title-panel{
+  flex:0 0 480px;padding:0 40px;
+}
+.cp-title-panel .num{
+  font-family:'Bebas Neue',sans-serif;color:var(--accent);
+  font-size:0.9rem;letter-spacing:0.12em;margin-bottom:18px;
+}
+.cp-title-panel h2{color:var(--text-1)}
+.cp-title-panel p{color:var(--text-2);margin-top:18px;max-width:36ch}
+.cp-card{
+  flex:0 0 360px;height:540px;
+  position:relative;overflow:hidden;
+  background:var(--ink);
+  cursor:pointer;
+}
+.cp-card .img{
+  position:absolute;inset:0;
+}
+.cp-card .img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.8s cubic-bezier(.16,1,.3,1);
+  opacity:0.7;
+}
+.cp-card:hover .img img{transform:scale(1.06);opacity:0.95}
+.cp-card .img::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.85) 100%);
+}
+.cp-card .cap{
+  position:absolute;left:24px;right:24px;bottom:24px;color:#fff;z-index:2;
+}
+.cp-card .cap .ix{font-size:0.7rem;font-weight:700;letter-spacing:0.18em;color:var(--accent-2);margin-bottom:8px}
+.cp-card .cap h4{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;line-height:1;letter-spacing:0.02em;text-transform:uppercase}
+.cp-card .cap .line{height:1px;width:0;background:var(--accent-2);margin-top:14px;transition:width 0.6s ease}
+.cp-card:hover .cap .line{width:80px}
+
+/* ─── CHAPTER ─── */
+.chapter{background:var(--ink-2);}
+.chapter > .pin-spacer{background:var(--ink-2);}
+
+.chapter-intro-pin{
+  position:relative;height:200vh;width:100%;
+  background:var(--ink);
+}
+.chapter-intro{
+  position:sticky;top:0;height:100vh;width:100%;
+  overflow:hidden;background:var(--ink);
+  z-index:1;
+}
+.chapter-intro img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0.5;filter:grayscale(15%) contrast(1.05);
+}
+.chapter-intro::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,11,11,0.5) 0%,rgba(10,11,11,0.2) 50%,rgba(10,11,11,0.85) 100%);
+}
+.chapter-intro .ci-inner{
+  position:relative;z-index:2;height:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;color:#fff;padding:0 48px;
+}
+.chapter-intro .step{
+  font-size:0.9rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--accent-2);margin-bottom:24px;
+}
+.chapter-intro h2{color:#fff;max-width:18ch}
+.chapter-intro .promise{
+  margin-top:28px;font-size:1.05rem;color:rgba(255,255,255,0.7);max-width:42ch;
+}
+.chapter-intro .scroll-cue{
+  position:absolute;bottom:60px;left:50%;transform:translateX(-50%);
+  z-index:3;
+}
+
+/* ─── SIDESCROLL ─── */
+.sidescroll-wrap{
+  overflow:hidden;
+  background:var(--ink-2);
+}
+.sidescroll-wrap.light{background:var(--paper)}
+.sidescroll{
+  display:flex;align-items:center;height:100vh;
+  width:max-content;
+  will-change:transform;
+}
+.s-block{
+  flex:0 0 100vw;height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:0 8vw;
+}
+.s-block.narrow{padding:0 12vw}
+
+/* Text + Image block */
+.text-image{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center;
+  max-width:1280px;width:100%;color:#fff;
+}
+.sidescroll-wrap.light .text-image{color:var(--text-1)}
+.text-image.reverse{grid-template-columns:1fr 1.2fr;}
+.text-image.reverse .ti-visual{order:2}
+.text-image.reverse .ti-content{order:1}
+.text-image.center{grid-template-columns:1fr;text-align:center;max-width:780px}
+.ti-visual{
+  position:relative;aspect-ratio:16/10;background:var(--ink-3);overflow:hidden;
+}
+.ti-visual img{width:100%;height:100%;object-fit:cover}
+.ti-content h3{color:inherit;margin-bottom:18px}
+.ti-content p{color:rgba(255,255,255,0.7);font-size:0.95rem;line-height:1.7}
+.sidescroll-wrap.light .ti-content p{color:var(--text-2)}
+.ti-content p + p{margin-top:14px}
+
+/* Stat block */
+.stat-block{
+  display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:center;
+  max-width:1280px;width:100%;color:#fff;
+}
+.sidescroll-wrap.light .stat-block{color:var(--text-1)}
+.stat-block .descr h3{color:inherit;margin-bottom:14px}
+.stat-block .descr p{color:rgba(255,255,255,0.65);font-size:0.95rem;line-height:1.7}
+.sidescroll-wrap.light .stat-block .descr p{color:var(--text-2)}
+.stat-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:40px 60px;
+}
+.stat{
+  border-top:1px solid var(--line-dark);padding-top:18px;
+}
+.sidescroll-wrap.light .stat{border-color:var(--line)}
+.stat .v{
+  font-family:'Bebas Neue',sans-serif;font-size:4rem;line-height:1;
+  color:var(--accent-2);
+}
+.sidescroll-wrap.light .stat .v{color:var(--accent)}
+.stat .l{font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:8px;line-height:1.5}
+.sidescroll-wrap.light .stat .l{color:var(--text-2)}
+
+/* Quote block */
+.quote-block{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:center;
+  max-width:1280px;width:100%;color:#fff;
+}
+.quote-img{aspect-ratio:4/5;overflow:hidden;background:var(--ink-3)}
+.quote-img img{width:100%;height:100%;object-fit:cover}
+.quote-content .mark svg{width:60px;height:auto;margin-bottom:24px}
+.quote-content blockquote{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1.25;color:#fff;
+  margin-bottom:24px;
+}
+.sidescroll-wrap.light .quote-content blockquote{color:var(--text-1)}
+.quote-attr{font-size:0.95rem;color:rgba(255,255,255,0.6)}
+.sidescroll-wrap.light .quote-attr{color:var(--text-2)}
+.quote-attr .who{color:var(--accent-2);font-weight:600}
+.sidescroll-wrap.light .quote-attr .who{color:var(--accent)}
+
+/* Big shoe equivalent — module showcase */
+.module-block{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;
+  max-width:1280px;width:100%;color:#fff;
+}
+.module-visual{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+  aspect-ratio:1/1;background:var(--ink-3);padding:24px;
+}
+.module-cell{
+  background:rgba(255,255,255,0.04);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);
+  font-weight:600;line-height:1.3;padding:8px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.module-cell.active{
+  background:rgba(74,158,63,0.18);border-color:var(--accent);color:var(--accent-2);
+}
+.module-cell.core{
+  background:rgba(255,255,255,0.08);color:#fff;
+}
+.module-content h3{margin-bottom:18px}
+.module-content p{color:rgba(255,255,255,0.65);font-size:0.95rem;line-height:1.7;margin-bottom:18px}
+.spec-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:10px 0;border-bottom:1px solid var(--line-dark);
+  font-size:0.85rem;
+}
+.spec-row .k{color:rgba(255,255,255,0.5)}
+.spec-row .v{color:#fff;font-weight:600}
+
+/* Chart block */
+.chart-block{
+  max-width:1280px;width:100%;color:#fff;
+}
+.chart-block.dual{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+}
+.chart-card{
+  background:rgba(255,255,255,0.03);border:1px solid var(--line-dark);
+  padding:28px;border-radius:12px;
+}
+.chart-card .lbl{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px}
+.chart-card h4{color:#fff;font-size:1rem;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0;text-transform:none;margin-bottom:18px;line-height:1.4}
+.chart-container{position:relative;height:260px}
+
+/* Table block */
+.fin-table{
+  width:100%;border-collapse:collapse;color:#fff;
+  font-size:0.82rem;
+}
+.fin-table thead th{
+  text-align:left;padding:14px 12px;
+  font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--accent-2);
+  border-bottom:1px solid var(--line-dark);
+}
+.fin-table thead th:not(:first-child){text-align:right}
+.fin-table tbody td{
+  padding:14px 12px;border-bottom:1px solid var(--line-dark);
+  color:rgba(255,255,255,0.85);
+}
+.fin-table tbody td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.fin-table tr.hl td{color:var(--accent-2);font-weight:600}
+.fin-table tr.total td{
+  background:rgba(74,158,63,0.12);color:#fff;font-weight:700;
+}
+
+/* Cards */
+.cards-block{
+  max-width:1280px;width:100%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.card{
+  background:rgba(255,255,255,0.03);border:1px solid var(--line-dark);
+  padding:28px;border-radius:12px;color:#fff;
+}
+.sidescroll-wrap.light .card{background:#fff;border-color:var(--line);color:var(--text-1)}
+.card .num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--accent-2);line-height:1;margin-bottom:8px}
+.sidescroll-wrap.light .card .num{color:var(--accent)}
+.card h4{margin-bottom:10px;color:inherit}
+.card p{font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.6}
+.sidescroll-wrap.light .card p{color:var(--text-2)}
+
+/* SPV diagram */
+.spv-block{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;
+  max-width:1280px;width:100%;color:#fff;
+}
+.spv-diagram{
+  background:rgba(255,255,255,0.03);border:1px solid var(--line-dark);
+  padding:36px;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+.spv-node{
+  width:100%;max-width:320px;padding:18px 22px;
+  border:1px solid var(--line-dark);border-radius:8px;text-align:center;
+  background:rgba(255,255,255,0.02);
+}
+.spv-node.row{display:flex;padding:0;gap:8px;background:transparent;border:none;}
+.spv-node.row > div{
+  flex:1;padding:16px;border:1px solid var(--line-dark);border-radius:8px;
+  background:rgba(255,255,255,0.03);
+}
+.spv-node.main{background:rgba(74,158,63,0.12);border-color:var(--accent);}
+.spv-node .nm{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.06em;color:#fff;margin-bottom:4px}
+.spv-node.main .nm{color:var(--accent-2)}
+.spv-node .rl{font-size:0.65rem;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-transform:uppercase}
+.spv-node .amt{font-size:0.78rem;color:var(--accent-2);margin-top:6px;font-weight:600}
+.spv-arrow{
+  width:2px;height:24px;background:linear-gradient(180deg,var(--accent-2),transparent);
+  position:relative;
+}
+.spv-arrow::after{
+  content:"";position:absolute;bottom:-2px;left:-3px;
+  border-left:4px solid transparent;border-right:4px solid transparent;
+  border-top:6px solid var(--accent-2);
+}
+
+.waterfall{list-style:none}
+.waterfall li{
+  display:grid;grid-template-columns:48px 1fr;gap:20px;
+  padding:20px 0;border-bottom:1px solid var(--line-dark);
+}
+.waterfall .wn{
+  font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--accent-2);
+  width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.waterfall h5{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#fff;letter-spacing:0.04em;margin-bottom:6px;text-transform:uppercase}
+.waterfall p{font-size:0.84rem;color:rgba(255,255,255,0.6);line-height:1.6}
+
+/* Risk grid */
+.risk-grid{
+  max-width:1280px;width:100%;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;color:#fff;
+}
+.risk{
+  background:rgba(255,255,255,0.03);border:1px solid var(--line-dark);
+  padding:22px;border-radius:10px;
+  border-left:3px solid var(--accent);
+}
+.risk.med{border-left-color:#e2a13c}
+.risk.high{border-left-color:var(--red)}
+.risk .lv{font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px}
+.risk.med .lv{color:#e2a13c}
+.risk.high .lv{color:var(--red)}
+.risk h5{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:0.04em;margin-bottom:10px;color:#fff;text-transform:uppercase;line-height:1.1}
+.risk p{font-size:0.76rem;color:rgba(255,255,255,0.6);line-height:1.55}
+
+/* Roadmap grid */
+.roadmap{
+  max-width:1280px;width:100%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;color:#fff;
+}
+.phase{
+  background:rgba(255,255,255,0.03);border:1px solid var(--line-dark);
+  padding:28px;border-radius:12px;position:relative;overflow:hidden;
+}
+.phase::before{
+  content:attr(data-num);position:absolute;top:-20px;right:-10px;
+  font-family:'Bebas Neue',sans-serif;font-size:7rem;color:rgba(255,255,255,0.04);
+}
+.phase .pl{font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-2);margin-bottom:8px}
+.phase h5{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.04em;color:#fff;margin-bottom:14px;text-transform:uppercase;line-height:1.1}
+.phase ul{list-style:none}
+.phase li{font-size:0.78rem;color:rgba(255,255,255,0.65);padding:6px 0;padding-left:16px;position:relative;line-height:1.5}
+.phase li::before{content:"·";color:var(--accent-2);position:absolute;left:4px;font-weight:700}
+
+/* Spacing block */
+.s-spacer{flex:0 0 30vw;height:100vh}
+.s-spacer.lg{flex:0 0 50vw}
+
+/* Chapter ending */
+.chapter-ending{
+  background:var(--ink);height:100vh;
+  display:flex;align-items:center;justify-content:flex-start;
+  padding:0 8vw;color:#fff;
+}
+.chapter-ending .step{color:var(--accent-2);margin-bottom:18px;font-size:0.9rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase}
+.chapter-ending h3{color:#fff}
+
+/* ─── LOCATIONS ─── */
+.locations{
+  background:var(--paper);padding:120px 60px;
+}
+.loc-inner{
+  max-width:1400px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;
+}
+.loc-content h2{color:var(--text-1);margin-bottom:36px}
+.loc-list{list-style:none}
+.loc-list li{
+  border-bottom:1px solid var(--line);padding:22px 0;
+}
+.loc-list li:first-child{border-top:1px solid var(--line)}
+.loc-list .head{
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;
+}
+.loc-list h4{
+  font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--text-1);
+  letter-spacing:0.02em;text-transform:uppercase;
+}
+.loc-list .toggle{
+  width:32px;height:32px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-2);transition:all 0.3s;flex-shrink:0;
+}
+.loc-list li.open .toggle{background:var(--accent);color:#fff;border-color:var(--accent);transform:rotate(45deg)}
+.loc-list .body{
+  max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(.16,1,.3,1);
+}
+.loc-list li.open .body{max-height:240px}
+.loc-list .body-inner{padding-top:18px;font-size:0.92rem;color:var(--text-2);line-height:1.7;max-width:60ch}
+.loc-list .tag{display:inline-block;background:var(--accent-light, rgba(74,158,63,0.12));color:var(--accent-deep);font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-top:10px}
+
+.loc-map{
+  position:relative;aspect-ratio:1/1.05;
+  background:transparent;overflow:visible;
+}
+.loc-map svg{width:100%;height:100%;display:block}
+.loc-map svg path.continent{
+  fill:none;stroke:var(--text-2);stroke-width:0.6;
+  vector-effect:non-scaling-stroke;
+  transition:stroke 0.3s;
+}
+.loc-map svg path.sa{
+  fill:rgba(74,158,63,0.06);stroke:var(--accent);stroke-width:1;
+  vector-effect:non-scaling-stroke;
+}
+.loc-map svg .grid-line{
+  stroke:var(--text-3);stroke-width:0.3;stroke-dasharray:2 4;opacity:0.35;
+  vector-effect:non-scaling-stroke;
+}
+.loc-map svg text{
+  font-family:'Inter',sans-serif;font-size:9px;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  fill:var(--text-3);
+}
+.loc-map svg text.region-label{font-size:11px;fill:var(--text-2)}
+.marker{
+  position:absolute;width:18px;height:18px;
+  transform:translate(-50%,-50%);z-index:3;
+}
+.marker .dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--paper);
+  box-shadow:0 4px 12px rgba(0,0,0,0.25), 0 0 0 4px rgba(74,158,63,0.12);
+  cursor:pointer;position:relative;z-index:2;
+  transition:transform 0.25s;
+}
+.marker:hover .dot{transform:scale(1.18)}
+.marker .pulse{
+  position:absolute;inset:-3px;border-radius:50%;
+  background:var(--accent);opacity:0.35;
+  animation:pulse 2.4s ease-out infinite;
+}
+.marker.active .dot{background:var(--red);box-shadow:0 4px 12px rgba(0,0,0,0.25), 0 0 0 6px rgba(200,49,43,0.18)}
+.marker.active .pulse{background:var(--red);opacity:0.45}
+.marker .lbl{
+  position:absolute;left:18px;top:-6px;white-space:nowrap;
+  font-family:'Inter',sans-serif;font-size:0.62rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--text-2);
+  background:rgba(244,242,237,0.92);padding:3px 8px;border:1px solid var(--line);
+  border-radius:3px;
+  opacity:0;transform:translateX(-6px);transition:all 0.25s;
+  pointer-events:none;
+}
+.marker.active .lbl,.marker:hover .lbl{opacity:1;transform:translateX(0);color:var(--text-1)}
+@keyframes pulse{
+  0%{transform:scale(1);opacity:0.5}
+  100%{transform:scale(2.5);opacity:0}
+}
+
+/* ─── CTA ─── */
+.cta-section{
+  background:var(--ink);padding:160px 60px;color:#fff;
+  text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(74,158,63,0.18) 0%,transparent 65%);
+}
+.cta-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto}
+.cta-eyebrow{color:var(--accent-2);font-size:0.78rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;margin-bottom:30px}
+.cta-title{color:#fff;margin-bottom:30px}
+.cta-title .green-2{color:var(--accent-2)}
+.cta-sub{color:rgba(255,255,255,0.6);font-size:1.1rem;max-width:60ch;margin:0 auto 40px}
+.cta-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:60px}
+.btn-pri{
+  padding:18px 36px;background:var(--accent);color:#fff;font-weight:600;
+  font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;border-radius:6px;transition:all 0.25s;
+}
+.btn-pri:hover{background:var(--accent-2);color:var(--ink);transform:translateY(-2px)}
+.btn-ghost{
+  padding:18px 36px;background:transparent;color:#fff;
+  border:1px solid rgba(255,255,255,0.25);font-weight:600;
+  font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;
+  text-decoration:none;border-radius:6px;transition:all 0.25s;
+}
+.btn-ghost:hover{border-color:var(--accent-2);color:var(--accent-2)}
+.cta-stats{display:flex;justify-content:center;gap:80px;flex-wrap:wrap}
+.cta-stat .v{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--accent-2);line-height:1}
+.cta-stat .l{font-size:0.6rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:6px}
+
+/* ─── FOOTER ─── */
+footer.foot{
+  background:var(--ink-2);color:rgba(255,255,255,0.5);padding:80px 60px 110px;
+  display:grid;grid-template-columns:1fr 2fr 1fr;gap:60px;align-items:start;font-size:0.78rem;
+}
+.foot .lg{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.18em;color:#fff;text-decoration:none}
+.foot .lg span{color:var(--accent-2)}
+.foot .dis{font-size:0.72rem;line-height:1.7;color:rgba(255,255,255,0.35);max-width:60ch}
+.foot a.mail{color:var(--accent-2);text-decoration:none}
+.foot .cp{display:block;margin-top:8px;color:rgba(255,255,255,0.25);font-size:0.65rem}
+
+/* ─── PROGRESS BAR FOOTER ─── */
+.progress-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:80;
+  background:rgba(10,11,11,0.88);backdrop-filter:blur(12px);
+  padding:14px 40px;color:#fff;
+  display:flex;align-items:center;gap:20px;
+}
+.progress-chapters{
+  flex:1;display:flex;gap:12px;
+}
+.progress-ch{
+  flex:1;position:relative;cursor:pointer;
+}
+.progress-ch:hover .ch-meta{color:var(--accent-2)}
+.progress-ch .ch-line{
+  height:2px;background:rgba(255,255,255,0.1);position:relative;overflow:hidden;
+}
+.progress-ch .ch-line::after{
+  content:"";position:absolute;left:0;top:0;height:100%;width:0%;
+  background:var(--accent-2);transition:width 0.2s linear;
+}
+.progress-ch.active .ch-line::after{width:var(--p, 0%)}
+.progress-ch.done .ch-line::after{width:100%}
+.progress-ch .ch-meta{
+  display:flex;justify-content:space-between;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-bottom:6px;
+}
+.progress-ch.active .ch-meta,
+.progress-ch.done .ch-meta{color:rgba(255,255,255,0.85)}
+.progress-ch .ch-name{font-weight:600}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:880px){
+  .brandbar{padding:18px 24px}
+  .intro-content{padding:30px 24px 40px}
+  .text-intro{padding:80px 24px}
+  .text-intro-inner{grid-template-columns:1fr;gap:24px}
+  .chapter-previews .scroller{padding:0 24px;gap:18px}
+  .cp-title-panel{flex:0 0 320px;padding:0 16px}
+  .cp-card{flex:0 0 260px;height:380px}
+  .text-image,.stat-block,.quote-block,.module-block,.spv-block{grid-template-columns:1fr;gap:32px}
+  .text-image.reverse .ti-visual{order:0}
+  .text-image.reverse .ti-content{order:0}
+  .s-block{padding:0 24px}
+  .chart-block.dual{grid-template-columns:1fr}
+  .cards-block{grid-template-columns:1fr}
+  .risk-grid{grid-template-columns:1fr 1fr}
+  .roadmap{grid-template-columns:1fr}
+  .locations{padding:80px 24px}
+  .loc-inner{grid-template-columns:1fr}
+  .cta-section{padding:100px 24px}
+  .cta-stats{gap:40px}
+  footer.foot{grid-template-columns:1fr;padding:60px 24px 100px}
+  .progress-bar{padding:10px 16px}
+  .progress-ch .ch-name{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── BRAND BAR ─── -->
+<div class="brandbar">
+  <div class="logo">PRECAST<sup style="font-size:0.5em;color:var(--accent-2)">·</sup>AFRICA</div>
+  <div class="meta">Venture Investment Proposal · Confidential</div>
+</div>
+
+<!-- ─── INTRO BANNER ─── -->
+<section class="intro-banner" data-ch="0">
+  <div class="intro-visual">
+    <img src="Renders/precast-mixed%20use%20development.png" alt="Precast Africa mixed-use development">
+  </div>
+  <div class="intro-content">
+    <div class="intro-eyebrow">Series A · R64M Equity Round · Strictly Confidential</div>
+    <h1 class="intro-title h0">
+      How a continent<br><span class="red-word">builds</span> its housing future
+    </h1>
+    <div class="intro-footer">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#fff" stroke-miterlimit="10">
+            <circle cx="16" cy="16" r="15.5"></circle>
+            <path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path>
+            <path d="m10.77 16h10.46"></path>
+          </g>
+        </svg>
+        Scroll and discover
+      </div>
+      <div class="intro-deal-strip">
+        <div class="cell"><div class="k">Deal</div><div class="v">Equity / SPV</div></div>
+        <div class="cell"><div class="k">Ask</div><div class="v">R64M</div></div>
+        <div class="cell"><div class="k">MOIC</div><div class="v">3.63×</div></div>
+        <div class="cell"><div class="k">IRR</div><div class="v">31%</div></div>
+        <div class="cell"><div class="k">Min Ticket</div><div class="v">R5M</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TEXT INTRO ─── -->
+<section class="text-intro">
+  <div class="text-intro-inner">
+    <h2 class="h2">From mould<br>to module</h2>
+    <div>
+      <p>Precast Africa is an industrial-scale PPVC concrete manufacturing venture, built to close the 2.4-million-unit housing deficit in South Africa and the 50-million-unit deficit across Sub-Saharan Africa.</p>
+      <p>This proposal walks the full investment case in six chapters — the demand, the technology, the offtake, the numbers, the structure, and the path forward. Every figure traces back to the underlying venture model. Every claim is anchored to a signed counterparty, a quoted supplier, or a published statistic.</p>
+      <p style="margin-top:24px;font-size:0.85rem;color:var(--text-3);font-style:italic;font-family:'Instrument Serif',serif">Read top to bottom. Six chapters. Roughly twelve minutes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CHAPTER PREVIEWS (horizontal scroll) ─── -->
+<section class="chapter-previews" id="chapter-previews">
+  <div class="scroller">
+    <div class="cp-title-panel">
+      <div class="num">— Six chapters</div>
+      <h2 class="h2">The full venture<br>investment case</h2>
+      <p>Each chapter pins the supporting evidence to a single, scannable narrative arc.</p>
+    </div>
+
+    <a class="cp-card" href="#ch1">
+      <div class="img"><img src="Renders/precast-lowcost%20housing-commercial.png" alt="Low-cost precast housing"></div>
+      <div class="cap"><div class="ix">01</div><h4>The Demand</h4><div class="line"></div></div>
+    </a>
+    <a class="cp-card" href="#ch2">
+      <div class="img"><img src="Graphics/Module%20Assembly%20-%20Exploded%20Render.png" alt="Exploded module assembly"></div>
+      <div class="cap"><div class="ix">02</div><h4>The Technology</h4><div class="line"></div></div>
+    </a>
+    <a class="cp-card" href="#ch3">
+      <div class="img"><img src="Renders/precast-apartment-block-evening.png" alt="Precast apartment block at evening"></div>
+      <div class="cap"><div class="ix">03</div><h4>The Offtake</h4><div class="line"></div></div>
+    </a>
+    <a class="cp-card" href="#ch4">
+      <div class="img"><img src="Renders/3%20storey%20walkup.png" alt="3 storey walkup development"></div>
+      <div class="cap"><div class="ix">04</div><h4>The Numbers</h4><div class="line"></div></div>
+    </a>
+    <a class="cp-card" href="#ch5">
+      <div class="img"><img src="Graphics/3%20Module%20Cluster%20Elevation%20Raw.png" alt="3 module cluster elevation"></div>
+      <div class="cap"><div class="ix">05</div><h4>The Structure</h4><div class="line"></div></div>
+    </a>
+    <a class="cp-card" href="#ch6">
+      <div class="img"><img src="Renders/precast-multistorey-house-modules.png" alt="Multistorey precast modules"></div>
+      <div class="cap"><div class="ix">06</div><h4>The Path</h4><div class="line"></div></div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CHAPTER 1 — THE DEMAND -->
+<!-- ════════════════════════════════════════ -->
+<section class="chapter" id="ch1" data-ch="1">
+
+  <div class="chapter-intro">
+    <img src="Renders/precast-lowcost%20housing-commercial.png" alt="Low-cost precast housing">
+    <div class="ci-inner">
+      <div class="step">Chapter 01</div>
+      <h2 class="h0">The Demand</h2>
+      <p class="promise">2.4 million homes short. 80,000 units missed every year. The gap that defines the opportunity.</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="#fff"><circle cx="16" cy="16" r="15.5"></circle><path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path><path d="m10.77 16h10.46"></path></g></svg>
+        An irreducible signal
+      </div>
+    </div>
+  </div>
+
+  <div class="sidescroll-wrap" data-sidescroll>
+    <div class="sidescroll">
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="text-image">
+          <div class="ti-visual"><img src="Background%20Images/IMG_4631.JPG" alt="Precast housing architectural renders"></div>
+          <div class="ti-content">
+            <div class="eyebrow light">Market Demand</div>
+            <h3 class="h3" style="margin-top:14px">A backlog<br>that compounds</h3>
+            <p>South Africa's housing deficit has grown every year for a decade. Conventional construction is structurally incapable of closing it — there are not enough bricklayers, not enough months in a year, not enough sites to deploy them on.</p>
+            <p>PPVC is the only proven technology that changes the production equation. It moves the build from the field to the factory, and from manual to industrial scale.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-block">
+        <div class="stat-block">
+          <div class="descr">
+            <div class="eyebrow light">By the numbers</div>
+            <h3 class="h3" style="margin-top:14px">The gap, sized</h3>
+            <p>Every metric below comes from published government and DFI sources — Stats SA, the National Department of Human Settlements, AfDB, and the Centre for Affordable Housing Finance in Africa.</p>
+          </div>
+          <div class="stat-grid">
+            <div class="stat"><div class="v">2.4M</div><div class="l">SA housing backlog</div></div>
+            <div class="stat"><div class="v">80K</div><div class="l">Annual delivery shortfall</div></div>
+            <div class="stat"><div class="v">50M+</div><div class="l">Sub-Saharan deficit</div></div>
+            <div class="stat"><div class="v">R980B</div><div class="l">SA 30-year TAM</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="chart-block dual">
+          <div class="chart-card">
+            <div class="lbl">South Africa</div>
+            <h4>Annual housing delivery vs. need — the structural gap</h4>
+            <div class="chart-container"><canvas id="saChart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="lbl">Sub-Saharan Africa</div>
+            <h4>Housing deficit by country (millions of units)</h4>
+            <div class="chart-container"><canvas id="africaChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="quote-block">
+          <div class="quote-img"><img src="Renders/precast-single-storey-home.png" alt="Single-storey precast home"></div>
+          <div class="quote-content">
+            <div class="mark">
+              <svg viewBox="0 0 72 64" xmlns="http://www.w3.org/2000/svg"><g fill="#88d87e"><path d="m39.47 31.47v32.53h29.33v-36.27h-13.6c0-12.53 6.67-18.93 16.8-18.93v-8.8c-21.33 0-32.53 13.6-32.53 31.47z"></path><path d="m0 31.47v32.53h29.6v-36.27h-13.6c0-12.53 6.67-18.93 16.53-18.93v-8.8c-21.06 0-32.53 13.6-32.53 31.47z"></path></g></svg>
+            </div>
+            <blockquote>South Africa cannot build its way out of the backlog using brick-and-mortar. The arithmetic does not work. Industrial precast is the only answer at scale.</blockquote>
+            <div class="quote-attr"><span class="who">Centre for Affordable Housing Finance in Africa</span> · 2024 State of the Sector Report</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="cards-block">
+          <div class="card"><div class="num">17M+</div><h4 class="h4">Nigeria</h4><p>Largest deficit on the continent. Rapid urbanisation. Federal social-housing programme active.</p></div>
+          <div class="card"><div class="num">2.8M</div><h4 class="h4">Ethiopia</h4><p>Urban growth 4.5% p.a. Addis Ababa expansion. Government-backed delivery pipeline.</p></div>
+          <div class="card"><div class="num">2.0M</div><h4 class="h4">Kenya</h4><p>Affordable Housing Presidential Directive. Nairobi densification mandate.</p></div>
+          <div class="card"><div class="num">1.4M</div><h4 class="h4">Mozambique</h4><p>Reconstruction demand. LNG corridor infrastructure. AfDB active lender.</p></div>
+          <div class="card"><div class="num">1.25M</div><h4 class="h4">Zimbabwe</h4><p>Post-rebuild demand. SADC trade lane. Proximity to SA operations.</p></div>
+          <div class="card"><div class="num">2.4M</div><h4 class="h4">South Africa</h4><p>NHBRC-regulated. DFI-bankable. Beachhead market for the venture.</p></div>
+        </div>
+      </div>
+
+      <div class="chapter-ending">
+        <div>
+          <div class="step">Next chapter</div>
+          <h3 class="h2">The Technology</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CHAPTER 2 — THE TECHNOLOGY -->
+<!-- ════════════════════════════════════════ -->
+<section class="chapter" id="ch2" data-ch="2">
+
+  <div class="chapter-intro">
+    <img src="Graphics/Module%20Assembly%20-%20Exploded%20Render.png" alt="Module exploded render">
+    <div class="ci-inner">
+      <div class="step">Chapter 02</div>
+      <h2 class="h0">The Technology</h2>
+      <p class="promise">Factory-built. Crane-installed. Field-proven. Spanish-engineered moulds, South African delivery.</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="#fff"><circle cx="16" cy="16" r="15.5"></circle><path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path><path d="m10.77 16h10.46"></path></g></svg>
+        Inside the factory
+      </div>
+    </div>
+  </div>
+
+  <div class="sidescroll-wrap" data-sidescroll>
+    <div class="sidescroll">
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="text-image reverse">
+          <div class="ti-visual"><img src="Precast%20Modules/Engineerd%20Module.png" alt="Engineered module specification"></div>
+          <div class="ti-content">
+            <div class="eyebrow light">PPVC — defined</div>
+            <h3 class="h3" style="margin-top:14px">Three-dimensional<br>concrete modules</h3>
+            <p>Prefabricated Prefinished Volumetric Construction produces complete 3D concrete modules — walls, floors, ceilings, finishes — in a controlled factory environment.</p>
+            <p>Modules are transported to site and stacked by crane. Build time on site: days, not months. Quality is repeatable because it is industrial, not artisanal.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-block">
+        <div class="text-image">
+          <div class="ti-visual"><img src="Manufacturing%20Plant.jpg" alt="Modular unit factory site plan"></div>
+          <div class="ti-content">
+            <div class="eyebrow light">Moldtech (Spain)</div>
+            <h3 class="h3" style="margin-top:14px">Spanish precision,<br>built for Africa</h3>
+            <p>Moldtech is a Spain-based specialist designing steel moulds for industrial concrete module production. Their moulds are deployed globally — and engineered for our Phase 1 configuration.</p>
+            <p>Each mould produces one cast per day across 255.5 productive days per year. Fixed Type A moulds for standard modules. Modular Type B & C for variable configurations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="module-block">
+          <div class="module-visual">
+            <div class="module-cell">Type A<br>Fixed</div>
+            <div class="module-cell active">Type B<br>Modular</div>
+            <div class="module-cell">Type A<br>Fixed</div>
+            <div class="module-cell active">Type B<br>Modular</div>
+            <div class="module-cell core">Core<br>Stair</div>
+            <div class="module-cell">Type A<br>Fixed</div>
+            <div class="module-cell">Type A<br>Fixed</div>
+            <div class="module-cell active">Type C<br>Modular</div>
+            <div class="module-cell">Type A<br>Fixed</div>
+          </div>
+          <div class="module-content">
+            <div class="eyebrow light">Module Layout — 3-storey configuration</div>
+            <h3 class="h3" style="margin-top:14px">The mould<br>becomes the home</h3>
+            <p>A standard three-storey building is composed of nine modular cells around a stair core. Each cell is a single mould cycle in the factory.</p>
+            <div class="spec-row"><span class="k">Max module width</span><span class="v">3.5m (SA road compliant)</span></div>
+            <div class="spec-row"><span class="k">Production days / year</span><span class="v">255.5</span></div>
+            <div class="spec-row"><span class="k">Casts per mould / day</span><span class="v">1</span></div>
+            <div class="spec-row"><span class="k">Phase 1 mould fleet</span><span class="v">5 moulds</span></div>
+            <div class="spec-row"><span class="k">Phase 1 capacity</span><span class="v">500 units / yr</span></div>
+            <div class="spec-row"><span class="k">Steady-state capacity</span><span class="v">1,500 units / yr</span></div>
+            <div class="spec-row"><span class="k">Demo unit size</span><span class="v">54 m² (3-bed)</span></div>
+            <div class="spec-row"><span class="k">Mould cost (installed)</span><span class="v">R3.125M per mould</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="cards-block">
+          <div class="card"><div class="num">1</div><h4 class="h4">Mould preparation</h4><p>Steel mould cleaned, release agent applied, reinforcement steel cage placed. Cycle time: ~2 hours per cast.</p></div>
+          <div class="card"><div class="num">2</div><h4 class="h4">Concrete pour</h4><p>High-strength concrete batched on site, poured into mould. Embedded inserts for services, doors, windows.</p></div>
+          <div class="card"><div class="num">3</div><h4 class="h4">Cure & demould</h4><p>24-hour controlled cure cycle. Mould opened, module lifted out by gantry, moved to finishing bay.</p></div>
+          <div class="card"><div class="num">4</div><h4 class="h4">Finish & QA</h4><p>Plumbing, electrical, plaster, fittings installed factory-side. NHBRC quality inspection.</p></div>
+          <div class="card"><div class="num">5</div><h4 class="h4">Transport</h4><p>Abnormal-load truck moves module within 30km. Crane offloads at site.</p></div>
+          <div class="card"><div class="num">6</div><h4 class="h4">Stack & seal</h4><p>Modules stacked, joints sealed, services connected. Three-storey building erected in a week.</p></div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="quote-block">
+          <div class="quote-img"><img src="Graphics/Module%20Assembly%20-%20Exploded%20Panels.png" alt="Module exploded panels"></div>
+          <div class="quote-content">
+            <div class="mark">
+              <svg viewBox="0 0 72 64"><g fill="#88d87e"><path d="m39.47 31.47v32.53h29.33v-36.27h-13.6c0-12.53 6.67-18.93 16.8-18.93v-8.8c-21.33 0-32.53 13.6-32.53 31.47z"></path><path d="m0 31.47v32.53h29.6v-36.27h-13.6c0-12.53 6.67-18.93 16.53-18.93v-8.8c-21.06 0-32.53 13.6-32.53 31.47z"></path></g></svg>
+            </div>
+            <blockquote>PPVC moves the build from the field to the factory. Once you do that, every variable that breaks construction projects — weather, labour, theft, sequencing — collapses into one process you can actually control.</blockquote>
+            <div class="quote-attr"><span class="who">Industrial Construction Review</span> · 2024 modular methods study</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-ending">
+        <div>
+          <div class="step">Next chapter</div>
+          <h3 class="h2">The Offtake</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CHAPTER 3 — THE OFFTAKE -->
+<!-- ════════════════════════════════════════ -->
+<section class="chapter" id="ch3" data-ch="3">
+
+  <div class="chapter-intro">
+    <img src="Renders/precast-mixed%20use%20development.png" alt="Mixed-use precast development">
+    <div class="ci-inner">
+      <div class="step">Chapter 03</div>
+      <h2 class="h0">The Offtake</h2>
+      <p class="promise">Demand is signed, not projected. The Mixilon agreement converts speculation into contracted revenue.</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="#fff"><circle cx="16" cy="16" r="15.5"></circle><path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path><path d="m10.77 16h10.46"></path></g></svg>
+        The bankable foundation
+      </div>
+    </div>
+  </div>
+
+  <div class="sidescroll-wrap" data-sidescroll>
+    <div class="sidescroll">
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="text-image">
+          <div class="ti-visual"><img src="Renders/precast-apartment-block-evening.png" alt="Precast apartment block"></div>
+          <div class="ti-content">
+            <div class="eyebrow light">Mixilon (Pty) Ltd</div>
+            <h3 class="h3" style="margin-top:14px">A named buyer.<br>A captive pipeline.</h3>
+            <p>Mixilon is a residential developer with an active pipeline at Droegjevel Estate, Randfontein — within Greater Johannesburg. They have committed a R1 million commercial setup payment and a 5–10 year exclusive offtake.</p>
+            <p>This is what bankability looks like. Lenders don't fund factories on hope. They fund factories whose output is already contracted.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-block">
+        <div class="stat-block">
+          <div class="descr">
+            <div class="eyebrow light">Agreement terms</div>
+            <h3 class="h3" style="margin-top:14px">The deal,<br>at a glance</h3>
+            <p>The Mixilon offtake is the cornerstone of bankability — a named buyer, defined volumes, an exclusive supply lane that anchors the investment case.</p>
+          </div>
+          <div class="stat-grid">
+            <div class="stat"><div class="v">5–10 yr</div><div class="l">Exclusive offtake term</div></div>
+            <div class="stat"><div class="v">R1.0M</div><div class="l">Commercial setup paid</div></div>
+            <div class="stat"><div class="v">150–250</div><div class="l">Units in initial phase</div></div>
+            <div class="stat"><div class="v">500–1,000</div><div class="l">Units / yr at scale</div></div>
+            <div class="stat"><div class="v">50/50</div><div class="l">SPV split, initial</div></div>
+            <div class="stat"><div class="v">70/30</div><div class="l">SPV split, at scale</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="cards-block" style="grid-template-columns:repeat(2,1fr);max-width:1100px">
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:10px">Investment logic</div>
+            <h4 class="h4" style="margin-bottom:14px">De-risks the ramp</h4>
+            <p>Eliminates market uncertainty in Years 1–2. The factory is already pre-sold against contracted volumes before the first concrete is poured.</p>
+          </div>
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:10px">Investment logic</div>
+            <h4 class="h4" style="margin-bottom:14px">Bankability lever</h4>
+            <p>Provides negotiating leverage with DFIs and senior lenders through a demonstrated first-customer commitment and named counterparty.</p>
+          </div>
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:10px">Investment logic</div>
+            <h4 class="h4" style="margin-bottom:14px">Preferred-supplier moat</h4>
+            <p>Establishes Precast Africa as preferred supplier in a captive 500–1,000 unit/year pipeline before the market is open to competition.</p>
+          </div>
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:10px">Investment logic</div>
+            <h4 class="h4" style="margin-bottom:14px">Aligned economics</h4>
+            <p>SPV split transitions from 50/50 to 70/30 in favour of Precast Africa once 500 unit/year run-rate is achieved — rewards delivery.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="quote-block">
+          <div class="quote-img"><img src="Renders/precast-multistorey-house-modules.png" alt="Multistorey house modules"></div>
+          <div class="quote-content">
+            <div class="mark"><svg viewBox="0 0 72 64"><g fill="#88d87e"><path d="m39.47 31.47v32.53h29.33v-36.27h-13.6c0-12.53 6.67-18.93 16.8-18.93v-8.8c-21.33 0-32.53 13.6-32.53 31.47z"></path><path d="m0 31.47v32.53h29.6v-36.27h-13.6c0-12.53 6.67-18.93 16.53-18.93v-8.8c-21.06 0-32.53 13.6-32.53 31.47z"></path></g></svg></div>
+            <blockquote>The Mixilon offtake is the single most important de-risking event in the venture. It is the difference between a factory looking for customers and a factory fulfilling contracted demand.</blockquote>
+            <div class="quote-attr"><span class="who">Precast Africa</span> · Investment memorandum, 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-ending">
+        <div>
+          <div class="step">Next chapter</div>
+          <h3 class="h2">The Numbers</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CHAPTER 4 — THE NUMBERS -->
+<!-- ════════════════════════════════════════ -->
+<section class="chapter" id="ch4" data-ch="4">
+
+  <div class="chapter-intro">
+    <img src="Graphics/Residential%20Front%20Elevation%20Day.png" alt="Residential front elevation">
+    <div class="ci-inner">
+      <div class="step">Chapter 04</div>
+      <h2 class="h0">The Numbers</h2>
+      <p class="promise">Five-year P&L. Three scenarios. One disciplined capital structure. Every line item traces back to the model.</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="#fff"><circle cx="16" cy="16" r="15.5"></circle><path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path><path d="m10.77 16h10.46"></path></g></svg>
+        Read the P&L
+      </div>
+    </div>
+  </div>
+
+  <div class="sidescroll-wrap" data-sidescroll>
+    <div class="sidescroll">
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="chart-block">
+          <div class="chart-card" style="padding:36px">
+            <div class="lbl">Five-year P&L · Base case</div>
+            <h4 style="margin-bottom:24px">Revenue per unit: R335,000 · Gross margin: ~31% · Capital fully returned by 2028</h4>
+            <table class="fin-table">
+              <thead>
+                <tr><th>R'000s</th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>Year 4</th><th>Year 5</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Units delivered</td><td>250</td><td>400</td><td>600</td><td>1,000</td><td>1,500</td></tr>
+                <tr><td>Revenue</td><td>83,750</td><td>134,000</td><td>201,000</td><td>335,000</td><td>502,500</td></tr>
+                <tr><td>COGS</td><td>(57,500)</td><td>(91,960)</td><td>(137,885)</td><td>(229,775)</td><td>(344,463)</td></tr>
+                <tr class="hl"><td>Gross profit</td><td>26,250</td><td>42,040</td><td>63,115</td><td>105,225</td><td>158,038</td></tr>
+                <tr><td>Operating expenses</td><td>(8,200)</td><td>(11,000)</td><td>(14,000)</td><td>(18,000)</td><td>(22,000)</td></tr>
+                <tr><td>EBITDA</td><td>18,050</td><td>31,040</td><td>49,115</td><td>87,225</td><td>136,038</td></tr>
+                <tr><td>Depreciation</td><td>(3,125)</td><td>(3,125)</td><td>(6,250)</td><td>(9,375)</td><td>(9,375)</td></tr>
+                <tr><td>EBIT</td><td>14,925</td><td>27,915</td><td>42,865</td><td>77,850</td><td>126,663</td></tr>
+                <tr><td>Finance costs</td><td>(4,800)</td><td>(4,200)</td><td>(3,000)</td><td>(1,500)</td><td>—</td></tr>
+                <tr class="total"><td>Net profit before tax</td><td>10,125</td><td>23,715</td><td>39,865</td><td>76,350</td><td>126,663</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="chart-block dual">
+          <div class="chart-card">
+            <div class="lbl">Revenue & profit trajectory</div>
+            <h4>Five-year compounding · base case</h4>
+            <div class="chart-container"><canvas id="revChart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="lbl">Scenario analysis</div>
+            <h4>EBIT range — bear, base, bull</h4>
+            <div class="chart-container"><canvas id="scenarioChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="stat-block">
+          <div class="descr">
+            <div class="eyebrow light">Investor returns</div>
+            <h3 class="h3" style="margin-top:14px">What the<br>capital does</h3>
+            <p>Bear case still returns 1.8×. Base case 3.63×. Bull case 5.2×. Capital fully repaid before Year 3 close in all scenarios.</p>
+          </div>
+          <div class="stat-grid">
+            <div class="stat"><div class="v">3.63×</div><div class="l">MOIC, base case</div></div>
+            <div class="stat"><div class="v">31%</div><div class="l">Project IRR</div></div>
+            <div class="stat"><div class="v">2028</div><div class="l">Capital fully returned</div></div>
+            <div class="stat"><div class="v">12%</div><div class="l">Preferred return p.a.</div></div>
+            <div class="stat"><div class="v">1.4×</div><div class="l">DSCR minimum</div></div>
+            <div class="stat"><div class="v">1.8×</div><div class="l">MOIC, bear case</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="chart-block">
+          <div class="chart-card" style="padding:36px">
+            <div class="lbl">CAPEX register</div>
+            <h4 style="margin-bottom:24px">R64.3M Phase 1 to first revenue · R127.4M total over 5 years</h4>
+            <table class="fin-table">
+              <thead>
+                <tr><th>CAPEX line item</th><th>Phase 1 (R'000)</th><th>Phase 2 (R'000)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Moldtech moulds (×5, installed)</td><td>15,625</td><td>15,625</td></tr>
+                <tr><td>Factory fit-out & infrastructure</td><td>18,000</td><td>12,000</td></tr>
+                <tr><td>Concrete batching plant</td><td>8,500</td><td>—</td></tr>
+                <tr><td>Cranage & logistics equipment</td><td>6,200</td><td>6,200</td></tr>
+                <tr><td>Working capital (3 months)</td><td>12,000</td><td>18,000</td></tr>
+                <tr><td>SPV legal & setup</td><td>1,000</td><td>—</td></tr>
+                <tr><td>Demo unit production</td><td>850</td><td>—</td></tr>
+                <tr><td>Contingency (5%)</td><td>2,125</td><td>2,590</td></tr>
+                <tr class="total"><td>Total CAPEX</td><td>64,300</td><td>54,415</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="cards-block" style="grid-template-columns:repeat(3,1fr)">
+          <div class="card"><div class="num">R48.3M</div><h4 class="h4">Investor equity</h4><p>75% of Phase 1 funding. This round. SPV equity, ring-fenced.</p></div>
+          <div class="card"><div class="num">R1.0M</div><h4 class="h4">Mixilon payment</h4><p>2% of Phase 1. Already committed. Commercial setup contribution.</p></div>
+          <div class="card"><div class="num">R15.0M</div><h4 class="h4">Senior debt</h4><p>23% of Phase 1. Bank / DFI. Fixed-rate target. NHFC and DBSA in mandate.</p></div>
+        </div>
+      </div>
+
+      <div class="chapter-ending">
+        <div>
+          <div class="step">Next chapter</div>
+          <h3 class="h2">The Structure</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CHAPTER 5 — THE STRUCTURE -->
+<!-- ════════════════════════════════════════ -->
+<section class="chapter" id="ch5" data-ch="5">
+
+  <div class="chapter-intro">
+    <img src="Graphics/3%20Module%20Cluster%20Elevation%20Raw.png" alt="3 module cluster elevation">
+    <div class="ci-inner">
+      <div class="step">Chapter 05</div>
+      <h2 class="h0">The Structure</h2>
+      <p class="promise">SPV-ringfenced. Waterfall-protected. Risk-mapped. Capital comes first — always.</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="#fff"><circle cx="16" cy="16" r="15.5"></circle><path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path><path d="m10.77 16h10.46"></path></g></svg>
+        How investors get paid
+      </div>
+    </div>
+  </div>
+
+  <div class="sidescroll-wrap" data-sidescroll>
+    <div class="sidescroll">
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="spv-block">
+          <div class="spv-diagram">
+            <div class="spv-node row">
+              <div><div class="nm">Investors</div><div class="rl">Equity Shareholders</div><div class="amt">R48.3M</div></div>
+              <div><div class="nm">Bank / DFI</div><div class="rl">Senior Debt</div><div class="amt">R15M</div></div>
+            </div>
+            <div class="spv-arrow"></div>
+            <div class="spv-node main">
+              <div class="nm">Precast Africa SPV</div>
+              <div class="rl">Factory Owner · Asset Holder · Contract Counterparty</div>
+              <div class="amt" style="font-size:0.7rem;color:rgba(255,255,255,0.4);font-weight:400">Owns: Moulds · Plant · Offtake Rights</div>
+            </div>
+            <div class="spv-arrow"></div>
+            <div class="spv-node row">
+              <div><div class="nm">Precast Africa</div><div class="rl">Operations</div><div class="amt">50→70%</div></div>
+              <div><div class="nm">Mixilon</div><div class="rl">Offtake Partner</div><div class="amt">50→30%</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow light">SPV Structure</div>
+            <h3 class="h3" style="margin-top:14px">Clean,<br>protected,<br>bankable.</h3>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.95rem;line-height:1.7;margin-top:18px">Investment is made into a dedicated Special Purpose Vehicle that owns the factory assets, mould equipment, and offtake contract rights.</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.95rem;line-height:1.7;margin-top:14px">The waterfall returns capital first, then preferred return, before profit share. Operating partners only participate after investors are fully repaid.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div style="max-width:1100px;width:100%;color:#fff">
+          <div class="eyebrow light" style="margin-bottom:14px">Profit distribution</div>
+          <h3 class="h3" style="margin-bottom:36px">The waterfall</h3>
+          <ul class="waterfall">
+            <li><div class="wn">1</div><div><h5>Operating costs & debt service</h5><p>All factory OPEX, Moldtech maintenance, transport, admin, and bank debt interest/principal paid first. DSCR minimum 1.4× maintained.</p></div></li>
+            <li><div class="wn">2</div><div><h5>Investor capital repayment</h5><p>100% of R48.3M investor equity returned from free cash flow before any profit share. Target repayment: 2028.</p></div></li>
+            <li><div class="wn">3</div><div><h5>Preferred return — 12% p.a.</h5><p>Investors receive 12% preferred return on outstanding capital balance from day 1, accrued and paid alongside capital repayment.</p></div></li>
+            <li><div class="wn">4</div><div><h5>Profit share — post return</h5><p>After full capital + preferred return: remaining profits split 50/50 between Investor Pool and Operating Partners.</p></div></li>
+            <li><div class="wn">5</div><div><h5>PA / Mixilon split — scaled</h5><p>Within the operating share: initial 50/50 converts to 70/30 in favour of Precast Africa once 500 unit/year run-rate is achieved.</p></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div style="max-width:1280px;width:100%;color:#fff">
+          <div class="eyebrow light" style="margin-bottom:14px">Risk register</div>
+          <h3 class="h3" style="margin-bottom:36px">Known risks.<br>Active mitigations.</h3>
+          <div class="risk-grid">
+            <div class="risk"><div class="lv">Low</div><h5>Offtake volume shortfall</h5><p>Signed 5–10 yr exclusive offtake. Bear case (150 units) still covers OPEX and debt. Alternative buyers in JHB pipeline.</p></div>
+            <div class="risk med"><div class="lv">Medium</div><h5>Construction cost escalation</h5><p>Fixed-price Moldtech contracts, bulk concrete supply, +20% COGS sensitivity modelled. SA escalation 8–10% p.a. in base.</p></div>
+            <div class="risk med"><div class="lv">Medium</div><h5>Mould delivery delay</h5><p>16–20 week lead. Early order at financial close. Local installation partner contracted. Phased ramp buffer.</p></div>
+            <div class="risk"><div class="lv">Low</div><h5>Site & planning approvals</h5><p>Industrial-zoned land in Randfontein/West Rand. No EIA below thresholds. SPLUMA compliant.</p></div>
+            <div class="risk med"><div class="lv">Medium</div><h5>Eskom load shedding</h5><p>Diesel generator for cure cycle. Battery for critical systems. Off-peak scheduling. Stage 2 in base case.</p></div>
+            <div class="risk"><div class="lv">Low</div><h5>Transport — oversize loads</h5><p>3.5m width within SA abnormal-load permit. Route mapped. Crane and rigging pre-qualified.</p></div>
+            <div class="risk high"><div class="lv">High — Managed</div><h5>Interest rate environment</h5><p>Fixed-rate DFI debt targeted (NHFC, DBSA). Variable exposure capped 30%. +300bps reduces MOIC to 2.8×.</p></div>
+            <div class="risk"><div class="lv">Low</div><h5>Key person / management</h5><p>Independent board director, investor-appointed financial controller, documented operations manual from Phase 3.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-ending">
+        <div>
+          <div class="step">Next chapter</div>
+          <h3 class="h2">The Path</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- CHAPTER 6 — THE PATH -->
+<!-- ════════════════════════════════════════ -->
+<section class="chapter" id="ch6" data-ch="6">
+
+  <div class="chapter-intro">
+    <img src="Renders/Residential%20Exterior%20Day.png" alt="Residential exterior precast">
+    <div class="ci-inner">
+      <div class="step">Chapter 06</div>
+      <h2 class="h0">The Path</h2>
+      <p class="promise">Three core partners. Six structured phases. From capital close to 1,500 units a year.</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-circle">
+        <svg viewBox="0 0 32 32"><g fill="none" stroke="#fff"><circle cx="16" cy="16" r="15.5"></circle><path d="m16.25 21.56-5.48-5.56 5.48-5.56"></path><path d="m10.77 16h10.46"></path></g></svg>
+        From close to scale
+      </div>
+    </div>
+  </div>
+
+  <div class="sidescroll-wrap" data-sidescroll>
+    <div class="sidescroll">
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div class="cards-block" style="grid-template-columns:repeat(3,1fr)">
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:8px">Operations</div>
+            <h4 class="h4" style="margin-bottom:12px">Precast Africa</h4>
+            <p>Development lead. PPVC manufacturing & operations. Factory setup, Moldtech procurement, production workflow, QA, logistics. Structural engineering and precast manufacturing expertise embedded in the SPV.</p>
+          </div>
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:8px">Commercial</div>
+            <h4 class="h4" style="margin-bottom:12px">Mixilon (Pty) Ltd</h4>
+            <p>Offtake partner & site developer. Active residential pipeline at Droegjevel Estate, Randfontein. R1M commercial setup paid. 5–10 year exclusive offtake. Demand anchor that converts capacity to revenue.</p>
+          </div>
+          <div class="card">
+            <div class="eyebrow light" style="margin-bottom:8px">Technology</div>
+            <h4 class="h4" style="margin-bottom:12px">Moldtech</h4>
+            <p>Spanish PPVC mould engineering. Designed Phase 1 5-mould configuration for 500 units/year. Technical specifications, installation support, and production optimisation for the Precast Africa factory.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s-spacer"></div>
+
+      <div class="s-block">
+        <div style="max-width:1280px;width:100%;color:#fff">
+          <div class="eyebrow light" style="margin-bottom:14px">Implementation roadmap</div>
+          <h3 class="h3" style="margin-bottom:36px">From close<br>to 1,500 units</h3>
+          <div class="roadmap">
+            <div class="phase" data-num="1"><div class="pl">Month 0–3</div><h5>Partnership & Capital</h5><ul><li>SPV formed and registered</li><li>Shareholder agreements executed</li><li>R48.3M equity raised and closed</li><li>R1M Mixilon payment received</li><li>DFI senior debt mandate secured</li></ul></div>
+            <div class="phase" data-num="2"><div class="pl">Month 2–6</div><h5>Site & Equipment</h5><ul><li>Factory site secured (30km Randfontein)</li><li>Moldtech mould order placed (R15.6M)</li><li>Concrete batching plant installed</li><li>Cranage equipment commissioned</li><li>Production team recruited and trained</li></ul></div>
+            <div class="phase" data-num="3"><div class="pl">Month 6–9</div><h5>Demonstration Unit</h5><ul><li>First mould cycle — 54 m² demo unit</li><li>Structural and quality testing</li><li>Mixilon approval and sign-off</li><li>Investor showcase and media event</li><li>Production workflow refined</li></ul></div>
+            <div class="phase" data-num="4"><div class="pl">Month 9–18</div><h5>Initial Production</h5><ul><li>150–250 units for Droegjevel Estate</li><li>Full logistics + install cycle proven</li><li>First revenue — R50M+ year 1</li><li>Mould utilisation optimised</li><li>Capital repayment schedule begins</li></ul></div>
+            <div class="phase" data-num="5"><div class="pl">Month 18–36</div><h5>Scale to 500+</h5><ul><li>Phase 2 mould fleet ordered</li><li>Second shift introduced</li><li>New offtake clients onboarded</li><li>SPV split adjusts to 70/30</li><li>Investor capital fully returned</li></ul></div>
+            <div class="phase" data-num="6"><div class="pl">Year 4–5</div><h5>Full Capacity & Exit</h5><ul><li>1,500 units / year run-rate</li><li>Regional expansion — Southern Africa</li><li>Strategic buyer / PE exit pathway</li><li>Dividend recapitalisation option</li><li>3.63×+ MOIC realised</li></ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapter-ending">
+        <div>
+          <div class="step">Discover</div>
+          <h3 class="h2">Where it gets built</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LOCATIONS ─── -->
+<section class="locations" id="locations" data-ch="7">
+  <div class="loc-inner">
+    <div class="loc-content">
+      <div class="eyebrow" style="margin-bottom:16px">Where it gets built</div>
+      <h2 class="h2">Precast Africa factory<br>and offtake footprint</h2>
+      <ul class="loc-list" id="locList">
+        <li class="open">
+          <div class="head"><h4>Randfontein, Gauteng — Factory Zone</h4><div class="toggle">+</div></div>
+          <div class="body"><div class="body-inner">Factory site within 30km of Mixilon's Droegjevel Estate. Industrial-zoned land, SPLUMA compliant, adequate cranage access, road logistics for 3.5m abnormal loads. Initial deployment site for Phase 1 capacity.<div class="tag">Phase 1 — Active</div></div></div>
+        </li>
+        <li>
+          <div class="head"><h4>Droegjevel Estate, Randfontein — Offtake</h4><div class="toggle">+</div></div>
+          <div class="body"><div class="body-inner">Mixilon residential development. 150–250 units in Phase 1, scaling to 500–1,000 units/year under the exclusive offtake. Within Greater Johannesburg, adjacent to N12 logistics corridor.<div class="tag">Offtake — Signed</div></div></div>
+        </li>
+        <li>
+          <div class="head"><h4>Greater Johannesburg — Secondary Pipeline</h4><div class="toggle">+</div></div>
+          <div class="body"><div class="body-inner">Identified pipeline of secondary offtake clients across West Rand and East Rand affordable housing developments. To be activated as Phase 2 capacity comes online.<div class="tag">Pipeline</div></div></div>
+        </li>
+        <li>
+          <div class="head"><h4>Southern Africa — Regional Expansion</h4><div class="toggle">+</div></div>
+          <div class="body"><div class="body-inner">Year 4–5 regional expansion into Zimbabwe and Mozambique via SADC trade corridors. Proximity to factory enables export of modules within transport-economic radius. AfDB active lender in both markets.<div class="tag">Year 4–5</div></div></div>
+        </li>
+        <li>
+          <div class="head"><h4>Seville, Spain — Moldtech HQ</h4><div class="toggle">+</div></div>
+          <div class="body"><div class="body-inner">Technology partner. Mould design, fabrication, and installation support. 16–20 week lead time. First five-mould fleet to be shipped to Precast Africa Phase 1 factory at financial close.<div class="tag">Technology Partner</div></div></div>
+        </li>
+      </ul>
+    </div>
+    <div class="loc-map">
+      <svg viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg" aria-label="Map of Africa with deployment markers">
+        <!-- Faint coordinate grid -->
+        <line class="grid-line" x1="0" y1="105" x2="400" y2="105"/>
+        <line class="grid-line" x1="0" y1="210" x2="400" y2="210"/>
+        <line class="grid-line" x1="0" y1="315" x2="400" y2="315"/>
+        <line class="grid-line" x1="100" y1="0" x2="100" y2="420"/>
+        <line class="grid-line" x1="200" y1="0" x2="200" y2="420"/>
+        <line class="grid-line" x1="300" y1="0" x2="300" y2="420"/>
+
+        <!-- Africa continent outline (stylised, simplified) -->
+        <path class="continent" d="
+          M 165 25
+          L 215 25
+          L 250 35
+          L 285 50
+          L 295 70
+          L 305 95
+          L 320 115
+          L 340 130
+          L 340 155
+          L 325 175
+          L 320 200
+          L 315 225
+          L 305 250
+          L 290 275
+          L 275 295
+          L 260 315
+          L 245 335
+          L 225 355
+          L 205 365
+          L 185 360
+          L 170 345
+          L 155 320
+          L 145 295
+          L 135 270
+          L 125 245
+          L 115 220
+          L 105 195
+          L 95 170
+          L 80 150
+          L 70 130
+          L 65 110
+          L 70 90
+          L 85 75
+          L 100 60
+          L 120 50
+          L 140 38
+          Z"/>
+
+        <!-- South Africa region highlighted -->
+        <path class="sa" d="
+          M 195 300
+          L 235 305
+          L 255 320
+          L 260 340
+          L 245 360
+          L 220 365
+          L 200 360
+          L 185 345
+          L 180 325
+          Z"/>
+
+        <!-- Spain marker callout (outside continent, top-left) -->
+        <line class="grid-line" x1="55" y1="20" x2="180" y2="20" stroke-dasharray="3 3"/>
+        <text x="55" y="14">Seville · Spain</text>
+
+        <!-- Region labels -->
+        <text x="175" y="125" class="region-label">Africa</text>
+        <text x="215" y="325" class="region-label" style="fill:var(--accent-deep);">South Africa</text>
+      </svg>
+
+      <!-- Markers positioned over the SVG -->
+      <div class="marker active" style="left:55%;top:80%"><div class="pulse"></div><div class="dot"></div><div class="lbl">Randfontein · Factory</div></div>
+      <div class="marker" style="left:58%;top:82%"><div class="dot"></div><div class="lbl">Droegjevel Estate</div></div>
+      <div class="marker" style="left:62%;top:78%"><div class="dot"></div><div class="lbl">Greater JHB Pipeline</div></div>
+      <div class="marker" style="left:64%;top:65%"><div class="dot"></div><div class="lbl">Southern Africa</div></div>
+      <div class="marker" style="left:18%;top:5%"><div class="dot"></div><div class="lbl">Seville · Moldtech</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section" id="contact" data-ch="7">
+  <div class="cta-inner">
+    <div class="cta-eyebrow">Venture Investment Opportunity</div>
+    <h2 class="cta-title h0">R64 Million.<br><span class="green-2">3.63×</span> Return.<br>Africa's housing future.</h2>
+    <p class="cta-sub">Phase 1 equity round open. Signed offtake. Industrial-grade technology. Disciplined capital structure. Capital fully repaid by 2028.</p>
+    <div class="cta-buttons">
+      <a href="mailto:info@livwater.io" class="btn-pri">Request data room access</a>
+      <a href="mailto:info@livwater.io" class="btn-ghost">Schedule investor briefing</a>
+    </div>
+    <div class="cta-stats">
+      <div class="cta-stat"><div class="v">R64M</div><div class="l">Equity ask</div></div>
+      <div class="cta-stat"><div class="v">3.63×</div><div class="l">Base MOIC</div></div>
+      <div class="cta-stat"><div class="v">31%</div><div class="l">Project IRR</div></div>
+      <div class="cta-stat"><div class="v">12%</div><div class="l">Preferred return</div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div>
+    <a href="#" class="lg">PRECAST<span>·</span>AFRICA</a>
+    <div style="font-size:0.65rem;color:rgba(255,255,255,0.3);margin-top:8px;letter-spacing:0.06em">Powered by LIVWater Infrastructure Group</div>
+  </div>
+  <div class="dis">
+    This document is strictly confidential and intended solely for the use of the named recipient. It contains forward-looking projections based on assumptions that may not materialise. Nothing herein constitutes an offer of securities. Recipients should conduct their own due diligence prior to making any investment decision.
+  </div>
+  <div>
+    <a class="mail" href="mailto:info@livwater.io">info@livwater.io</a>
+    <span class="cp">© 2025 Precast Africa (Pty) Ltd. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- ─── PROGRESS BAR FOOTER ─── -->
+<div class="progress-bar">
+  <div class="progress-chapters" id="progressChapters">
+    <div class="progress-ch active" data-ch="0"><div class="ch-meta"><span>00</span><span class="ch-name">Intro</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="1"><div class="ch-meta"><span>01</span><span class="ch-name">Demand</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="2"><div class="ch-meta"><span>02</span><span class="ch-name">Technology</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="3"><div class="ch-meta"><span>03</span><span class="ch-name">Offtake</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="4"><div class="ch-meta"><span>04</span><span class="ch-name">Numbers</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="5"><div class="ch-meta"><span>05</span><span class="ch-name">Structure</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="6"><div class="ch-meta"><span>06</span><span class="ch-name">Path</span></div><div class="ch-line"></div></div>
+    <div class="progress-ch" data-ch="7"><div class="ch-meta"><span>07</span><span class="ch-name">Invest</span></div><div class="ch-line"></div></div>
+  </div>
+</div>
+
+<script>
+// ─── Wrap each chapter-intro in a 200vh container so its CSS position:sticky
+// pins it for 100vh of scroll. The next 100vh of the wrapper shares the
+// chapter-intro's dark background, so when the intro slides out and the
+// sidescroll-wrap slides in, the visible transition is dark-on-dark. ───
+document.querySelectorAll('.chapter-intro').forEach((intro) => {
+  if (intro.parentElement.classList.contains('chapter-intro-pin')) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'chapter-intro-pin';
+  intro.parentNode.insertBefore(wrap, intro);
+  wrap.appendChild(intro);
+});
+
+// ─── GSAP / SCROLLTRIGGER SIDESCROLL ───
+gsap.registerPlugin(ScrollTrigger);
+
+// Chapter previews horizontal scroll (created first so subsequent triggers
+// can account for its added pin distance)
+const cpSection = document.getElementById('chapter-previews');
+const cpScroller = cpSection.querySelector('.scroller');
+gsap.to(cpScroller, {
+  x: () => -(cpScroller.scrollWidth - window.innerWidth),
+  ease: 'none',
+  scrollTrigger: {
+    trigger: cpSection,
+    start: 'top top',
+    end: () => '+=' + (cpScroller.scrollWidth - window.innerWidth),
+    pin: true,
+    scrub: 1,
+    invalidateOnRefresh: true
+  }
+});
+
+// Horizontal sidescroll for each chapter
+document.querySelectorAll('[data-sidescroll]').forEach((wrap) => {
+  const inner = wrap.querySelector('.sidescroll');
+  const getDistance = () => inner.scrollWidth - window.innerWidth;
+  gsap.to(inner, {
+    x: () => -getDistance(),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: wrap,
+      start: 'top top',
+      end: () => '+=' + getDistance(),
+      pin: true,
+      scrub: 1,
+      invalidateOnRefresh: true,
+      anticipatePin: 1
+    }
+  });
+});
+
+// (Chapter-intros are handled by CSS position:sticky, not GSAP — see the
+// .chapter-intro-pin wrapper inserted above.)
+
+// ─── PROGRESS BAR ───
+// Only select top-level section elements, not the progress-bar children that also have data-ch
+const chapters = document.querySelectorAll('section[data-ch]');
+const progressChs = document.querySelectorAll('.progress-ch');
+function updateProgress(){
+  const sy = window.scrollY + window.innerHeight * 0.5;
+  let activeCh = 0;
+  let progress = 0;
+  chapters.forEach(ch => {
+    const r = ch.getBoundingClientRect();
+    const top = r.top + window.scrollY;
+    const bottom = top + r.height;
+    if (sy >= top && sy < bottom) {
+      activeCh = parseInt(ch.dataset.ch);
+      progress = ((sy - top) / r.height) * 100;
+    }
+  });
+  progressChs.forEach(pc => {
+    const n = parseInt(pc.dataset.ch);
+    pc.classList.remove('active','done');
+    if (n < activeCh) pc.classList.add('done');
+    else if (n === activeCh) {
+      pc.classList.add('active');
+      pc.style.setProperty('--p', Math.max(0,Math.min(100,progress)) + '%');
+    }
+  });
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+
+// ─── PROGRESS-BAR CLICK NAV ───
+// Click any chapter pill in the bottom progress bar to jump to that section.
+const chapterTargets = {
+  0: '.intro-banner',
+  1: '#ch1', 2: '#ch2', 3: '#ch3', 4: '#ch4', 5: '#ch5', 6: '#ch6',
+  7: '#locations'
+};
+document.querySelectorAll('.progress-ch').forEach(pc => {
+  pc.addEventListener('click', () => {
+    const n = pc.dataset.ch;
+    const sel = chapterTargets[n];
+    if (!sel) return;
+    const el = document.querySelector(sel);
+    if (!el) return;
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    const top = el.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top });
+  });
+});
+
+// ─── ANCHOR NAVIGATION ───
+// GSAP's pin spacers create dynamic scroll offsets that break native anchor
+// scrolling. Intercept clicks on in-page anchors and scroll to the target's
+// real document position with smooth behaviour.
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    // ScrollTrigger.refresh() before measuring so pin spacers are up to date
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    const top = target.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top });
+    history.pushState(null, '', '#' + id);
+  });
+});
+
+// ─── LOCATION ACCORDION ───
+document.querySelectorAll('#locList li').forEach((li, i) => {
+  li.querySelector('.head').addEventListener('click', () => {
+    document.querySelectorAll('#locList li').forEach(o => o.classList.remove('open'));
+    li.classList.add('open');
+    document.querySelectorAll('.marker').forEach(m => m.classList.remove('active'));
+    const markers = document.querySelectorAll('.marker');
+    if (markers[i]) markers[i].classList.add('active');
+  });
+});
+
+// ─── CHARTS ───
+const ringBg = ['rgba(74,158,63,0.92)','rgba(74,158,63,0.74)','rgba(74,158,63,0.58)','rgba(136,216,126,0.78)','rgba(136,216,126,0.6)','rgba(30,69,25,0.92)','rgba(255,255,255,0.14)'];
+
+// SA Delivery Chart
+new Chart(document.getElementById('saChart'), {
+  type: 'bar',
+  data: {
+    labels: ['2019','2020','2021','2022','2023','2024','2025E'],
+    datasets: [
+      { label: 'Actual delivery', data: [152,98,110,135,128,140,145], backgroundColor: 'rgba(74,158,63,0.75)', borderRadius: 4 },
+      { label: 'Required', data: [220,220,225,225,228,230,230], backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: 'rgba(255,255,255,0.55)', font:{size:10} } } },
+    scales: {
+      x: { ticks: { color: 'rgba(255,255,255,0.45)', font:{size:10} }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: 'rgba(255,255,255,0.45)', font:{size:10}, callback: v => v+'k' }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// Africa Doughnut
+new Chart(document.getElementById('africaChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Nigeria','Ethiopia','Kenya','Mozambique','Zimbabwe','South Africa','Other SSA'],
+    datasets: [{ data: [17,2.8,2,1.4,1.25,2.4,23.15], backgroundColor: ringBg, borderWidth: 1, borderColor: 'rgba(255,255,255,0.04)' }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { color: 'rgba(255,255,255,0.55)', font:{size:9}, boxWidth: 10, padding: 6 } },
+      tooltip: { callbacks: { label: c => ' ' + c.label + ': ' + c.parsed + 'M units' } }
+    }
+  }
+});
+
+// Revenue line chart
+new Chart(document.getElementById('revChart'), {
+  type: 'line',
+  data: {
+    labels: ['Y1','Y2','Y3','Y4','Y5'],
+    datasets: [
+      { label: 'Revenue (R\'000s)', data: [83750,134000,201000,335000,502500], borderColor: 'rgba(136,216,126,0.95)', backgroundColor: 'rgba(74,158,63,0.1)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: 'rgba(136,216,126,1)' },
+      { label: 'Net profit (R\'000s)', data: [10125,23715,39865,76350,126663], borderColor: 'rgba(255,255,255,0.5)', backgroundColor: 'transparent', tension: 0.4, borderDash: [4,3], pointRadius: 3, pointBackgroundColor: 'rgba(255,255,255,0.6)' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: 'rgba(255,255,255,0.55)', font:{size:10} } } },
+    scales: {
+      x: { ticks: { color: 'rgba(255,255,255,0.45)', font:{size:10} }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: 'rgba(255,255,255,0.45)', font:{size:10} }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  }
+});
+
+// Scenario bar chart
+new Chart(document.getElementById('scenarioChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Bear (150 units)','Base (500 units)','Bull (1,000 units)'],
+    datasets: [{
+      label: 'EBIT (R\'000s)',
+      data: [3800, 49100, 125000],
+      backgroundColor: ['rgba(200,49,43,0.65)','rgba(74,158,63,0.85)','rgba(136,216,126,0.85)'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { color: 'rgba(255,255,255,0.45)', font:{size:10}, callback: v => 'R'+(v/1000)+'M' }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: 'rgba(255,255,255,0.7)', font:{size:11} }, grid: { display: false } }
+    }
+  }
+});
+
+// Refresh ScrollTrigger after charts render
+setTimeout(() => ScrollTrigger.refresh(), 500);
+window.addEventListener('load', () => ScrollTrigger.refresh());
+</script>
+</body>
+</html>

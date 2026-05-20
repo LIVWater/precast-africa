@@ -1261,9 +1261,59 @@
     /* ═══════════════════════════════════════════════
        RESPONSIVE
     ═══════════════════════════════════════════════ */
+    /* ─── Mobile menu (toggle + drawer) ─── */
+    .nav__toggle {
+      display: none;
+      width: 44px; height: 44px;
+      margin-left: auto;
+      align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      cursor: pointer;
+      transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+    }
+    .nav__toggle svg { width: 20px; height: 20px; }
+    .nav.scrolled .nav__toggle {
+      background: rgba(30,69,25,0.06);
+      border-color: rgba(30,69,25,0.18);
+      color: var(--accent-deep);
+    }
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      inset: var(--nav-h) 0 0 0;
+      z-index: 95;
+      background: rgba(0,0,0,0.96);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      padding: 2rem 1.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow-y: auto;
+    }
+    .nav__mobile.is-open { display: flex; }
+    .nav__mobile a {
+      display: block;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      text-decoration: none;
+    }
+    .nav__mobile a:hover { color: var(--accent-2); }
+    body.nav-open { overflow: hidden; }
+
     @media (max-width: 1024px) {
       :root { --nav-h: 64px; }
       .nav__links { display: none; }
+      .nav__cta { display: none; }
+      .nav__toggle { display: inline-flex; }
       .cards { grid-template-columns: 1fr 1fr; }
       .card { aspect-ratio: 4 / 5; }
       .stats { grid-template-columns: 1fr 1fr; }
@@ -1276,7 +1326,6 @@
       .cards { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .nav__cta { display: none; }
       .stats { grid-template-columns: 1fr; }
       .footer__inner { grid-template-columns: 1fr; }
       .section1__controls { bottom: 1rem; }
@@ -1312,6 +1361,9 @@
       <a href="sustainability.html" class="nav__link">Sustainability</a>
       <a href="news.html" class="nav__link">News</a>
     </div>
+    <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navMobile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
     <div class="nav__cta">
       <a href="build-your-project.html" class="btn btn--accent">
         <span>Build Project</span>
@@ -1323,6 +1375,16 @@
       </a>
     </div>
   </nav>
+  <div class="nav__mobile" id="navMobile" role="menu">
+    <a href="precast-africa-warwick-style.html">Home</a>
+    <a href="system.html">System</a>
+    <a href="process.html">Process</a>
+    <a href="developers.html">Developers</a>
+    <a href="build-your-project.html">Build Project</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="news.html">News</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
   <!-- ════════════════════════════════════════════════ SECTION 1 ════════════════════════════════════════════════ -->
   <section class="section section1" id="section1">
@@ -2035,6 +2097,27 @@
       const setScrolled = () => nav.classList.toggle('scrolled', window.scrollY > 50);
       window.addEventListener('scroll', setScrolled, { passive: true });
       setScrolled();
+    })();
+
+    // ── Mobile menu toggle ────────────────────────
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const mobile = document.getElementById('navMobile');
+      if (!toggle || !mobile) return;
+      const close = () => {
+        mobile.classList.remove('is-open');
+        document.body.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+      toggle.addEventListener('click', () => {
+        const open = mobile.classList.toggle('is-open');
+        document.body.classList.toggle('nav-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      mobile.addEventListener('click', e => { if (e.target.tagName === 'A') close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+      // Close when viewport widens past mobile breakpoint
+      window.matchMedia('(min-width: 1025px)').addEventListener('change', e => { if (e.matches) close(); });
     })();
 
     // ── Hero video fade-in once buffered ───────────

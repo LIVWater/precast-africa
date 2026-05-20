@@ -208,6 +208,11 @@
     display: block;
     width: 100%; height: 100%;
     cursor: grab;
+    /* On touch devices, claim all gestures so single-finger drag orbits the
+       camera instead of scrolling the page, and pinch is handled by our JS. */
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
   .builder__panel {
     max-height: 750px;
@@ -1085,7 +1090,7 @@
           Delete
         </button>
       </div>
-      <div class="viewport__hint">Click ground to place · Click module to select · Drag selected module to move · R rotate · Del remove · Esc deselect</div>
+      <div class="viewport__hint" id="viewportHint">Click ground to place · Click module to select · Drag selected module to move · R rotate · Del remove · Esc deselect</div>
     </div>
 
     <!-- RIGHT PANEL: SUMMARY -->
@@ -2257,6 +2262,71 @@ window.addEventListener('load', function () {
     camDist = Math.max(8, Math.min(70, camDist + e.deltaY * 0.1));
     applyCamera();
   }, { passive: false });
+
+  /* ── Touch: pinch-to-zoom + two-finger swallow ─────────────────────────
+     Track active touch pointers; when two are down, compute their distance
+     and apply the delta to camDist on every move. Pause module drag/orbit
+     while pinching so the camera doesn't jitter. */
+  const activePointers = new Map();
+  let pinchPrevDist = 0;
+  function touchDist() {
+    if (activePointers.size < 2) return 0;
+    const pts = Array.from(activePointers.values());
+    const dx = pts[0].x - pts[1].x;
+    const dy = pts[0].y - pts[1].y;
+    return Math.hypot(dx, dy);
+  }
+  canvas.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'touch') return;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (activePointers.size === 2) {
+      // Cancel any in-progress single-touch drag/orbit
+      if (dragMode) {
+        try { canvas.releasePointerCapture(e.pointerId); } catch(_) {}
+        viewport.classList.remove('is-grabbing');
+        if (dragMode === 'module') {
+          const m = placedModules.find(x => x.id === dragModuleId);
+          if (m) m.mesh.visible = true;
+          destroyGhost();
+          dragModuleId = null;
+        }
+        dragMode = null;
+        dragMoved = true;   // suppress tap-to-place after pinch
+      }
+      pinchPrevDist = touchDist();
+    }
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'touch' || !activePointers.has(e.pointerId)) return;
+    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (activePointers.size >= 2) {
+      const d = touchDist();
+      if (pinchPrevDist > 0 && d > 0) {
+        const scale = pinchPrevDist / d;          // >1 = pinching in (zoom out)
+        camDist = Math.max(8, Math.min(70, camDist * scale));
+        applyCamera();
+      }
+      pinchPrevDist = d;
+      e.preventDefault();
+    }
+  }, { passive: false });
+  function clearPointer(e) {
+    if (e.pointerType !== 'touch') return;
+    activePointers.delete(e.pointerId);
+    if (activePointers.size < 2) pinchPrevDist = 0;
+  }
+  canvas.addEventListener('pointerup', clearPointer);
+  canvas.addEventListener('pointercancel', clearPointer);
+
+  /* Touch-friendly hint: rewrite once we know we're on a touch device */
+  (function () {
+    const hint = document.getElementById('viewportHint');
+    if (!hint) return;
+    const isTouch = matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (isTouch) {
+      hint.textContent = 'Tap ground to place · Tap module to select · Drag to move · Pinch to zoom · Use buttons to rotate or delete';
+    }
+  })();
 
   /* Keyboard shortcuts */
   document.addEventListener('keydown', (e) => {
