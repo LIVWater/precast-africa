@@ -1751,7 +1751,7 @@ h1, h2, h3, h4, h5, h6 { text-align-last: auto; text-align: inherit; }
 /* ─── LETTER ANIMATION (auto-applied to .anim-letters) ─── */
 .anim-letters .word {
   display: inline-block;
-  margin-right: 0.22em;
+  margin-right: 0.04em;
   vertical-align: top;
   white-space: nowrap;
 }
