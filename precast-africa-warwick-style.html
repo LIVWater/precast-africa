@@ -1261,9 +1261,56 @@
     /* ═══════════════════════════════════════════════
        RESPONSIVE
     ═══════════════════════════════════════════════ */
+    /* Mobile menu — hamburger toggle + sliding panel */
+    .nav__toggle {
+      display: none;
+      margin-left: auto;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      cursor: pointer;
+      transition: background var(--t), border-color var(--t), color var(--t);
+    }
+    .nav.scrolled .nav__toggle {
+      background: rgba(255,255,255,0.6);
+      border-color: rgba(45,107,39,0.25);
+      color: var(--accent-deep);
+    }
+    .nav__toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      inset: var(--nav-h, 72px) 0 0 0;
+      z-index: 95;
+      background: rgba(0,0,0,0.96);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      padding: 2rem 1.5rem;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .nav__mobile.is-open { display: flex; }
+    .nav__mobile a {
+      display: block;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: #fff;
+      text-decoration: none;
+    }
+    .nav__mobile a:last-child { border-bottom: none; }
+
     @media (max-width: 1024px) {
       :root { --nav-h: 64px; }
       .nav__links { display: none; }
+      .nav__toggle { display: inline-flex; order: 99; }
       .cards { grid-template-columns: 1fr 1fr; }
       .card { aspect-ratio: 4 / 5; }
       .stats { grid-template-columns: 1fr 1fr; }
@@ -1284,7 +1331,7 @@
     }
   
     /* Letter-blur reveal (re-used by section4 & section6 headings) */
-    .anim-letters .word { display: inline-block; margin-right: 0.22em; vertical-align: top; white-space: nowrap; }
+    .anim-letters .word { display: inline-block; margin-right: 0.04em; vertical-align: top; white-space: nowrap; }
     .anim-letters .letter {
       display: inline-block;
       opacity: 0;
@@ -1312,6 +1359,9 @@
       <a href="sustainability.html" class="nav__link">Sustainability</a>
       <a href="news.html" class="nav__link">News</a>
     </div>
+    <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+    </button>
     <div class="nav__cta">
       <a href="build-your-project.html" class="btn btn--accent">
         <span>Build Project</span>
@@ -1323,6 +1373,16 @@
       </a>
     </div>
   </nav>
+  <div class="nav__mobile" id="navMobile">
+    <a href="precast-africa-warwick-style.html">Home</a>
+    <a href="system.html">System</a>
+    <a href="process.html">Process</a>
+    <a href="developers.html">Developers</a>
+    <a href="build-your-project.html">Build Project</a>
+    <a href="sustainability.html">Sustainability</a>
+    <a href="news.html">News</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
   <!-- ════════════════════════════════════════════════ SECTION 1 ════════════════════════════════════════════════ -->
   <section class="section section1" id="section1">
@@ -2035,6 +2095,20 @@
       const setScrolled = () => nav.classList.toggle('scrolled', window.scrollY > 50);
       window.addEventListener('scroll', setScrolled, { passive: true });
       setScrolled();
+    })();
+
+    // ── Mobile menu toggle ─────────────────────────
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const mobile = document.getElementById('navMobile');
+      if (!toggle || !mobile) return;
+      toggle.addEventListener('click', () => {
+        const open = mobile.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      mobile.addEventListener('click', e => {
+        if (e.target.tagName === 'A') mobile.classList.remove('is-open');
+      });
     })();
 
     // ── Hero video fade-in once buffered ───────────
