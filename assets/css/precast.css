@@ -194,10 +194,10 @@ body:has(.nav.scrolled) .topgrad { opacity: 0; }
   font-weight: 400;
   transition: color var(--t-long), font-weight var(--t-long);
 }
-/* Global heading word-spacing — opens word gaps for easier reading across all headers */
+/* Global heading word-spacing — tightened gaps across all non-blog headers */
 h1, h2, h3, h4, h5, h6,
 .h-display, .page-hero__title,
-.section__head h1, .section__head h2 { word-spacing: 0.18em; }
+.section__head h1, .section__head h2 { word-spacing: 0.06em; }
 
 .nav.scrolled .nav__link { color: var(--g-mid, #2d6b27); }
 /* Hover — bold + bright green in both nav states */
